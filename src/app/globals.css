@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@theme {
+  --color-porcelana: #F7F4F0;
+  --color-carvao:    #1F1C19;
+  --color-champanhe: #C2A36B;
+  --color-nude:      #A57C55;
+  --color-linha:     #E3DDD5;
+}
+
+@theme {
+  --color-porcelana: #F7F4F0;
+  --color-carvao:    #1F1C19;
+  --color-champanhe: #C2A36B;
+  --color-nude:      #A57C55;
+  --color-linha:     #E3DDD5;
+}
