@@ -4,6 +4,7 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import { criarProduto, type EstadoForm } from "../actions";
 import { sugerirSku } from "@/lib/slug";
+import Fotos, { type Foto } from "./fotos";
 
 const campo =
   "w-full border border-linha bg-white px-3 py-2 text-sm outline-none focus:border-nude";
@@ -26,6 +27,7 @@ export default function FormProduto({
   const [marca, setMarca] = useState("");
   const [tamanhos, setTamanhos] = useState<Tamanho[]>([vazio()]);
   const [comNota, setComNota] = useState(false);
+  const [fotos, setFotos] = useState<Foto[]>([]);
 
   function alterar(i: number, chave: keyof Tamanho, valor: string) {
     setTamanhos((ts) => ts.map((t, j) => (j === i ? { ...t, [chave]: valor } : t)));
@@ -52,7 +54,7 @@ export default function FormProduto({
 
       <form action={acao} className="mt-8 max-w-2xl">
         <input type="hidden" name="variantes" value={JSON.stringify(tamanhos)} />
-        <input type="hidden" name="fotos" value="[]" />
+        <input type="hidden" name="fotos" value={JSON.stringify(fotos)} />
 
         <label className={rotulo} htmlFor="nome">Nome do produto</label>
         <input id="nome" name="nome" value={nome} onChange={(e) => setNome(e.target.value)} className={campo} required />
@@ -161,6 +163,10 @@ export default function FormProduto({
           >
             Adicionar outro tamanho
           </button>
+        </div>
+
+        <div className="mt-8 border-t border-linha pt-6">
+          <Fotos fotos={fotos} onChange={setFotos} />
         </div>
 
         {/* atributos */}
