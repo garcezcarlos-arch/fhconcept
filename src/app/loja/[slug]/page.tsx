@@ -55,7 +55,7 @@ export default async function Produto({
   const { data: p } = await supabase
     .from("products")
     .select(
-      "id, nome, slug, descricao, descricao_curta, modo_uso, ingredientes, status, brands(nome), categories(nome, slug, categories!parent_id(nome, slug)), product_variants(id, nome, preco, preco_promocional, ativo, ordem), product_media(url, alt, ordem), product_attributes(attribute_options(nome, attributes(nome)))",
+      "id, nome, slug, vendor_id, descricao, descricao_curta, modo_uso, ingredientes, status, brands(nome), categories(nome, slug, categories!parent_id(nome, slug)), product_variants(id, nome, sku, preco, preco_promocional, ativo, ordem), product_media(url, alt, ordem), product_attributes(attribute_options(nome, attributes(nome)))",
     )
     .eq("slug", slug)
     .maybeSingle();
@@ -155,7 +155,7 @@ export default async function Produto({
             <p className="mt-3 text-carvao/70">{p.descricao_curta}</p>
           )}
 
-          <Comprar produto={p.nome} tamanhos={tamanhos} />
+          <Comprar produto={p.nome} slug={p.slug} vendorId={p.vendor_id} foto={fotos[0]?.url ?? null} tamanhos={tamanhos} />
 
           {/* informacao exposta, nao escondida em acordeao:
               em beleza a informacao e o argumento de venda */}

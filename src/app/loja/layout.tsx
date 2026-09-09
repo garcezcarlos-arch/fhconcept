@@ -2,6 +2,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { DadosEstruturados } from "@/components/dados-estruturados";
 import { SITE } from "@/lib/site";
+import { CarrinhoProvider } from "@/lib/carrinho";
+import { CarrinhoLink } from "@/components/carrinho-link";
 
 export default async function LojaLayout({
   children,
@@ -19,6 +21,7 @@ export default async function LojaLayout({
   }
 
   return (
+    <CarrinhoProvider>
     <div className="min-h-dvh bg-creme text-carvao">
       <DadosEstruturados
         dados={{
@@ -62,9 +65,10 @@ export default async function LojaLayout({
         <Link href="/loja" aria-label="FH Concept">
           <img src="/fh-concept.svg" alt="FH Concept" className="h-10 w-auto md:h-11" />
         </Link>
-        <Link href="/" className="text-sm text-carvao/60 hover:text-nude">
-          o salão
-        </Link>
+        <nav className="flex items-center gap-6">
+          <Link href="/" className="text-sm text-carvao/60 hover:text-nude">o salão</Link>
+          <CarrinhoLink />
+        </nav>
       </div></header>
 
       {children}
@@ -75,5 +79,6 @@ export default async function LojaLayout({
         <p className="mt-4 text-carvao/40">Fernanda Hosang Concept · desde 2014</p>
       </footer>
     </div>
+    </CarrinhoProvider>
   );
 }
