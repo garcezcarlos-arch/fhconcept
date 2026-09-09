@@ -26,19 +26,35 @@ body {
 }
 
 @theme {
-  --color-porcelana: #F7F4F0;
-  --color-carvao:    #1F1C19;
-  --color-champanhe: #C2A36B;
-  --color-nude:      #A57C55;
-  --color-linha:     #E3DDD5;
+  /* tokens do site original — tres fundos permitem alternar secoes sem borda */
+  --color-branco:   #FFFFFF;
+  --color-creme:    #FBF9F6;
+  --color-areia:    #F2ECE5;
+  --color-carvao:   #1F1C19;
+  --color-texto:    #2B2724;
+  --color-texto2:   #767069;
+  --color-nude:     #B08968;
+  --color-nude-esc: #8E6B4F;
+  --color-champanhe:#C2A36B;
+  --color-linha:    rgba(31, 28, 25, 0.10);
+  /* aliases para o que ja esta escrito */
+  --color-porcelana: #FBF9F6;
 }
 
 @theme {
-  --color-porcelana: #F7F4F0;
-  --color-carvao:    #1F1C19;
-  --color-champanhe: #C2A36B;
-  --color-nude:      #A57C55;
-  --color-linha:     #E3DDD5;
+  /* tokens do site original — tres fundos permitem alternar secoes sem borda */
+  --color-branco:   #FFFFFF;
+  --color-creme:    #FBF9F6;
+  --color-areia:    #F2ECE5;
+  --color-carvao:   #1F1C19;
+  --color-texto:    #2B2724;
+  --color-texto2:   #767069;
+  --color-nude:     #B08968;
+  --color-nude-esc: #8E6B4F;
+  --color-champanhe:#C2A36B;
+  --color-linha:    rgba(31, 28, 25, 0.10);
+  /* aliases para o que ja esta escrito */
+  --color-porcelana: #FBF9F6;
 }
 
 @theme {

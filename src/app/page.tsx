@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Cabecalho } from "@/components/cabecalho";
 import { Rodape } from "@/components/rodape";
@@ -101,21 +102,38 @@ export default function Home() {
       <Cabecalho />
 
       <main className="mx-auto max-w-6xl px-5 md:px-10">
-        <section className="border-b border-linha py-16 md:py-24">
-          <span className="block h-px w-12 bg-champanhe" />
-          <h1 className="mt-6 max-w-3xl font-serif text-4xl leading-[1.12] md:text-6xl">
-            Cor que sai como foi combinado
-          </h1>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-carvao/70">
-            Salão técnico em Garuva, a trinta minutos de Joinville. Especializado
-            em mechas, loiros e correção de cor — o caso que costuma chegar aqui
-            vindo de outro lugar.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-5">
-            <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="flex min-h-13 items-center bg-carvao px-7 text-sm text-porcelana">Agendar pelo WhatsApp</a>
-            <Link href="/loja/diagnostico" className="border-b border-nude pb-0.5 text-sm text-nude">Descobrir o que usar no seu cabelo</Link>
-          </div>
-        </section>
+        <section className="border-b border-linha py-12 md:grid md:grid-cols-2 md:items-center md:gap-16 md:py-24">
+            <div>
+              <span className="block h-px w-12 bg-champanhe" />
+              <h1 className="mt-6 max-w-[12ch] font-serif text-4xl leading-[1.08] md:text-6xl">
+                Cor que sai como foi combinado
+              </h1>
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-carvao/70">
+                Salão técnico em Garuva, a trinta minutos de Joinville. Especializado
+                em mechas, loiros e correção de cor — o caso que costuma chegar aqui
+                vindo de outro lugar.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-5">
+                <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="flex min-h-13 items-center bg-carvao px-7 text-sm text-porcelana">Agendar pelo WhatsApp</a>
+                <Link href="/loja/diagnostico" className="inline-flex min-h-11 items-center border-b border-nude text-sm text-nude">Descobrir o que usar no seu cabelo</Link>
+              </div>
+            </div>
+
+            <div className="mt-12 grid grid-cols-[1.5fr_1fr] gap-3 md:mt-0">
+              <figure className="relative row-span-2 aspect-[3/4.1] overflow-hidden bg-areia">
+                <Image src="/galeria/cor-loiro-balayage.jpg" alt="Balayage loiro com ondas longas" fill sizes="(max-width: 768px) 60vw, 30vw" priority className="object-cover" />
+              </figure>
+              <figure className="relative aspect-[4/3] overflow-hidden bg-areia">
+                <Image src="/galeria/cor-acobreado-costas.jpg" alt="Acobreado visto de costas" fill sizes="(max-width: 768px) 40vw, 20vw" className="object-cover" />
+              </figure>
+              <div className="flex flex-col justify-center bg-areia p-5">
+                <b className="font-serif text-[29px] font-normal leading-none">2.900</b>
+                <span className="mt-2 text-[10.5px] font-medium uppercase leading-relaxed tracking-[0.16em] text-carvao/55">
+                  alunas formadas<br />em oito anos
+                </span>
+              </div>
+            </div>
+          </section>
 
         <section id="servicos" className="scroll-mt-20 py-16 md:py-24">
           <p className="text-sm text-carvao/45">O que fazemos</p>
