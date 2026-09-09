@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export default function Entrar() {
+function FormularioEntrar() {
   const router = useRouter();
   const params = useSearchParams();
   const [email, setEmail] = useState("");
@@ -67,5 +67,19 @@ export default function Entrar() {
         </button>
       </div>
     </main>
+  );
+}
+
+export default function Entrar() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-dvh bg-porcelana text-carvao grid place-items-center px-6">
+          <p className="text-sm text-carvao/50">Carregando…</p>
+        </main>
+      }
+    >
+      <FormularioEntrar />
+    </Suspense>
   );
 }
