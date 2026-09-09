@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 const LINKS = [
   { href: "/servicos", texto: "Serviços" },
   { href: "/equipe", texto: "Equipe" },
-  { href: "/#formacoes", texto: "Formações" },
+  { href: "/formacoes", texto: "Formações" },
   { href: "/loja", texto: "Loja" },
-  { href: "/#contato", texto: "Contato" },
+  { href: "/contato", texto: "Contato" },
 ];
 
 export function Cabecalho() {

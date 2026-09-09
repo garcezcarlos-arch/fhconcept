@@ -21,17 +21,17 @@ export function Rodape() {
             <Link href="/servicos" className="hover:text-nude">Serviços</Link>
             <Link href="/equipe" className="hover:text-nude">Equipe</Link>
             <Link href="/loja" className="hover:text-nude">Produtos</Link>
-            <Link href="/#contato" className="hover:text-nude">Como chegar</Link>
+            <Link href="/contato" className="hover:text-nude">Como chegar</Link>
           </div>
         </div>
 
         <div>
           <p className="font-serif text-base">Para profissionais</p>
           <div className="mt-3 flex flex-col gap-2 text-carvao/60">
-            <Link href="/#formacoes" className="hover:text-nude">Formações</Link>
-            <Link href="/#formacoes" className="hover:text-nude">Curso em turma</Link>
-            <Link href="/#formacoes" className="hover:text-nude">Shadow Day</Link>
-            <Link href="/#formacoes" className="hover:text-nude">Mentoria técnica</Link>
+            <Link href="/formacoes" className="hover:text-nude">Formações</Link>
+            <Link href="/formacoes#turma" className="hover:text-nude">Curso em turma</Link>
+            <Link href="/formacoes#shadow-day" className="hover:text-nude">Shadow Day</Link>
+            <Link href="/formacoes#mentoria" className="hover:text-nude">Mentoria técnica</Link>
           </div>
         </div>
 
