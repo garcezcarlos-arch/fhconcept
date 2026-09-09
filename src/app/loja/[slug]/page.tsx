@@ -2,8 +2,47 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import Comprar from "./comprar";
+import { DadosEstruturados } from "@/components/dados-estruturados";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 60;
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("products")
+    .select("nome, descricao_curta, descricao, status, brands(nome), product_media(url, ordem)")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (!data) return { title: "Produto nao encontrado" };
+
+  const marca = data.brands?.nome ? `${data.brands.nome} · ` : "";
+  const desc =
+    data.descricao_curta ??
+    data.descricao?.slice(0, 155) ??
+    `${data.nome} na loja da FH Concept, em Garuva.`;
+  const foto = [...data.product_media].sort((a, b) => a.ordem - b.ordem)[0];
+
+  return {
+    title: data.nome,
+    description: `${marca}${desc}`,
+    alternates: { canonical: `/loja/${slug}` },
+    robots: data.status === "ativo" ? undefined : { index: false, follow: false },
+    openGraph: {
+      type: "website",
+      title: data.nome,
+      description: desc,
+      images: foto ? [foto.url] : undefined,
+    },
+  };
+}
 
 export default async function Produto({
   params,
@@ -43,6 +82,30 @@ export default async function Produto({
 
   return (
     <main className="pb-16">
+      {p.status === "ativo" && (
+        <DadosEstruturados
+          dados={{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: p.nome,
+            description: p.descricao_curta ?? p.descricao ?? p.nome,
+            image: fotos.map((f) => f.url),
+            brand: p.brands?.nome
+              ? { "@type": "Brand", name: p.brands.nome }
+              : undefined,
+            category: p.categories?.nome,
+            offers: tamanhos.map((t) => ({
+              "@type": "Offer",
+              name: t.nome,
+              price: (t.preco_promocional ?? t.preco).toFixed(2),
+              priceCurrency: "BRL",
+              availability: "https://schema.org/InStock",
+              url: `${SITE.url}/loja/${p.slug}`,
+              seller: { "@type": "Organization", name: SITE.nome },
+            })),
+          }}
+        />
+      )}
       <nav className="px-5 py-4 text-sm text-carvao/50 md:px-10">
         <Link href="/loja" className="hover:text-nude">Loja</Link>
         {pai?.nome && (

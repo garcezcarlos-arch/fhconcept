@@ -1,0 +1,23 @@
+# FH Concept
+
+> Salão e centro de formação em colorimetria em Garuva, Santa Catarina.
+> Especializado em mechas, correção de cor e cabelos loiros. Também vende
+> os produtos usados no atendimento.
+
+Responsável: Fernanda Hosang, colorista com formação PHD em colorimetria
+e descoloração. Atende em Garuva desde 2014 e forma profissionais de todo
+o país.
+
+## Loja
+- [Loja](/loja): produtos de cabelo, estética facial, perfumaria e corpo.
+- [Diagnóstico](/loja/diagnostico): quatro perguntas sobre tipo de cabelo,
+  química e necessidade; devolve os produtos indicados para o caso.
+
+## Atendimento
+- Endereço: Rua Rui Barbosa, 679 — Sala 02, Centro, Garuva/SC
+- Horário: terça a sábado, 8h30 às 12h e 13h30 às 18h30
+- Agendamento e pedidos pelo WhatsApp
+
+## Observações
+- Pedidos são fechados por WhatsApp; não há checkout automático no site.
+- Retirada no salão em Garuva ou envio para outras cidades.

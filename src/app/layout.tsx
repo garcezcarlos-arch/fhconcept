@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import { SITE } from "@/lib/site";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -13,8 +14,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "FH Concept",
-  description: "Salao e formacoes em Garuva, SC",
+  metadataBase: new URL(SITE.url),
+  title: { default: SITE.nomeLongo, template: "%s · FH Concept" },
+  description: SITE.descricao,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: SITE.nome,
+    title: SITE.nomeLongo,
+    description: SITE.descricao,
+  },
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

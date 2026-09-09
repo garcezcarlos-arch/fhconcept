@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { DadosEstruturados } from "@/components/dados-estruturados";
+import { SITE } from "@/lib/site";
 
 export default async function LojaLayout({
   children,
@@ -18,6 +20,37 @@ export default async function LojaLayout({
 
   return (
     <div className="min-h-dvh bg-porcelana text-carvao">
+      <DadosEstruturados
+        dados={{
+          "@context": "https://schema.org",
+          "@type": "HairSalon",
+          name: SITE.nome,
+          description: SITE.descricao,
+          url: SITE.url,
+          telephone: SITE.telefone,
+          foundingDate: SITE.fundacao,
+          priceRange: "$$",
+          image: `${SITE.url}/fh-concept.svg`,
+          sameAs: [SITE.instagram],
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: SITE.rua,
+            addressLocality: SITE.cidade,
+            addressRegion: SITE.uf,
+            postalCode: SITE.cep,
+            addressCountry: SITE.pais,
+          },
+          geo: { "@type": "GeoCoordinates", latitude: SITE.lat, longitude: SITE.lng },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              opens: "08:30",
+              closes: "18:30",
+            },
+          ],
+        }}
+      />
       {staff && (
         <p className="bg-carvao px-5 py-2 text-center text-xs text-porcelana">
           Você está vendo a loja como administradora. Rascunhos aparecem aqui,
@@ -25,14 +58,14 @@ export default async function LojaLayout({
         </p>
       )}
 
-      <header className="flex items-baseline justify-between border-b border-linha px-5 py-5 md:px-10">
+      <header className="border-b border-linha"><div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-10">
         <Link href="/loja" aria-label="FH Concept">
-          <img src="/fh-concept.svg" alt="FH Concept" className="h-8 w-auto md:h-9" />
+          <img src="/fh-concept.svg" alt="FH Concept" className="h-10 w-auto md:h-11" />
         </Link>
         <Link href="/" className="text-sm text-carvao/60 hover:text-nude">
           o salão
         </Link>
-      </header>
+      </div></header>
 
       {children}
 
