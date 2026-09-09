@@ -226,7 +226,7 @@ export default function FormProduto({
         {estado.erro && <p className="mt-6 text-sm text-red-700">{estado.erro}</p>}
 
         <div className="mt-8 flex items-center gap-4">
-          <button type="submit" disabled={enviando} className="bg-carvao px-5 py-2.5 text-sm text-porcelana disabled:opacity-40">
+          <button type="submit" disabled={enviando} className="bg-carvao px-5 py-2.5 text-sm text-creme disabled:opacity-40">
             {enviando ? "Salvando" : "Salvar rascunho"}
           </button>
           <Link href="/admin/produtos" className="text-sm text-carvao/60 hover:text-nude">

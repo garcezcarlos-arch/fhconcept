@@ -141,7 +141,7 @@ export default async function Produto({
 
         <div className="px-5 pt-8 md:px-0 md:pt-0">
           {p.status !== "ativo" && (
-            <p className="mb-4 inline-block bg-carvao px-2 py-0.5 text-xs text-porcelana">
+            <p className="mb-4 inline-block bg-carvao px-2 py-0.5 text-xs text-creme">
               rascunho — visível só para você
             </p>
           )}

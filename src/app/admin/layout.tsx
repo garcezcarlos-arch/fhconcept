@@ -25,7 +25,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-dvh bg-porcelana text-carvao md:grid md:grid-cols-[13rem_1fr]">
+    <div className="min-h-dvh bg-creme text-carvao md:grid md:grid-cols-[13rem_1fr]">
       <aside className="border-b border-linha md:border-b-0 md:border-r px-5 py-6">
         <img src="/fh-concept.svg" alt="FH Concept" className="h-7 w-auto" />
         <nav className="mt-8 flex gap-4 text-sm md:flex-col md:gap-1">

@@ -27,7 +27,7 @@ export default async function Notas() {
     <>
       <div className="flex items-baseline justify-between">
         <h1 className="font-serif text-2xl">Notas de entrada</h1>
-        <Link href="/admin/notas/nova" className="bg-carvao px-4 py-2 text-sm text-porcelana">
+        <Link href="/admin/notas/nova" className="bg-carvao px-4 py-2 text-sm text-creme">
           Lancar nota
         </Link>
       </div>

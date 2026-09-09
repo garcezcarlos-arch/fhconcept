@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Figura, Faixa } from "@/components/ui";
 import { Cabecalho } from "@/components/cabecalho";
 import { Rodape } from "@/components/rodape";
 import { DadosEstruturados } from "@/components/dados-estruturados";
@@ -32,18 +33,21 @@ const EQUIPE = [
     papel: "Colorimetria, mechas e correção de cor",
     texto: "Cabeleireira em Garuva desde 2014 e educadora técnica. Formou 2.900 alunas em oito anos.",
     insta: "https://instagram.com/fernandahosangconcept",
+    foto: "/galeria/equipe-atendimento-bob.jpg",
   },
   {
     nome: "Juliana Araújo",
     papel: "Cachos e tratamentos",
     texto: "Corte e definição para ondas, cachos e crespos, e reconstrução de fios comprometidos.",
     insta: "https://instagram.com/juaraujocachos",
+    foto: "/galeria/equipe-atendimento-parede.jpg",
   },
   {
     nome: "Laura Elisa",
     papel: "Estética facial e sobrancelhas",
     texto: "Limpeza de pele, tratamentos faciais e design de sobrancelhas.",
     insta: "https://instagram.com/lauraelisa.beauty",
+    foto: "/galeria/equipe-jaleco-natylla.jpg",
   },
 ];
 
@@ -56,7 +60,7 @@ const FORMACOES = [
 
 export default function Home() {
   return (
-    <div className="min-h-dvh bg-porcelana text-carvao">
+    <div className="min-h-dvh bg-creme text-carvao">
       <DadosEstruturados
         dados={{
           "@context": "https://schema.org",
@@ -114,7 +118,7 @@ export default function Home() {
                 vindo de outro lugar.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-5">
-                <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="flex min-h-13 items-center bg-carvao px-7 text-sm text-porcelana">Agendar pelo WhatsApp</a>
+                <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Agendar pelo WhatsApp</a>
                 <Link href="/loja/diagnostico" className="inline-flex min-h-11 items-center border-b border-nude text-sm text-nude">Descobrir o que usar no seu cabelo</Link>
               </div>
             </div>
@@ -134,6 +138,8 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+        <Faixa itens={[["2014", "no mesmo endereço"], ["2.900", "alunas formadas"], ["8", "anos de formação"], ["4", "cidades atendidas"]]} />
 
         <section id="servicos" className="scroll-mt-20 py-16 md:py-24">
           <p className="text-sm text-carvao/45">O que fazemos</p>
@@ -170,11 +176,12 @@ export default function Home() {
 
         <section id="equipe" className="scroll-mt-20 py-16 md:py-24">
           <p className="text-sm text-carvao/45">Quem atende</p>
-          <h2 className="mt-2 font-serif text-3xl md:text-4xl">Equipe</h2>
+          <div className="flex items-baseline justify-between gap-6"><h2 className="mt-2 font-serif text-3xl md:text-4xl">Equipe</h2><Link href="/equipe" className="text-sm text-nude">Conhecer a equipe</Link></div>
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {EQUIPE.map((p) => (
               <div key={p.nome}>
-                <h3 className="font-serif text-xl">{p.nome}</h3>
+                <Figura src={p.foto} alt={p.nome} proporcao="aspect-[4/3] md:aspect-[3/4]" sizes="(max-width: 768px) 100vw, 31vw" />
+                <h3 className="mt-5 font-serif text-xl">{p.nome}</h3>
                 <p className="mt-1 text-sm text-nude">{p.papel}</p>
                 <p className="mt-3 text-carvao/65">{p.texto}</p>
                 <a href={p.insta} target="_blank" rel="noopener" className="mt-3 inline-block text-sm text-carvao/45 hover:text-nude">Instagram</a>
@@ -183,29 +190,29 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="formacoes" className="scroll-mt-20 bg-carvao px-6 py-16 text-porcelana md:px-12 md:py-20">
-          <p className="text-sm text-porcelana/50">Para profissionais</p>
+        <section id="formacoes" className="scroll-mt-20 bg-carvao px-6 py-16 text-creme md:px-12 md:py-20">
+          <p className="text-sm text-creme/50">Para profissionais</p>
           <h2 className="mt-2 max-w-2xl font-serif text-3xl leading-tight md:text-4xl">
             2.900 cabeleireiras formadas em oito anos
           </h2>
-          <p className="mt-5 max-w-xl text-porcelana/70">
+          <p className="mt-5 max-w-xl text-creme/70">
             As formações acontecem dentro do salão em operação, com modelo real e
             turma pequena. Quem ensina é quem atende todos os dias.
           </p>
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {FORMACOES.map((f) => (
-              <div key={f.nome} className="border-t border-porcelana/15 pt-5">
+              <div key={f.nome} className="border-t border-creme/15 pt-5">
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="font-serif text-xl">{f.nome}</h3>
                   <span className="shrink-0 text-sm text-champanhe">{f.preco}</span>
                 </div>
-                <p className="mt-2 text-sm text-porcelana/60">{f.texto}</p>
+                <p className="mt-2 text-sm text-creme/60">{f.texto}</p>
               </div>
             ))}
           </div>
 
-          <a href={linkWhatsapp("Oi! Quero saber sobre as formações.")} target="_blank" rel="noopener" className="mt-12 inline-flex min-h-13 items-center bg-porcelana px-7 text-sm text-carvao">Entrar na lista da próxima turma</a>
+          <a href={linkWhatsapp("Oi! Quero saber sobre as formações.")} target="_blank" rel="noopener" className="mt-12 inline-flex min-h-13 items-center bg-creme px-7 text-sm text-carvao">Entrar na lista da próxima turma</a>
         </section>
 
         <section id="contato" className="scroll-mt-20 py-16 md:grid md:grid-cols-2 md:gap-16 md:py-24">
@@ -217,7 +224,7 @@ export default function Home() {
               {SITE.bairro} · {SITE.cidade}/{SITE.uf}<br />
               Terça a sábado, 8h30–12h e 13h30–18h30
             </p>
-            <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="mt-8 inline-flex min-h-13 items-center bg-carvao px-7 text-sm text-porcelana">Agendar pelo WhatsApp</a>
+            <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="mt-8 inline-flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Agendar pelo WhatsApp</a>
           </div>
           <div className="mt-10 space-y-5 text-carvao/65 md:mt-0">
             <p>

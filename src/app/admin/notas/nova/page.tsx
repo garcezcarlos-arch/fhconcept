@@ -63,7 +63,7 @@ export default function NovaNota() {
           <button
             type="submit"
             disabled={enviando}
-            className="bg-carvao px-5 py-2.5 text-sm text-porcelana disabled:opacity-40"
+            className="bg-carvao px-5 py-2.5 text-sm text-creme disabled:opacity-40"
           >
             {enviando ? "Salvando" : "Salvar nota"}
           </button>

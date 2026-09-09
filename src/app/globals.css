@@ -1,65 +1,29 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* paleta do FH Concept — tres fundos (branco, creme, areia) permitem alternar secoes sem borda */
+  --color-branco:    #FFFFFF;
+  --color-creme:     #FBF9F6;
+  --color-areia:     #F2ECE5;
+  --color-carvao:    #1F1C19;
+  --color-texto:     #2B2724;
+  --color-texto2:    #767069;
+  --color-nude:      #B08968;
+  --color-nude-esc:  #8E6B4F;
+  --color-champanhe: #C2A36B;
+  --color-linha:     rgba(31, 28, 25, 0.10);
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans:  var(--font-inter), system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { color-scheme: light; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-creme);
+  color: var(--color-texto);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
-@theme {
-  /* tokens do site original — tres fundos permitem alternar secoes sem borda */
-  --color-branco:   #FFFFFF;
-  --color-creme:    #FBF9F6;
-  --color-areia:    #F2ECE5;
-  --color-carvao:   #1F1C19;
-  --color-texto:    #2B2724;
-  --color-texto2:   #767069;
-  --color-nude:     #B08968;
-  --color-nude-esc: #8E6B4F;
-  --color-champanhe:#C2A36B;
-  --color-linha:    rgba(31, 28, 25, 0.10);
-  /* aliases para o que ja esta escrito */
-  --color-porcelana: #FBF9F6;
-}
-
-@theme {
-  /* tokens do site original — tres fundos permitem alternar secoes sem borda */
-  --color-branco:   #FFFFFF;
-  --color-creme:    #FBF9F6;
-  --color-areia:    #F2ECE5;
-  --color-carvao:   #1F1C19;
-  --color-texto:    #2B2724;
-  --color-texto2:   #767069;
-  --color-nude:     #B08968;
-  --color-nude-esc: #8E6B4F;
-  --color-champanhe:#C2A36B;
-  --color-linha:    rgba(31, 28, 25, 0.10);
-  /* aliases para o que ja esta escrito */
-  --color-porcelana: #FBF9F6;
-}
-
-@theme {
-  --font-serif: var(--font-playfair), Georgia, serif;
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-}
-
-body { font-family: var(--font-sans); }
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.01em; }

@@ -31,7 +31,7 @@ export default async function Produtos() {
         <h1 className="font-serif text-2xl">Produtos</h1>
         <Link
           href="/admin/produtos/novo"
-          className="bg-carvao px-4 py-2 text-sm text-porcelana"
+          className="bg-carvao px-4 py-2 text-sm text-creme"
         >
           Cadastrar produto
         </Link>

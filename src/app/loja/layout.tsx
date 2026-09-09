@@ -19,7 +19,7 @@ export default async function LojaLayout({
   }
 
   return (
-    <div className="min-h-dvh bg-porcelana text-carvao">
+    <div className="min-h-dvh bg-creme text-carvao">
       <DadosEstruturados
         dados={{
           "@context": "https://schema.org",
@@ -52,7 +52,7 @@ export default async function LojaLayout({
         }}
       />
       {staff && (
-        <p className="bg-carvao px-5 py-2 text-center text-xs text-porcelana">
+        <p className="bg-carvao px-5 py-2 text-center text-xs text-creme">
           Você está vendo a loja como administradora. Rascunhos aparecem aqui,
           mas não para o público.
         </p>

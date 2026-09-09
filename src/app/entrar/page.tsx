@@ -30,7 +30,7 @@ function FormularioEntrar() {
   }
 
   return (
-    <main className="min-h-dvh bg-porcelana text-carvao grid place-items-center px-6">
+    <main className="min-h-dvh bg-creme text-carvao grid place-items-center px-6">
       <div className="w-full max-w-sm">
         <p className="font-serif text-3xl tracking-tight">FH Concept</p>
         <p className="mt-1 mb-8 text-sm text-carvao/60">Painel da loja</p>
@@ -61,7 +61,7 @@ function FormularioEntrar() {
         <button
           onClick={entrar}
           disabled={carregando || !email || !senha}
-          className="mt-6 w-full bg-carvao px-4 py-2.5 text-sm text-porcelana disabled:opacity-40"
+          className="mt-6 w-full bg-carvao px-4 py-2.5 text-sm text-creme disabled:opacity-40"
         >
           {carregando ? "Entrando" : "Entrar"}
         </button>
@@ -74,7 +74,7 @@ export default function Entrar() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-dvh bg-porcelana text-carvao grid place-items-center px-6">
+        <main className="min-h-dvh bg-creme text-carvao grid place-items-center px-6">
           <p className="text-sm text-carvao/50">Carregando…</p>
         </main>
       }

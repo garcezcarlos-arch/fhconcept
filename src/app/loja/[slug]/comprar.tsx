@@ -34,7 +34,7 @@ export default function Comprar({
               key={x.id}
               onClick={() => setI(j)}
               className={`min-h-11 border px-4 text-sm ${
-                j === i ? "border-carvao bg-carvao text-porcelana" : "border-linha bg-white"
+                j === i ? "border-carvao bg-carvao text-creme" : "border-linha bg-white"
               }`}
             >
               {x.nome}
@@ -59,7 +59,7 @@ export default function Comprar({
         href={linkWhatsapp(`Oi! Quero comprar: ${rotulo} — ${reais(preco)}`)}
         target="_blank"
         rel="noopener"
-        className="mt-5 flex min-h-13 w-full items-center justify-center bg-carvao px-6 text-sm text-porcelana"
+        className="mt-5 flex min-h-13 w-full items-center justify-center bg-carvao px-6 text-sm text-creme"
       >
         Comprar pelo WhatsApp
       </a>

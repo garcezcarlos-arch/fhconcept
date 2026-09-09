@@ -39,7 +39,7 @@ function Produto({ p, grande = false }: { p: Card; grande?: boolean }) {
           </div>
         )}
         {p.status !== "ativo" && (
-          <span className="absolute left-3 top-3 bg-carvao/90 px-2 py-0.5 text-xs text-porcelana">
+          <span className="absolute left-3 top-3 bg-carvao/90 px-2 py-0.5 text-xs text-creme">
             rascunho
           </span>
         )}
@@ -165,13 +165,13 @@ export default async function Loja({
 
       <Link
         href="/loja/diagnostico"
-        className="group mt-16 flex items-center justify-between gap-6 bg-carvao px-6 py-10 text-porcelana md:px-10"
+        className="group mt-16 flex items-center justify-between gap-6 bg-carvao px-6 py-10 text-creme md:px-10"
       >
         <div>
           <p className="font-serif text-2xl leading-tight md:text-3xl">
             Não sabe qual usar no seu cabelo?
           </p>
-          <p className="mt-2 max-w-md text-sm text-porcelana/60">
+          <p className="mt-2 max-w-md text-sm text-creme/60">
             Quatro perguntas e a Fernanda monta a rotina certa para o seu fio.
           </p>
         </div>
