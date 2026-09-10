@@ -1246,6 +1246,119 @@ export type Database = {
         }
         Relationships: []
       }
+      turmas: {
+        Row: {
+          created_at: string
+          data_fim: string | null
+          data_inicio: string
+          descricao: string | null
+          formato: string
+          horario: string | null
+          id: string
+          nome: string
+          preco: number
+          sinal: number | null
+          status: string
+          vagas: number
+        }
+        Insert: {
+          created_at?: string
+          data_fim?: string | null
+          data_inicio: string
+          descricao?: string | null
+          formato: string
+          horario?: string | null
+          id?: string
+          nome: string
+          preco: number
+          sinal?: number | null
+          status?: string
+          vagas?: number
+        }
+        Update: {
+          created_at?: string
+          data_fim?: string | null
+          data_inicio?: string
+          descricao?: string | null
+          formato?: string
+          horario?: string | null
+          id?: string
+          nome?: string
+          preco?: number
+          sinal?: number | null
+          status?: string
+          vagas?: number
+        }
+        Relationships: []
+      }
+      inscricoes: {
+        Row: {
+          cidade: string | null
+          created_at: string
+          email: string | null
+          experiencia: string | null
+          formato: string
+          gateway: string
+          gateway_payment_id: string | null
+          id: string
+          metodo: string | null
+          nome: string
+          observacoes: string | null
+          pago_em: string | null
+          preference_id: string | null
+          status: string
+          telefone: string
+          turma_id: string | null
+          valor: number
+        }
+        Insert: {
+          cidade?: string | null
+          created_at?: string
+          email?: string | null
+          experiencia?: string | null
+          formato: string
+          gateway?: string
+          gateway_payment_id?: string | null
+          id?: string
+          metodo?: string | null
+          nome: string
+          observacoes?: string | null
+          pago_em?: string | null
+          preference_id?: string | null
+          status?: string
+          telefone: string
+          turma_id?: string | null
+          valor?: number
+        }
+        Update: {
+          cidade?: string | null
+          created_at?: string
+          email?: string | null
+          experiencia?: string | null
+          formato?: string
+          gateway?: string
+          gateway_payment_id?: string | null
+          id?: string
+          metodo?: string | null
+          nome?: string
+          observacoes?: string | null
+          pago_em?: string | null
+          preference_id?: string | null
+          status?: string
+          telefone?: string
+          turma_id?: string | null
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inscricoes_turma_id_fkey"
+            columns: ["turma_id"]
+            isOneToOne: false
+            referencedRelation: "turmas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       vendors: {
         Row: {
           cnpj: string | null
@@ -1296,7 +1409,24 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      turmas_vagas: {
+        Row: {
+          created_at: string | null
+          data_fim: string | null
+          data_inicio: string | null
+          descricao: string | null
+          formato: string | null
+          horario: string | null
+          id: string | null
+          nome: string | null
+          preco: number | null
+          restantes: number | null
+          sinal: number | null
+          status: string | null
+          vagas: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       fn_customer_id: { Args: never; Returns: string }

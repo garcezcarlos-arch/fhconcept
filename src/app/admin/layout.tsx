@@ -33,6 +33,7 @@ export default async function AdminLayout({
           <Link href="/admin/pedidos" className="py-1 hover:text-nude">Pedidos</Link>
           <Link href="/admin/estoque" className="py-1 hover:text-nude">Estoque</Link>
           <Link href="/admin/notas" className="py-1 hover:text-nude">Notas de entrada</Link>
+          <Link href="/admin/turmas" className="py-1 hover:text-nude">Turmas</Link>
         </nav>
         <p className="mt-8 text-xs text-carvao/50 md:mt-12">{perfil.nome}</p>
       </aside>

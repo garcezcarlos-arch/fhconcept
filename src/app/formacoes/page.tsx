@@ -4,7 +4,9 @@ import { Rodape } from "@/components/rodape";
 import { DadosEstruturados } from "@/components/dados-estruturados";
 import { Eyebrow, Figura, Faixa, Botao, LinkNude } from "@/components/ui";
 import { SITE } from "@/lib/site";
-import { linkWhatsapp } from "@/lib/preco";
+import { linkWhatsapp, reais } from "@/lib/preco";
+import { FORMATOS, periodo } from "@/lib/formacoes";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Formações para cabeleireiras",
@@ -12,68 +14,6 @@ export const metadata = {
     "Cursos de colorimetria, mechas e correção de cor dentro de um salão em operação, em Garuva/SC. Seis formatos, de R$ 700 a R$ 2.200. 2.900 alunas formadas em oito anos.",
   alternates: { canonical: "/formacoes" },
 };
-
-type Formato = {
-  numero: string;
-  tipo: string;
-  nome: string;
-  texto: string;
-  preco: string;
-  ficha: [string, string][];
-  cta: string;
-  id: string;
-};
-
-const FORMATOS: Formato[] = [
-  {
-    numero: "01", tipo: "Turma", id: "turma",
-    nome: "Curso prático em turma",
-    texto: "Grupo reduzido, prática em modelo real e conteúdo adaptado ao nível da turma. É o formato principal, e o que mais transforma a agenda de quem faz.",
-    preco: "R$ 700 a R$ 2.200 por pessoa",
-    ficha: [["Duração", "1 a 3 dias"], ["Turma", "Até 8 alunas"], ["Prática", "Modelo real"], ["Inclui", "Certificado e suporte"]],
-    cta: "Entrar na lista da próxima turma",
-  },
-  {
-    numero: "02", tipo: "Individual", id: "individual",
-    nome: "Curso particular individual",
-    texto: "Conteúdo desenhado só para você, no seu ritmo e a partir das suas dificuldades reais. Para quem quer avançar rápido em um ponto específico.",
-    preco: "Sob consulta",
-    ficha: [["Duração", "Combinada"], ["Turma", "Individual"], ["Conteúdo", "Sob medida"]],
-    cta: "Quero me inscrever",
-  },
-  {
-    numero: "03", tipo: "Imersão", id: "shadow-day",
-    nome: "Shadow Day",
-    texto: "Um dia inteiro acompanhando atendimentos reais: diagnóstico, planejamento, execução, finalização e orientação à cliente. Ao final, uma hora de mentoria sobre o que você viu.",
-    preco: "R$ 950 o dia",
-    ficha: [["Duração", "1 dia completo"], ["Formato", "Acompanhamento"], ["Extra", "1 h de mentoria ao final"]],
-    cta: "Quero me inscrever",
-  },
-  {
-    numero: "04", tipo: "Prática", id: "assistido",
-    nome: "Atendimento assistido",
-    texto: "Aqui quem executa é você. O procedimento é feito em modelo ou cliente, com supervisão e orientação da Fernanda do começo ao fim. É o formato que mais tira o medo.",
-    preco: "R$ 900 a R$ 1.200 o dia",
-    ficha: [["Duração", "1 dia"], ["Formato", "Você executa"], ["Supervisão", "Integral"]],
-    cta: "Quero me inscrever",
-  },
-  {
-    numero: "05", tipo: "Consultoria", id: "mentoria",
-    nome: "Mentoria técnica presencial",
-    texto: "Sem modelo e sem tesoura: análise de casos reais, diagnóstico, planejamento e tomada de decisão. Para a profissional que já executa bem e precisa acertar o julgamento técnico.",
-    preco: "R$ 1.200 o dia",
-    ficha: [["Duração", "1 dia"], ["Formato", "Análise de casos"], ["Foco", "Suas dificuldades"]],
-    cta: "Quero me inscrever",
-  },
-  {
-    numero: "06", tipo: "Sob medida", id: "pacote",
-    nome: "Pacotes personalizados",
-    texto: "Combinação de formatos — curso prático, atendimento assistido, imersão e mentoria — estruturada conforme o seu nível técnico e o resultado que você quer alcançar.",
-    preco: "Sob consulta",
-    ficha: [["Duração", "1 ou mais dias"], ["Formato", "Combinado"], ["Para", "Quem quer plano completo"]],
-    cta: "Montar meu pacote",
-  },
-];
 
 const EMENTA: [string, string][] = [
   ["Diagnóstico de histórico químico", "Como descobrir o que já foi feito naquele cabelo antes de propor qualquer coisa — e o que fazer quando a cliente não lembra."],
@@ -96,7 +36,18 @@ const FAQ: [string, string][] = [
   ["Vocês fazem treinamento para marcas?", "Sim. A Fernanda ministra treinamentos e workshops em parceria com marcas profissionais. Para propostas comerciais, o contato é pelo WhatsApp."],
 ];
 
-export default function Formacoes() {
+export const revalidate = 300;
+
+export default async function Formacoes() {
+  const supabase = await createClient();
+  const hoje = new Date().toISOString().slice(0, 10);
+  const { data: turmas } = await supabase
+    .from("turmas_vagas")
+    .select("id, formato, nome, data_inicio, data_fim, horario, preco, sinal, vagas, restantes, status")
+    .in("status", ["aberta", "esgotada"])
+    .gte("data_inicio", hoje)
+    .order("data_inicio");
+
   return (
     <div className="min-h-dvh bg-creme text-texto">
       <DadosEstruturados
@@ -147,6 +98,44 @@ export default function Formacoes() {
           <Faixa itens={[["+2.900", "profissionais formadas"], ["150", "turmas ministradas"], ["8", "anos como educadora"], ["Até 8", "alunas por turma"]]} />
         </div>
 
+        {/* proximas turmas */}
+        <section id="turmas" className="scroll-mt-20 px-5 py-16 md:px-10 md:py-20">
+          <div className="mx-auto max-w-6xl">
+            <Eyebrow>Agenda</Eyebrow>
+            <h2 className="mt-4 max-w-[19ch] font-serif text-3xl leading-[1.12] md:text-4xl">Próximas turmas</h2>
+            {!turmas?.length ? (
+              <div className="mt-6 max-w-xl">
+                <p className="text-texto2">Nenhuma turma com data aberta agora. Deixe seu contato e você recebe a próxima data antes de ela ir para o Instagram.</p>
+                <div className="mt-5"><LinkNude href="/formacoes/lista-espera" externo={false}>Entrar na lista de espera</LinkNude></div>
+              </div>
+            ) : (
+              <div className="mt-8 border-t border-carvao">
+                {turmas.map((t) => {
+                  const esgotada = t.status === "esgotada" || (t.restantes ?? 0) <= 0;
+                  return (
+                    <div key={t.id} className="grid gap-3 border-b border-linha py-5 md:grid-cols-[9rem_1fr_10rem_11rem] md:items-center md:gap-6">
+                      <p className="font-serif text-xl">{periodo(t.data_inicio!, t.data_fim)}</p>
+                      <div>
+                        <p className="text-[15px]">{t.nome}</p>
+                        <p className="text-xs text-texto2">{FORMATOS.find((f) => f.id === t.formato)?.nome}{t.horario ? ` · ${t.horario}` : ""}</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-serif text-lg">{reais(t.preco ?? 0)}</p>
+                        <p className="text-xs text-texto2">{esgotada ? "esgotada" : `${t.restantes} de ${t.vagas} vagas`}</p>
+                      </div>
+                      <div>
+                        {esgotada
+                          ? <LinkNude href="/formacoes/lista-espera" externo={false}>Avisar quando abrir</LinkNude>
+                          : <Link href={`/formacoes/inscricao/${t.id}`} className="inline-flex min-h-11 items-center bg-carvao px-5 text-sm text-creme hover:bg-nude-esc">Reservar vaga</Link>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* seis formatos */}
         <section id="formatos" className="scroll-mt-20 px-5 py-16 md:px-10 md:py-24">
           <div className="mx-auto max-w-6xl">
@@ -174,7 +163,7 @@ export default function Formacoes() {
                     ))}
                   </dl>
                   <div className="mt-5">
-                    <LinkNude href={linkWhatsapp(`Oi! Quero saber sobre: ${f.nome}.`)}>{f.cta}</LinkNude>
+                    {f.id === "turma" ? <LinkNude href="#turmas" externo={false}>Ver datas e reservar</LinkNude> : <LinkNude href={linkWhatsapp(`Oi! Quero saber sobre: ${f.nome}.`)}>{f.cta}</LinkNude>}
                   </div>
                 </article>
               ))}

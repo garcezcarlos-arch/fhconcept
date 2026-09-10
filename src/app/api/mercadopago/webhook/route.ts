@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { confirmarPagamento } from "@/lib/pedidos";
+import { confirmarInscricao } from "@/lib/inscricoes";
 
 export async function POST(req: Request) {
   const token = process.env.MERCADOPAGO_ACCESS_TOKEN;
@@ -18,7 +19,12 @@ export async function POST(req: Request) {
   const pg = await r.json();
 
   if (pg.status === "approved" && pg.external_reference) {
-    await confirmarPagamento(String(pg.external_reference), { gateway_payment_id: String(pg.id), raw: pg });
+    const ref = String(pg.external_reference);
+    if (ref.startsWith("inscricao:")) {
+      await confirmarInscricao(ref.slice("inscricao:".length), String(pg.id));
+    } else {
+      await confirmarPagamento(ref, { gateway_payment_id: String(pg.id), raw: pg });
+    }
   }
   return NextResponse.json({ ok: true });
 }
