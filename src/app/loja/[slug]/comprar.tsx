@@ -69,7 +69,7 @@ export default function Comprar({
           <span className="flex min-w-10 items-center justify-center text-sm">{qtd}</span>
           <button type="button" aria-label="Mais" onClick={() => setQtd(qtd + 1)} className="min-h-13 w-11 text-lg">+</button>
         </div>
-        <button type="button" onClick={porNoCarrinho} className="flex min-h-13 flex-1 items-center justify-center bg-carvao px-6 text-sm text-creme transition-colors hover:bg-nude-esc">
+        <button type="button" onClick={porNoCarrinho} className="flex min-h-13 flex-1 items-center justify-center rounded-full bg-terracota px-6 text-sm text-creme transition-colors hover:bg-terracota-esc">
           {adicionado ? "Adicionado ✓" : "Adicionar ao carrinho"}
         </button>
       </div>

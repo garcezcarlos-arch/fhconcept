@@ -16,7 +16,7 @@ export default function Carrinho() {
       {!pronto ? null : itens.length === 0 ? (
         <div className="mt-10 max-w-md">
           <p className="text-texto2">Seu carrinho está vazio.</p>
-          <Link href="/loja" className="mt-5 inline-flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Ver produtos</Link>
+          <Link href="/loja" className="mt-5 inline-flex min-h-13 items-center rounded-full bg-terracota px-7 text-sm text-creme hover:bg-terracota-esc">Ver produtos</Link>
         </div>
       ) : (
         <div className="mt-10 md:grid md:grid-cols-[1fr_20rem] md:gap-12">
@@ -47,7 +47,7 @@ export default function Carrinho() {
             <div className="flex justify-between text-sm"><span className="text-texto2">Subtotal</span><span>{reais(total)}</span></div>
             <div className="mt-2 flex justify-between text-sm"><span className="text-texto2">Frete</span><span className="text-texto2">calculado no próximo passo</span></div>
             <div className="mt-4 flex justify-between border-t border-linha pt-4 font-serif text-xl"><span>Total</span><span>{reais(total)}</span></div>
-            <Link href="/loja/checkout" className="mt-6 flex min-h-13 items-center justify-center bg-carvao text-sm text-creme hover:bg-nude-esc">Finalizar compra</Link>
+            <Link href="/loja/checkout" className="mt-6 flex min-h-13 items-center justify-center rounded-full bg-terracota text-sm text-creme hover:bg-terracota-esc">Finalizar compra</Link>
             <Link href="/loja" className="mt-3 block text-center text-sm text-carvao/60 hover:text-nude">Continuar comprando</Link>
           </aside>
         </div>

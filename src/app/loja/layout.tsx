@@ -61,22 +61,35 @@ export default async function LojaLayout({
         </p>
       )}
 
-      <header className="border-b border-linha"><div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-10">
+      <p className="bg-terracota px-5 py-2.5 text-center text-[13px] text-creme">
+        Retirada grátis no salão, em Garuva · Pix ou cartão em até 6x
+      </p>
+
+      <header className="bg-rose"><div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-10">
         <Link href="/loja" aria-label="FH Concept">
           <img src="/fh-concept.svg" alt="FH Concept" className="h-10 w-auto md:h-11" />
         </Link>
         <nav className="flex items-center gap-6">
-          <Link href="/" className="text-sm text-carvao/60 hover:text-nude">o salão</Link>
+          <Link href="/" className="text-sm text-carvao/70 hover:text-terracota">o salão</Link>
           <CarrinhoLink />
         </nav>
       </div></header>
 
       {children}
 
-      <footer className="mt-24 border-t border-linha px-5 py-10 text-sm text-carvao/60 md:px-10">
-        <p>Rua Rui Barbosa, 679 — Sala 02 · Centro · Garuva/SC</p>
-        <p className="mt-1">Terça a sábado, 8h30–12h e 13h30–18h30</p>
-        <p className="mt-4 text-carvao/40">Fernanda Hosang Concept · desde 2014</p>
+      <footer className="mt-24 bg-rose">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 text-sm md:grid-cols-4 md:px-10">
+          <div><p className="font-medium text-carvao">Retirada no salão</p><p className="mt-1 text-carvao/70">Centro de Garuva, sem frete</p></div>
+          <div><p className="font-medium text-carvao">Envio pelos Correios</p><p className="mt-1 text-carvao/70">frete confirmado antes de postar</p></div>
+          <div><p className="font-medium text-carvao">Pix ou cartão</p><p className="mt-1 text-carvao/70">em até 6x</p></div>
+          <div><p className="font-medium text-carvao">Dúvida? WhatsApp</p><p className="mt-1 text-carvao/70">quem responde é da equipe</p></div>
+        </div>
+        <div className="border-t border-carvao/10 px-5 py-6 text-xs text-carvao/60 md:px-10">
+          <div className="mx-auto max-w-6xl">
+            <p>Rua Rui Barbosa, 679 — Sala 02 · Centro · Garuva/SC · Terça a sábado, 8h30–12h e 13h30–18h30</p>
+            <p className="mt-1">Fernanda Hosang Concept · desde 2014</p>
+          </div>
+        </div>
       </footer>
     </div>
     </CarrinhoProvider>

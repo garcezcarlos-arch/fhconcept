@@ -13,6 +13,12 @@
   --color-champanhe: #C2A36B;
   --color-linha:     rgba(31, 28, 25, 0.10);
 
+  /* loja (proposta B, out/2026): rosé de fundo, terracota nos botoes e selos */
+  --color-rose:          #F3E1D9;
+  --color-rose-forte:    #E9CFC4;
+  --color-terracota:     #A1523A;
+  --color-terracota-esc: #84402C;
+
   --font-serif: var(--font-playfair), Georgia, serif;
   --font-sans:  var(--font-inter), system-ui, sans-serif;
 }

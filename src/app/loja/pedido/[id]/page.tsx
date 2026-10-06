@@ -50,7 +50,7 @@ export default async function Pedido({ params, searchParams }: { params: Promise
       {pendente && manual && (
         <div className="mt-6 border border-linha bg-areia p-5">
           <p className="text-sm">Falta só o pagamento por <b>{metodo}</b>. Toque no botão abaixo — a mensagem já vai pronta com o número do pedido, e a Fernanda te passa a chave Pix ou os dados na hora.</p>
-          <a href={linkWhatsapp(msg)} target="_blank" rel="noopener" className="mt-4 inline-flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Pagar pelo WhatsApp</a>
+          <a href={linkWhatsapp(msg)} target="_blank" rel="noopener" className="mt-4 inline-flex min-h-13 items-center rounded-full bg-terracota px-7 text-sm text-creme hover:bg-terracota-esc">Pagar pelo WhatsApp</a>
         </div>
       )}
       {pendente && !manual && retorno !== "sucesso" && (

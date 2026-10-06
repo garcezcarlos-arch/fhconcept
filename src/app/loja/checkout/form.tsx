@@ -20,7 +20,7 @@ export default function CheckoutForm() {
     return (
       <div className="mt-10">
         <p className="text-texto2">Seu carrinho está vazio.</p>
-        <Link href="/loja" className="mt-5 inline-flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Ver produtos</Link>
+        <Link href="/loja" className="mt-5 inline-flex min-h-13 items-center rounded-full bg-terracota px-7 text-sm text-creme hover:bg-terracota-esc">Ver produtos</Link>
       </div>
     );
   }
@@ -96,7 +96,7 @@ export default function CheckoutForm() {
 
         {estado.erro && <p className="mt-4 border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{estado.erro}</p>}
 
-        <button type="submit" disabled={pendente} className="mt-6 flex min-h-13 w-full items-center justify-center bg-carvao text-sm text-creme hover:bg-nude-esc disabled:opacity-60">
+        <button type="submit" disabled={pendente} className="mt-6 flex min-h-13 w-full items-center justify-center rounded-full bg-terracota text-sm text-creme hover:bg-terracota-esc disabled:opacity-60">
           {pendente ? "Registrando pedido…" : "Confirmar pedido"}
         </button>
         <p className="mt-3 text-center text-xs text-texto2">Você será direcionada para o pagamento em seguida.</p>

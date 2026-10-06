@@ -63,7 +63,7 @@ export default function Diagnostico({ perguntas }: { perguntas: Pergunta[] }) {
               href={linkWhatsapp("Oi! Fiz o diagnóstico no site e queria uma indicação.")}
               target="_blank"
               rel="noopener"
-              className="mt-8 inline-flex min-h-13 items-center bg-carvao px-6 text-sm text-creme"
+              className="mt-8 inline-flex min-h-13 items-center rounded-full bg-terracota px-6 text-sm text-creme hover:bg-terracota-esc"
             >
               Falar no WhatsApp
             </a>
@@ -107,7 +107,7 @@ export default function Diagnostico({ perguntas }: { perguntas: Pergunta[] }) {
               )}
               target="_blank"
               rel="noopener"
-              className="mt-14 flex min-h-13 w-full items-center justify-center bg-carvao px-6 text-sm text-creme"
+              className="mt-14 flex min-h-13 w-full items-center justify-center rounded-full bg-terracota px-6 text-sm text-creme hover:bg-terracota-esc"
             >
               Levar tudo pelo WhatsApp
             </a>
@@ -156,7 +156,7 @@ export default function Diagnostico({ perguntas }: { perguntas: Pergunta[] }) {
         <button
           onClick={() => avancar()}
           disabled={!escolhidas.length || carregando}
-          className="mt-8 min-h-13 bg-carvao px-8 text-sm text-creme disabled:opacity-40"
+          className="mt-8 min-h-13 rounded-full bg-terracota px-8 text-sm text-creme disabled:opacity-40 hover:bg-terracota-esc"
         >
           {carregando ? "Buscando" : "Continuar"}
         </button>
