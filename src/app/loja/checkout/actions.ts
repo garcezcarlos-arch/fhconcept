@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SITE } from "@/lib/site";
+import { criarPreferencia, mpConfigurado } from "@/lib/payments/mercadopago";
 
 export type EstadoCheckout = { erro?: string };
 
@@ -106,54 +107,39 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
     vendorIds.map((vendor_id) => ({ order_id: pedido.id, vendor_id, tipo: entrega, valor_frete: 0, status: "pendente" })),
   );
 
-  const token = process.env.MERCADOPAGO_ACCESS_TOKEN;
-  const gateway = token ? "mercadopago" : "manual";
+  const usaMP = mpConfigurado();
 
   const { data: pag } = await db
     .from("payments")
-    .insert({ order_id: pedido.id, gateway, metodo: pagamento, valor: subtotal, status: "pendente" })
+    .insert({ order_id: pedido.id, gateway: usaMP ? "mercadopago" : "manual", metodo: pagamento, valor: subtotal, status: "pendente" })
     .select("id")
     .single();
 
   // com Mercado Pago configurado, cria a preferencia e redireciona
-  if (token) {
-    const base = SITE.url;
-    const corpo = {
-      items: linhas.map((l) => ({
-        id: l.v.sku,
-        title: l.v.nome ? `${l.v.products!.nome} — ${l.v.nome}` : l.v.products!.nome,
-        quantity: l.quantidade,
-        unit_price: Number(l.preco.toFixed(2)),
-        currency_id: "BRL",
-      })),
-      payer: { name: nome, email: email ?? undefined, phone: { area_code: telefone.slice(2, 4), number: telefone.slice(4) } },
-      external_reference: pedido.id,
-      notification_url: `${base}/api/mercadopago/webhook`,
-      back_urls: {
-        success: `${base}/loja/pedido/${pedido.id}?retorno=sucesso`,
-        pending: `${base}/loja/pedido/${pedido.id}?retorno=pendente`,
-        failure: `${base}/loja/pedido/${pedido.id}?retorno=falha`,
-      },
-      auto_return: "approved",
-      statement_descriptor: "FH CONCEPT",
-      payment_methods: pagamento === "pix"
-        ? { excluded_payment_types: [{ id: "credit_card" }, { id: "debit_card" }, { id: "ticket" }] }
-        : { excluded_payment_types: [{ id: "ticket" }, { id: "bank_transfer" }], installments: 6 },
-    };
-
-    let initPoint: string | null = null;
+  if (usaMP && pag) {
+    let urlPagamento: string | null = null;
     try {
-      const r = await fetch("https://api.mercadopago.com/checkout/preferences", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-        body: JSON.stringify(corpo),
+      const pref = await criarPreferencia({
+        referencia: pedido.id,
+        itens: linhas.map((l) => ({
+          id: l.v.sku,
+          title: l.v.nome ? `${l.v.products!.nome} — ${l.v.nome}` : l.v.products!.nome,
+          quantity: l.quantidade,
+          unit_price: l.preco,
+        })),
+        pagador: { nome, email, telefone: telefone.length > 11 ? telefone.replace(/^55/, "") : telefone },
+        metodo: pagamento,
+        urlBase: SITE.url,
+        retorno: `/loja/pedido/${pedido.id}`,
       });
-      const j = await r.json();
-      initPoint = j?.init_point ?? null;
-      if (pag && j?.id) await db.from("payments").update({ raw: { preference_id: j.id } }).eq("id", pag.id);
-    } catch {}
-
-    if (initPoint) redirect(initPoint);
+      urlPagamento = pref.url;
+      await db.from("payments").update({ raw: { preference_id: pref.preferenceId } }).eq("id", pag.id);
+    } catch (e) {
+      console.error("preferencia mercado pago", e);
+      // gateway fora: o pedido segue, e a pagina oferece pagar pelo WhatsApp
+      await db.from("payments").update({ gateway: "manual" }).eq("id", pag.id);
+    }
+    if (urlPagamento) redirect(urlPagamento);
   }
 
   redirect(`/loja/pedido/${pedido.id}`);

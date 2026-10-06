@@ -1,23 +1,15 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { reais } from "@/lib/preco";
-import { mudarStatus, confirmarPagamentoManual } from "./actions";
+import { mudarStatus, confirmarPagamentoManual, estornar } from "./actions";
+import { NOME_STATUS, PROXIMOS_MANUAIS, PODE_ESTORNAR, type StatusPedido } from "@/lib/status-pedido";
 
 export const dynamic = "force-dynamic";
 
-const STATUS: [string, string][] = [
-  ["aguardando_pagamento", "Aguardando pagamento"],
-  ["pago", "Pago"],
-  ["em_separacao", "Em separação"],
-  ["pronto_retirada", "Pronto p/ retirada"],
-  ["enviado", "Enviado"],
-  ["concluido", "Concluído"],
-  ["cancelado", "Cancelado"],
-  ["estornado", "Estornado"],
-];
-const NOME = Object.fromEntries(STATUS);
+const STATUS = Object.entries(NOME_STATUS) as [StatusPedido, string][];
+const NOME = NOME_STATUS;
 
-export default async function Pedidos({ searchParams }: { searchParams: Promise<{ s?: string }> }) {
-  const { s } = await searchParams;
+export default async function Pedidos({ searchParams }: { searchParams: Promise<{ s?: string; aviso?: string }> }) {
+  const { s, aviso } = await searchParams;
   const db = createAdminClient();
 
   let q = db
@@ -42,6 +34,8 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
         </nav>
       </div>
 
+      {aviso && <p className="mt-6 border border-linha bg-areia px-4 py-3 text-sm">{aviso}</p>}
+
       {!pedidos?.length ? (
         <p className="mt-12 text-sm text-carvao/60">Nenhum pedido{s ? " nessa situação" : " ainda"}.</p>
       ) : (
@@ -65,6 +59,7 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
                   </ul>
                   <p className="mt-3 text-xs text-carvao/60">
                     {entrega === "retirada_salao" ? "Retirada no salão" : "Envio pelos Correios"} · {pag?.metodo === "pix" ? "Pix" : pag?.metodo === "cartao_credito" ? "Cartão" : "Boleto"} · {pag?.gateway === "manual" ? "pagamento manual" : "Mercado Pago"}
+                    {pag?.status && pag.status !== "pendente" && pag.status !== "aprovado" && <> · pagamento {pag.status}</>}
                     {p.observacoes && <> · <i>{p.observacoes}</i></>}
                   </p>
                 </div>
@@ -80,13 +75,31 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
                     </form>
                   )}
 
-                  <form action={mudarStatus} className="mt-3 flex gap-2">
-                    <input type="hidden" name="id" value={p.id} />
-                    <select name="status" defaultValue={p.status} className="min-h-10 flex-1 border border-linha bg-white px-2 text-xs">
-                      {STATUS.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-                    </select>
-                    <button className="min-h-10 border border-carvao px-3 text-xs">Salvar</button>
-                  </form>
+                  {PROXIMOS_MANUAIS[p.status].length > 0 && (
+                    <form action={mudarStatus} className="mt-3 flex gap-2">
+                      <input type="hidden" name="id" value={p.id} />
+                      <input type="hidden" name="atual" value={p.status} />
+                      <select name="status" defaultValue={p.status} className="min-h-10 flex-1 border border-linha bg-white px-2 text-xs">
+                        <option value={p.status}>{NOME[p.status]}</option>
+                        {PROXIMOS_MANUAIS[p.status].map((k) => <option key={k} value={k}>{NOME[k]}</option>)}
+                      </select>
+                      <button className="min-h-10 border border-carvao px-3 text-xs">Salvar</button>
+                    </form>
+                  )}
+
+                  {PODE_ESTORNAR.includes(p.status) && (
+                    <details className="mt-3 text-xs">
+                      <summary className="cursor-pointer text-carvao/60 hover:text-nude">Estornar</summary>
+                      <form action={estornar} className="mt-2">
+                        <input type="hidden" name="id" value={p.id} />
+                        <p className="text-carvao/70">
+                          {pag?.gateway === "mercadopago" ? "Devolve o valor integral pelo Mercado Pago." : "Registra o estorno; a devolução do valor é feita por fora."}
+                          {["pago", "em_separacao", "pronto_retirada"].includes(p.status) ? " Os itens voltam ao estoque." : " Os itens já saíram e não voltam ao estoque."}
+                        </p>
+                        <button className="mt-2 min-h-10 w-full border border-nude px-3 text-nude">Confirmar estorno de {reais(p.total)}</button>
+                      </form>
+                    </details>
+                  )}
                 </div>
               </article>
             );

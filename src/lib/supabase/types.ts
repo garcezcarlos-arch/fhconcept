@@ -907,6 +907,42 @@ export type Database = {
           },
         ]
       }
+      payment_events: {
+        Row: {
+          assinatura_ok: boolean | null
+          created_at: string
+          erro: string | null
+          gateway: string
+          id: string
+          payload: Json | null
+          recurso_id: string | null
+          resultado: string | null
+          tipo: string | null
+        }
+        Insert: {
+          assinatura_ok?: boolean | null
+          created_at?: string
+          erro?: string | null
+          gateway: string
+          id?: string
+          payload?: Json | null
+          recurso_id?: string | null
+          resultado?: string | null
+          tipo?: string | null
+        }
+        Update: {
+          assinatura_ok?: boolean | null
+          created_at?: string
+          erro?: string | null
+          gateway?: string
+          id?: string
+          payload?: Json | null
+          recurso_id?: string | null
+          resultado?: string | null
+          tipo?: string | null
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           gateway: string
@@ -1429,6 +1465,23 @@ export type Database = {
       }
     }
     Functions: {
+      fn_confirmar_pagamento: {
+        Args: {
+          p_gateway_payment_id?: string
+          p_order_id: string
+          p_parcelas?: number
+          p_raw?: Json
+        }
+        Returns: string
+      }
+      fn_estornar_pedido: {
+        Args: {
+          p_order_id: string
+          p_raw?: Json
+          p_status_pagamento?: Database["public"]["Enums"]["pagamento_status"]
+        }
+        Returns: string
+      }
       fn_customer_id: { Args: never; Returns: string }
       fn_papel: { Args: never; Returns: string }
       fn_produto_publico: { Args: { p_id: string }; Returns: boolean }
