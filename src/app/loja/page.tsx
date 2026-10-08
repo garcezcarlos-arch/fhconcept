@@ -119,9 +119,9 @@ export default async function Loja({
     <main>
       {!c && (
         <section className="bg-rose">
-          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 md:grid-cols-[1.1fr_1fr] md:gap-14 md:px-10 md:pb-16 md:pt-6">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl md:order-2 md:aspect-[4/5]">
-              <Image src="/galeria/cor-loiro-mel.jpg" alt="Loiro mel feito no salão FH Concept" fill priority sizes="(max-width: 768px) 100vw, 45vw" className="object-cover" />
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-3 md:grid-cols-[1.2fr_1fr] md:gap-14 md:px-10 md:pb-12 md:pt-4">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl md:order-2 md:aspect-auto md:h-[420px]">
+              <Image src="/galeria/cor-loiro-mel.jpg" alt="Loiro mel feito no salão FH Concept" fill priority sizes="(max-width: 768px) 100vw, 45vw" className="object-cover object-[50%_30%]" />
             </div>
             <div>
               <h1 className="font-serif text-[34px] leading-[1.12] text-carvao md:text-5xl">

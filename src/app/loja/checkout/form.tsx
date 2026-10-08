@@ -29,6 +29,8 @@ export default function CheckoutForm() {
   function cotar(cepDigitado: string) {
     const cep = cepDigitado.replace(/\D/g, "");
     if (cep.length !== 8) return;
+    // mesmo CEP e mesmo carrinho ja cotados (ou cotando): nao repete
+    if (cotando || `${cep}|${itensJson}` === chaveValida) return;
     setCepCotado(cep);
     iniciarCotacao(async () => {
       const r = await cotarFreteCheckout(cep, itensJson);

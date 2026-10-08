@@ -1,4 +1,6 @@
 import "server-only";
+import { after } from "next/server";
+import { avisarPedidoPago } from "@/lib/email";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { confirmarInscricao } from "@/lib/inscricoes";
 import { traduzirStatus, type PagamentoMP } from "@/lib/payments/mercadopago";
@@ -15,6 +17,8 @@ export async function confirmarPagamento(orderId: string, extra?: { gateway_paym
     p_raw: extra?.raw as Json | undefined,
   });
   if (error) throw new Error(`confirmar pagamento ${orderId}: ${error.message}`);
+  // so na primeira confirmacao (webhook repetido devolve "ja_processado")
+  if (data === "pago" || data === "pago_sem_estoque") after(() => avisarPedidoPago(orderId));
   return data;
 }
 

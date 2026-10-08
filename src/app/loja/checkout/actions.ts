@@ -1,6 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { after } from "next/server";
+import { avisarPedidoRecebido } from "@/lib/email";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SITE } from "@/lib/site";
 import { criarPreferencia, mpConfigurado } from "@/lib/payments/mercadopago";
@@ -153,6 +155,9 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
       transportadora: servicoFrete ? [servicoFrete.transportadora, servicoFrete.nome].filter(Boolean).join(" ") : null,
     })),
   );
+
+  // e-mail de pedido recebido (cliente e loja) depois da resposta: nao atrasa o redirecionamento
+  after(() => avisarPedidoRecebido(pedido.id));
 
   const usaMP = mpConfigurado();
 

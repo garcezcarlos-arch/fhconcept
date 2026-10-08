@@ -26,7 +26,7 @@ export default async function Pedido({ params, searchParams }: { params: Promise
 
   const { data: p } = await db
     .from("orders")
-    .select("id, numero, status, subtotal, frete_total, total, observacoes, created_at, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade, total_linha), order_shipments(tipo, valor_frete, transportadora), payments(metodo, status, gateway)")
+    .select("id, numero, status, subtotal, frete_total, total, observacoes, created_at, customers(nome, telefone, email), order_items(produto_nome, variante_nome, quantidade, total_linha), order_shipments(tipo, valor_frete, transportadora), payments(metodo, status, gateway)")
     .eq("id", id)
     .maybeSingle();
   if (!p) notFound();
@@ -48,13 +48,13 @@ export default async function Pedido({ params, searchParams }: { params: Promise
       </h1>
 
       {pendente && manual && (
-        <div className="mt-6 border border-linha bg-areia p-5">
+        <div className="mt-6 rounded-3xl bg-rose p-6">
           <p className="text-sm">Falta só o pagamento por <b>{metodo}</b>. Toque no botão abaixo — a mensagem já vai pronta com o número do pedido, e a Fernanda te passa a chave Pix ou os dados na hora.</p>
           <a href={linkWhatsapp(msg)} target="_blank" rel="noopener" className="mt-4 inline-flex min-h-13 items-center rounded-full bg-terracota px-7 text-sm text-creme hover:bg-terracota-esc">Pagar pelo WhatsApp</a>
         </div>
       )}
       {pendente && !manual && retorno !== "sucesso" && (
-        <p className="mt-6 text-texto2">Assim que o Mercado Pago confirmar, o pedido muda para pago aqui e no WhatsApp da Fernanda. Se você não concluiu o pagamento, pode <a href={linkWhatsapp(msg)} target="_blank" rel="noopener" className="border-b border-nude text-nude">falar com o salão</a>.</p>
+        <p className="mt-6 text-texto2">Assim que o Mercado Pago confirmar, o pedido muda para pago aqui{p.customers?.email ? " e você recebe um e-mail" : ""}. Se você não concluiu o pagamento, pode <a href={linkWhatsapp(msg)} target="_blank" rel="noopener" className="border-b border-nude text-nude">falar com o salão</a>.</p>
       )}
 
       <section className="mt-10 border-t border-carvao">
