@@ -87,7 +87,12 @@ export default async function LojaLayout({
         <div className="border-t border-carvao/10 px-5 py-6 text-xs text-carvao/60 md:px-10">
           <div className="mx-auto max-w-6xl">
             <p>Rua Rui Barbosa, 679 — Sala 02 · Centro · Garuva/SC · Terça a sábado, 8h30–12h e 13h30–18h30</p>
-            <p className="mt-1">Fernanda Hosang Concept · desde 2014</p>
+            <p className="mt-1">Fernanda Hosang Concept · desde 2014 · CNPJ 19.417.911/0001-47</p>
+            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+              <Link href="/trocas-e-devolucoes" className="hover:text-terracota">Trocas e devoluções</Link>
+              <Link href="/privacidade" className="hover:text-terracota">Privacidade</Link>
+              <Link href="/termos" className="hover:text-terracota">Termos de compra</Link>
+            </p>
           </div>
         </div>
       </footer>

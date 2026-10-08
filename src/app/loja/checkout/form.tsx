@@ -167,6 +167,10 @@ export default function CheckoutForm() {
           {pendente ? "Registrando pedido…" : faltaFrete ? "Calcule o frete" : "Confirmar pedido"}
         </button>
         <p className="mt-3 text-center text-xs text-texto2">Você será direcionada para o pagamento em seguida.</p>
+        <p className="mt-2 text-center text-xs text-texto2">
+          Ao confirmar, você concorda com os <Link href="/termos" target="_blank" className="underline hover:text-terracota">termos de compra</Link> e
+          a <Link href="/trocas-e-devolucoes" target="_blank" className="underline hover:text-terracota">política de trocas</Link>.
+        </p>
       </aside>
     </form>
   );

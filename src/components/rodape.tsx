@@ -51,6 +51,11 @@ export function Rodape() {
 
       <div className="mx-auto flex max-w-6xl flex-col gap-1 border-t border-linha px-5 py-6 text-xs text-carvao/45 md:flex-row md:justify-between md:px-10">
         <span>© 2026 Fernanda Hosang Concept · CNPJ 19.417.911/0001-47</span>
+        <span className="flex flex-wrap gap-x-4 gap-y-1">
+          <Link href="/trocas-e-devolucoes" className="hover:text-nude">Trocas e devoluções</Link>
+          <Link href="/privacidade" className="hover:text-nude">Privacidade</Link>
+          <Link href="/termos" className="hover:text-nude">Termos</Link>
+        </span>
         <span>Garuva · Joinville · Itapoá · Guaratuba</span>
       </div>
     </footer>

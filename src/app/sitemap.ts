@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { SITE } from "@/lib/site";
+import { LEGAL } from "@/lib/legal";
 
 export const revalidate = 3600;
 
@@ -28,6 +29,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE.url}/contato`, priority: 0.8 },
     { url: `${SITE.url}/loja`, priority: 0.9 },
     { url: `${SITE.url}/loja/diagnostico`, priority: 0.8 },
+    // paginas legais so entram depois de revisadas (antes disso estao em noindex)
+    ...(LEGAL.revisado
+      ? ["/trocas-e-devolucoes", "/privacidade", "/termos"].map((p) => ({ url: `${SITE.url}${p}`, priority: 0.3 }))
+      : []),
     ...(categorias ?? []).map((c) => ({
       url: `${SITE.url}/loja?c=${c.slug}`,
       priority: 0.7,
