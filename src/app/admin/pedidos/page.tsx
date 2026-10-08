@@ -14,7 +14,7 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
 
   let q = db
     .from("orders")
-    .select("id, numero, status, total, created_at, observacoes, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade), order_shipments(tipo, valor_frete, transportadora), payments(metodo, status, gateway)")
+    .select("id, numero, status, total, desconto_total, cupom_codigo, created_at, observacoes, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade), order_shipments(tipo, valor_frete, transportadora), payments(metodo, status, gateway)")
     .order("created_at", { ascending: false })
     .limit(100);
   if (s) q = q.eq("status", s as never);
@@ -66,6 +66,7 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
 
                 <div className="mt-4 md:mt-0">
                   <p className="font-serif text-xl">{reais(p.total)}</p>
+                  {p.cupom_codigo && <p className="text-xs text-terracota">cupom {p.cupom_codigo} · − {reais(p.desconto_total)}</p>}
                   <p className="mt-1 text-xs text-nude">{NOME[p.status]}</p>
 
                   {p.status === "aguardando_pagamento" && (

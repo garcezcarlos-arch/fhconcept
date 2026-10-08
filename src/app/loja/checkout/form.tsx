@@ -4,7 +4,7 @@ import { useActionState, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { useCarrinho } from "@/lib/carrinho";
 import { reais } from "@/lib/preco";
-import { cotarFreteCheckout, finalizarPedido, type EstadoCheckout, type ResultadoCotacao } from "./actions";
+import { conferirCupomCheckout, cotarFreteCheckout, finalizarPedido, type EstadoCheckout, type ResultadoCotacao } from "./actions";
 
 const campo = "mt-1 w-full border border-linha bg-white px-3 py-3 text-sm outline-none focus:border-carvao";
 const rotulo = "block text-[11px] font-semibold uppercase tracking-[0.16em] text-texto2";
@@ -52,6 +52,29 @@ export default function CheckoutForm() {
   const frete = entrega === "correios" && opcaoEscolhida ? opcaoEscolhida.preco : 0;
   const freteManual = entrega === "correios" && cotacaoValida?.modo === "manual";
   const faltaFrete = entrega === "correios" && !freteManual && !opcaoEscolhida;
+
+  // cupom: o servidor confere; aqui so mostramos a previa (o valor final e recalculado ao confirmar)
+  const [cupomDigitado, setCupomDigitado] = useState("");
+  const [cupom, setCupom] = useState<{ codigo: string; tipo: string | null; desconto: number; itens: string } | null>(null);
+  const [cupomMsg, setCupomMsg] = useState<string | null>(null);
+  const [conferindo, iniciarConferencia] = useTransition();
+  const cupomAtivo = cupom && cupom.itens === itensJson ? cupom : null; // carrinho mudou: confere de novo
+  const desconto = !cupomAtivo ? 0 : cupomAtivo.tipo === "frete_gratis" ? frete : Math.min(cupomAtivo.desconto, total);
+
+  function aplicarCupom() {
+    const codigo = cupomDigitado.trim();
+    if (!codigo) return;
+    iniciarConferencia(async () => {
+      const r = await conferirCupomCheckout(codigo, itensJson, frete);
+      if (r.valido && r.codigo) {
+        setCupom({ codigo: r.codigo, tipo: r.tipo, desconto: r.desconto, itens: itensJson });
+        setCupomMsg(r.motivo);
+      } else {
+        setCupom(null);
+        setCupomMsg(r.motivo ?? "Cupom inválido.");
+      }
+    });
+  }
 
   if (!pronto) return null;
   if (itens.length === 0) {
@@ -152,13 +175,41 @@ export default function CheckoutForm() {
             </li>
           ))}
         </ul>
+        <div className="mt-4 border-t border-linha pt-4">
+          {cupomAtivo ? (
+            <div className="flex items-center justify-between gap-3 text-sm">
+              <span>Cupom <b className="font-medium">{cupomAtivo.codigo}</b></span>
+              <button type="button" onClick={() => { setCupom(null); setCupomMsg(null); setCupomDigitado(""); }} className="min-h-11 text-xs text-texto2 underline hover:text-terracota">remover</button>
+              <input type="hidden" name="cupom" value={cupomAtivo.codigo} />
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <label className="sr-only" htmlFor="cupom">Cupom de desconto</label>
+              <input id="cupom" value={cupomDigitado} onChange={(e) => setCupomDigitado(e.target.value.toUpperCase())}
+                onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); aplicarCupom(); } }}
+                placeholder="Cupom de desconto" autoComplete="off"
+                className="min-h-11 min-w-0 flex-1 rounded-full border border-linha bg-white px-4 text-sm uppercase outline-none focus:border-carvao" />
+              <button type="button" onClick={aplicarCupom} disabled={conferindo || !cupomDigitado.trim()}
+                className="min-h-11 shrink-0 rounded-full border border-carvao px-4 text-sm disabled:opacity-40">
+                {conferindo ? "…" : "Aplicar"}
+              </button>
+            </div>
+          )}
+          {cupomMsg && <p className={`mt-2 text-xs ${cupomAtivo ? "text-texto2" : "text-red-800"}`} role="status">{cupomMsg}</p>}
+        </div>
+
         {entrega === "correios" && (
           <div className="mt-4 flex justify-between border-t border-linha pt-4 text-sm">
             <span className="text-texto2">Frete{opcaoEscolhida ? ` · ${opcaoEscolhida.nome}` : ""}</span>
             <span>{opcaoEscolhida ? reais(frete) : freteManual ? "a confirmar" : "—"}</span>
           </div>
         )}
-        <div className="mt-4 flex justify-between border-t border-linha pt-4 font-serif text-xl"><span>Total</span><span>{reais(total + frete)}</span></div>
+        {desconto > 0 && (
+          <div className="mt-3 flex justify-between text-sm text-terracota">
+            <span>Desconto{cupomAtivo?.tipo === "frete_gratis" ? " (frete grátis)" : ""}</span><span>− {reais(desconto)}</span>
+          </div>
+        )}
+        <div className="mt-4 flex justify-between border-t border-linha pt-4 font-serif text-xl"><span>Total</span><span>{reais(total + frete - desconto)}</span></div>
         {freteManual && <p className="mt-2 text-xs text-texto2">+ frete, confirmado no WhatsApp antes do envio</p>}
 
         {estado.erro && <p className="mt-4 border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">{estado.erro}</p>}

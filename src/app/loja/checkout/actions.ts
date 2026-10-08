@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { after } from "next/server";
 import { avisarPedidoRecebido } from "@/lib/email";
+import { calcularCupom, type ResultadoCupom } from "@/lib/cupom";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SITE } from "@/lib/site";
 import { criarPreferencia, mpConfigurado } from "@/lib/payments/mercadopago";
@@ -16,6 +17,25 @@ export type ResultadoCotacao = {
   endereco: { logradouro: string; bairro: string; cidade: string; uf: string } | null;
   erro?: string;
 };
+
+/* Chamada pelo formulario ao aplicar o cupom: subtotal recalculado pelo banco, frete informado so para o cupom de frete gratis. */
+export async function conferirCupomCheckout(codigo: string, itensJson: string, frete: number): Promise<ResultadoCupom> {
+  let itens: ItemEnviado[] = [];
+  try { itens = JSON.parse(itensJson); } catch {}
+  const subtotal = await subtotalDoBanco(itens);
+  return calcularCupom(codigo, subtotal, Math.max(0, Number(frete) || 0));
+}
+
+async function subtotalDoBanco(itens: ItemEnviado[]) {
+  const validos = itens.filter((x) => x.variant_id && x.quantidade > 0);
+  if (!validos.length) return 0;
+  const db = createAdminClient();
+  const { data } = await db.from("product_variants").select("id, preco, preco_promocional, ativo").in("id", validos.map((x) => x.variant_id));
+  return Math.round(validos.reduce((s, x) => {
+    const v = data?.find((y) => y.id === x.variant_id);
+    return v && v.ativo ? s + (v.preco_promocional ?? v.preco) * x.quantidade : s;
+  }, 0) * 100) / 100;
+}
 
 /* Chamada pelo formulario quando a cliente digita o CEP. */
 export async function cotarFreteCheckout(cep: string, itensJson: string): Promise<ResultadoCotacao> {
@@ -122,12 +142,28 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
       return { erro: "Não foi possível confirmar o frete agora. Tente de novo em instantes." };
     }
   }
-  const total = Math.round((subtotal + frete) * 100) / 100;
+  // cupom: recalculado aqui com o subtotal e o frete do servidor
+  let desconto = 0;
+  let descontoFrete = 0;          // parte do desconto que zera o frete (cupom frete gratis)
+  let cupomCodigo: string | null = null;
+  const cupomDigitado = String(dados.get("cupom") ?? "").trim();
+  if (cupomDigitado) {
+    const c = await calcularCupom(cupomDigitado, subtotal, frete);
+    if (!c.valido) return { erro: c.motivo ?? "Cupom inválido." };
+    if (c.tipo === "frete_gratis") {
+      descontoFrete = Math.min(c.desconto, frete);
+      desconto = descontoFrete;
+    } else {
+      desconto = Math.min(c.desconto, subtotal);
+    }
+    cupomCodigo = desconto > 0 ? c.codigo : null;
+  }
+  const total = Math.round((subtotal + frete - desconto) * 100) / 100;
 
   // pedido
   const { data: pedido, error: ePed } = await db
     .from("orders")
-    .insert({ customer_id: customerId, address_id: addressId, subtotal, frete_total: frete, desconto_total: 0, total, status: "aguardando_pagamento", observacoes })
+    .insert({ customer_id: customerId, address_id: addressId, subtotal, frete_total: frete, desconto_total: desconto, cupom_codigo: cupomCodigo, total, status: "aguardando_pagamento", observacoes })
     .select("id, numero")
     .single();
   if (ePed || !pedido) return { erro: "Não foi possível criar o pedido: " + (ePed?.message ?? "") };
@@ -159,7 +195,8 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
   // e-mail de pedido recebido (cliente e loja) depois da resposta: nao atrasa o redirecionamento
   after(() => avisarPedidoRecebido(pedido.id));
 
-  const usaMP = mpConfigurado();
+  // pedido de valor zero (cupom cobrindo tudo) nao passa pelo Mercado Pago
+  const usaMP = mpConfigurado() && total > 0;
 
   const { data: pag } = await db
     .from("payments")
@@ -167,23 +204,41 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
     .select("id")
     .single();
 
+  function itensMercadoPago() {
+    const linhaFrete = (valor: number) => servicoFrete && valor > 0 ? [{
+      id: `frete-${servicoFrete.id}`,
+      title: `Frete ${servicoFrete.nome} (${servicoFrete.prazoDias} dias úteis)`,
+      quantity: 1,
+      unit_price: Math.round(valor * 100) / 100,
+    }] : [];
+    const descontoProdutos = desconto - descontoFrete;
+    const freteFinal = Math.max(0, frete - descontoFrete);
+    if (descontoProdutos <= 0) {
+      return linhas.map((l) => ({
+        id: l.v.sku,
+        title: l.v.nome ? `${l.v.products!.nome} — ${l.v.nome}` : l.v.products!.nome,
+        quantity: l.quantidade,
+        unit_price: l.preco,
+      })).concat(linhaFrete(freteFinal));
+    }
+    // o MP nao aceita item negativo: com desconto nos produtos, eles viram uma linha so
+    const produtos = Math.max(0, subtotal - descontoProdutos);
+    const qtd = linhas.reduce((s, l) => s + l.quantidade, 0);
+    return (produtos > 0 ? [{
+      id: `pedido-${pedido!.numero}`,
+      title: `Pedido #${pedido!.numero} — ${qtd} ${qtd === 1 ? "item" : "itens"} (cupom ${cupomCodigo})`,
+      quantity: 1,
+      unit_price: Math.round(produtos * 100) / 100,
+    }] : []).concat(linhaFrete(freteFinal));
+  }
+
   // com Mercado Pago configurado, cria a preferencia e redireciona
   if (usaMP && pag) {
     let urlPagamento: string | null = null;
     try {
       const pref = await criarPreferencia({
         referencia: pedido.id,
-        itens: linhas.map((l) => ({
-          id: l.v.sku,
-          title: l.v.nome ? `${l.v.products!.nome} — ${l.v.nome}` : l.v.products!.nome,
-          quantity: l.quantidade,
-          unit_price: l.preco,
-        })).concat(frete > 0 && servicoFrete ? [{
-          id: `frete-${servicoFrete.id}`,
-          title: `Frete ${servicoFrete.nome} (${servicoFrete.prazoDias} dias úteis)`,
-          quantity: 1,
-          unit_price: frete,
-        }] : []),
+        itens: itensMercadoPago(),
         pagador: { nome, email, telefone: telefone.length > 11 ? telefone.replace(/^55/, "") : telefone },
         metodo: pagamento,
         urlBase: SITE.url,

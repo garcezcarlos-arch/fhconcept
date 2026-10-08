@@ -31,6 +31,7 @@ export default async function AdminLayout({
         <nav className="mt-8 flex gap-4 text-sm md:flex-col md:gap-1">
           <Link href="/admin/produtos" className="py-1 hover:text-nude">Produtos</Link>
           <Link href="/admin/pedidos" className="py-1 hover:text-nude">Pedidos</Link>
+          <Link href="/admin/cupons" className="py-1 hover:text-nude">Cupons</Link>
           <Link href="/admin/estoque" className="py-1 hover:text-nude">Estoque</Link>
           <Link href="/admin/notas" className="py-1 hover:text-nude">Notas de entrada</Link>
           <Link href="/admin/turmas" className="py-1 hover:text-nude">Turmas</Link>

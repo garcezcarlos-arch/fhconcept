@@ -1465,6 +1465,16 @@ export type Database = {
       }
     }
     Functions: {
+      fn_cupom_calcular: {
+        Args: { p_codigo: string; p_frete?: number; p_subtotal: number }
+        Returns: {
+          codigo: string | null
+          desconto: number
+          motivo: string | null
+          tipo: string | null
+          valido: boolean
+        }[]
+      }
       fn_confirmar_pagamento: {
         Args: {
           p_gateway_payment_id?: string

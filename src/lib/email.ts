@@ -43,7 +43,7 @@ async function carregarPedido(orderId: string) {
   const db = createAdminClient();
   const { data } = await db
     .from("orders")
-    .select("id, numero, status, subtotal, frete_total, total, observacoes, customers(nome, telefone, email), addresses(logradouro, numero, complemento, bairro, cidade, uf, cep), order_items(produto_nome, variante_nome, quantidade, total_linha), order_shipments(tipo, transportadora), payments(metodo, gateway, parcelas)")
+    .select("id, numero, status, subtotal, frete_total, desconto_total, cupom_codigo, total, observacoes, customers(nome, telefone, email), addresses(logradouro, numero, complemento, bairro, cidade, uf, cep), order_items(produto_nome, variante_nome, quantidade, total_linha), order_shipments(tipo, transportadora), payments(metodo, gateway, parcelas)")
     .eq("id", orderId)
     .maybeSingle();
   return data;
@@ -86,6 +86,7 @@ function layout(titulo: string, intro: string, p: Pedido, rodape: string) {
 <tr><td style="padding:16px 28px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">
   ${linhas}
   <tr><td style="padding:8px 0;color:#6A635C">Frete</td><td style="padding:8px 0;text-align:right;color:#6A635C">${frete}</td></tr>
+  ${p.desconto_total > 0 ? `<tr><td style="padding:8px 0;color:#A1523A">Desconto${p.cupom_codigo ? ` (cupom ${esc(p.cupom_codigo)})` : ""}</td><td style="padding:8px 0;text-align:right;color:#A1523A">− ${reais(p.desconto_total)}</td></tr>` : ""}
   <tr><td style="padding:12px 0 0;font-family:Georgia,serif;font-size:20px">Total</td><td style="padding:12px 0 0;text-align:right;font-family:Georgia,serif;font-size:20px">${reais(p.total)}</td></tr>
 </table></td></tr>
 <tr><td style="padding:8px 28px;font-size:14px;line-height:1.5">
