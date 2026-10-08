@@ -64,7 +64,7 @@ export function CarrinhoProvider({ children }: { children: ReactNode }) {
           : atual.map((x) => (x.variant_id === variant_id ? { ...x, quantidade } : x)),
       ),
     remover: (variant_id) => setItens((atual) => atual.filter((x) => x.variant_id !== variant_id)),
-    limpar: () => setItens([]),
+    limpar: () => setItens((atual) => (atual.length ? [] : atual)),
     total: itens.reduce((s, x) => s + x.preco * x.quantidade, 0),
     quantidade: itens.reduce((s, x) => s + x.quantidade, 0),
   }), [itens, pronto]);
