@@ -4,8 +4,32 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SITE } from "@/lib/site";
 import { criarPreferencia, mpConfigurado } from "@/lib/payments/mercadopago";
+import { buscarEndereco, cotarFrete, freteConfigurado, type OpcaoFrete } from "@/lib/frete/melhorenvio";
 
 export type EstadoCheckout = { erro?: string };
+
+export type ResultadoCotacao = {
+  modo: "cotado" | "manual";       // manual = sem Melhor Envio: frete combinado no WhatsApp
+  opcoes: OpcaoFrete[];
+  endereco: { logradouro: string; bairro: string; cidade: string; uf: string } | null;
+  erro?: string;
+};
+
+/* Chamada pelo formulario quando a cliente digita o CEP. */
+export async function cotarFreteCheckout(cep: string, itensJson: string): Promise<ResultadoCotacao> {
+  let itens: ItemEnviado[] = [];
+  try { itens = JSON.parse(itensJson); } catch {}
+  const endereco = await buscarEndereco(cep);
+  if (!freteConfigurado()) return { modo: "manual", opcoes: [], endereco };
+  try {
+    const opcoes = await cotarFrete(cep, itens);
+    if (!opcoes.length) return { modo: "cotado", opcoes, endereco, erro: "Nenhuma opção de envio para esse CEP. Escolha retirada ou fale com o salão." };
+    return { modo: "cotado", opcoes, endereco };
+  } catch (e) {
+    console.error("cotacao de frete", e);
+    return { modo: "cotado", opcoes: [], endereco, erro: "Não foi possível calcular o frete agora. Tente de novo em instantes." };
+  }
+}
 
 type ItemEnviado = { variant_id: string; quantidade: number };
 
@@ -80,10 +104,28 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
     addressId = addr.id;
   }
 
+  // frete: recalculado aqui no servidor com o servico escolhido (nunca o valor do navegador)
+  let frete = 0;
+  let servicoFrete: OpcaoFrete | null = null;
+  if (entrega === "correios" && freteConfigurado()) {
+    const servicoId = String(dados.get("servico_frete") ?? "");
+    if (!servicoId) return { erro: "Escolha uma opção de frete." };
+    try {
+      const opcoes = await cotarFrete(String(dados.get("cep") ?? ""), itens, servicoId);
+      const opcao = opcoes.find((o) => String(o.id) === servicoId);
+      if (!opcao) return { erro: "Essa opção de frete não está mais disponível. Calcule de novo." };
+      servicoFrete = opcao;
+      frete = Math.round(opcao.preco * 100) / 100;
+    } catch {
+      return { erro: "Não foi possível confirmar o frete agora. Tente de novo em instantes." };
+    }
+  }
+  const total = Math.round((subtotal + frete) * 100) / 100;
+
   // pedido
   const { data: pedido, error: ePed } = await db
     .from("orders")
-    .insert({ customer_id: customerId, address_id: addressId, subtotal, frete_total: 0, desconto_total: 0, total: subtotal, status: "aguardando_pagamento", observacoes })
+    .insert({ customer_id: customerId, address_id: addressId, subtotal, frete_total: frete, desconto_total: 0, total, status: "aguardando_pagamento", observacoes })
     .select("id, numero")
     .single();
   if (ePed || !pedido) return { erro: "Não foi possível criar o pedido: " + (ePed?.message ?? "") };
@@ -104,14 +146,19 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
 
   const vendorIds = [...new Set(linhas.map((l) => l.v.products!.vendor_id))];
   await db.from("order_shipments").insert(
-    vendorIds.map((vendor_id) => ({ order_id: pedido.id, vendor_id, tipo: entrega, valor_frete: 0, status: "pendente" })),
+    // vendedor unico hoje: o frete inteiro fica na primeira remessa
+    vendorIds.map((vendor_id, i) => ({
+      order_id: pedido.id, vendor_id, tipo: entrega, status: "pendente",
+      valor_frete: i === 0 ? frete : 0,
+      transportadora: servicoFrete ? [servicoFrete.transportadora, servicoFrete.nome].filter(Boolean).join(" ") : null,
+    })),
   );
 
   const usaMP = mpConfigurado();
 
   const { data: pag } = await db
     .from("payments")
-    .insert({ order_id: pedido.id, gateway: usaMP ? "mercadopago" : "manual", metodo: pagamento, valor: subtotal, status: "pendente" })
+    .insert({ order_id: pedido.id, gateway: usaMP ? "mercadopago" : "manual", metodo: pagamento, valor: total, status: "pendente" })
     .select("id")
     .single();
 
@@ -126,7 +173,12 @@ export async function finalizarPedido(_: EstadoCheckout, dados: FormData): Promi
           title: l.v.nome ? `${l.v.products!.nome} — ${l.v.nome}` : l.v.products!.nome,
           quantity: l.quantidade,
           unit_price: l.preco,
-        })),
+        })).concat(frete > 0 && servicoFrete ? [{
+          id: `frete-${servicoFrete.id}`,
+          title: `Frete ${servicoFrete.nome} (${servicoFrete.prazoDias} dias úteis)`,
+          quantity: 1,
+          unit_price: frete,
+        }] : []),
         pagador: { nome, email, telefone: telefone.length > 11 ? telefone.replace(/^55/, "") : telefone },
         metodo: pagamento,
         urlBase: SITE.url,

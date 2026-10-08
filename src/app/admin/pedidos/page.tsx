@@ -14,7 +14,7 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
 
   let q = db
     .from("orders")
-    .select("id, numero, status, total, created_at, observacoes, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade), order_shipments(tipo), payments(metodo, status, gateway)")
+    .select("id, numero, status, total, created_at, observacoes, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade), order_shipments(tipo, valor_frete, transportadora), payments(metodo, status, gateway)")
     .order("created_at", { ascending: false })
     .limit(100);
   if (s) q = q.eq("status", s as never);
@@ -58,7 +58,7 @@ export default async function Pedidos({ searchParams }: { searchParams: Promise<
                     ))}
                   </ul>
                   <p className="mt-3 text-xs text-carvao/60">
-                    {entrega === "retirada_salao" ? "Retirada no salão" : "Envio pelos Correios"} · {pag?.metodo === "pix" ? "Pix" : pag?.metodo === "cartao_credito" ? "Cartão" : "Boleto"} · {pag?.gateway === "manual" ? "pagamento manual" : "Mercado Pago"}
+                    {entrega === "retirada_salao" ? "Retirada no salão" : p.order_shipments[0]?.valor_frete ? `Envio ${p.order_shipments[0].transportadora ?? ""} · frete ${reais(p.order_shipments[0].valor_frete)}` : "Envio pelos Correios · frete a combinar"} · {pag?.metodo === "pix" ? "Pix" : pag?.metodo === "cartao_credito" ? "Cartão" : "Boleto"} · {pag?.gateway === "manual" ? "pagamento manual" : "Mercado Pago"}
                     {pag?.status && pag.status !== "pendente" && pag.status !== "aprovado" && <> · pagamento {pag.status}</>}
                     {p.observacoes && <> · <i>{p.observacoes}</i></>}
                   </p>

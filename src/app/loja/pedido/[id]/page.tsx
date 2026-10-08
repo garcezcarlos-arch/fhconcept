@@ -26,7 +26,7 @@ export default async function Pedido({ params, searchParams }: { params: Promise
 
   const { data: p } = await db
     .from("orders")
-    .select("id, numero, status, subtotal, total, observacoes, created_at, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade, total_linha), order_shipments(tipo, valor_frete), payments(metodo, status, gateway)")
+    .select("id, numero, status, subtotal, frete_total, total, observacoes, created_at, customers(nome, telefone), order_items(produto_nome, variante_nome, quantidade, total_linha), order_shipments(tipo, valor_frete, transportadora), payments(metodo, status, gateway)")
     .eq("id", id)
     .maybeSingle();
   if (!p) notFound();
@@ -64,14 +64,14 @@ export default async function Pedido({ params, searchParams }: { params: Promise
             <span className="shrink-0">{reais(it.total_linha)}</span>
           </div>
         ))}
-        <div className="flex justify-between border-b border-linha py-3 text-sm text-texto2"><span>Frete</span><span>{entrega === "retirada_salao" ? "retirada no salão" : "a confirmar no WhatsApp"}</span></div>
+        <div className="flex justify-between border-b border-linha py-3 text-sm text-texto2"><span>Frete</span><span>{entrega === "retirada_salao" ? "retirada no salão" : p.frete_total > 0 ? `${p.order_shipments[0]?.transportadora ?? ""} ${reais(p.frete_total)}`.trim() : "a confirmar no WhatsApp"}</span></div>
         <div className="flex justify-between py-4 font-serif text-xl"><span>Total</span><span>{reais(p.total)}</span></div>
       </section>
 
       <section className="mt-8 grid gap-6 text-sm md:grid-cols-2">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-texto2">Entrega</p>
-          <p className="mt-2">{entrega === "retirada_salao" ? `Retirada no salão — ${SITE.rua}, ${SITE.bairro}, ${SITE.cidade}. Terça a sábado, 8h30–12h e 13h30–18h30.` : "Envio pelos Correios. O frete é confirmado pelo WhatsApp antes de postar."}</p>
+          <p className="mt-2">{entrega === "retirada_salao" ? `Retirada no salão — ${SITE.rua}, ${SITE.bairro}, ${SITE.cidade}. Terça a sábado, 8h30–12h e 13h30–18h30.` : p.frete_total > 0 ? "Envio pelos Correios. O código de rastreio chega pelo WhatsApp quando postarmos." : "Envio pelos Correios. O frete é confirmado pelo WhatsApp antes de postar."}</p>
         </div>
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-texto2">Situação</p>
