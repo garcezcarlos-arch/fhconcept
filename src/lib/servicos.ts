@@ -3,7 +3,7 @@
 //
 // - texto: um item por paragrafo, como ela escreveu
 // - itens: atendimentos e duracao; fica de fora quando ainda nao foi informado
-// - foto: opcional por servico; em /servicos ela substitui a da categoria enquanto o servico esta na tela
+// - foto / comparar: opcionais por servico; em /servicos substituem a foto da categoria enquanto o servico esta na tela
 
 export type Servico = {
   slug: string;
@@ -54,14 +54,12 @@ export const CATEGORIAS: Categoria[] = [
     slug: "cor",
     nome: "Cor",
     quem: "Fernanda Hosang",
-    foto: "/galeria/cor-loiro-mel.jpg",
-    alt: "Loiro mel com ondas longas",
+    foto: "/galeria/cor-mechas-loiras-salao.jpg",
+    alt: "Mechas loiras em cabelo longo e ondulado, em frente à parede do salão",
     servicos: [
       {
         slug: "coloracao-e-mechas",
         nome: "Coloração e mechas personalizadas",
-        foto: "/galeria/cor-mechas-loiras-salao.jpg",
-        alt: "Mechas loiras em cabelo longo e ondulado, em frente à parede do salão",
         texto: [
           "Loiros, morenas iluminadas e balayage criados para valorizar sua beleza e seu estilo. Cada resultado começa com uma avaliação dos fios e do histórico de químicas, para definir os tons e as técnicas mais adequados ao seu cabelo.",
         ],

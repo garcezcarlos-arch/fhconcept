@@ -101,6 +101,7 @@ export default function Servicos() {
                   padrao={{ foto: c.foto, alt: c.alt }}
                   slugs={c.servicos.map((s) => s.slug)}
                   fotos={Object.fromEntries(c.servicos.filter((s) => s.foto).map((s) => [s.slug, { foto: s.foto!, alt: s.alt ?? s.nome, posicao: s.posicao }]))}
+                  pares={Object.fromEntries(c.servicos.filter((s) => s.comparar).map((s) => [s.slug, s.comparar!]))}
                   className={`relative mt-8 aspect-square overflow-hidden bg-areia md:sticky md:top-40 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/5] md:self-start ${invertido ? "md:col-start-2" : "md:col-start-1"}`}
                 />
 
@@ -119,7 +120,8 @@ export default function Servicos() {
                       ))}
 
                       {s.comparar && (
-                        <figure className="mt-7 max-w-md">
+                        // no computador o antes e depois fica na foto ao lado
+                        <figure className="mt-7 max-w-md md:hidden">
                           <Comparador antes={s.comparar.antes} depois={s.comparar.depois} alt={s.comparar.alt} proporcao="aspect-[4/5]" />
                           <figcaption className="mt-2 text-xs text-texto2">Arraste para comparar o antes e o depois.</figcaption>
                         </figure>
