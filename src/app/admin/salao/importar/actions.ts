@@ -88,8 +88,23 @@ export async function importarAgenda(de: unknown, ate: unknown, linhas: unknown)
   if (!validas.length) return falha("Nenhum agendamento válido no arquivo.");
 
   const db = createAdminClient();
+
+  // arquivo sem categoria (agenda futura tirada da tela do Gendo): usa a do cadastro de servicos
+  if (validas.some((v) => !v.categoria)) {
+    const { data: servicos } = await db.from("salao_servicos").select("nome, categoria");
+    const porNome = new Map((servicos ?? []).filter((x) => x.categoria).map((x) => [x.nome.replace(/\s+/g, " ").trim().toLowerCase(), x.categoria as string]));
+    for (const v of validas) {
+      if (v.categoria) continue;
+      const primeiro = v.servico.split(",")[0]?.replace(/\s+/g, " ").trim().toLowerCase() ?? "";
+      v.categoria = porNome.get(primeiro) ?? "";
+    }
+  }
+
   const { data, error } = await db.rpc("fn_salao_importar_agenda", { p_de: inicio, p_ate: fim, p_linhas: validas });
-  return error ? falha(error.message) : { ok: true, gravados: data ?? validas.length };
+  if (error) return falha(error.message);
+  // a tela da agenda mostra quando foi a ultima atualizacao; se a tabela de textos nao existir, segue sem isso
+  await db.from("salao_config").upsert({ chave: "agenda_importada_em", valor: new Date().toISOString(), atualizado_em: new Date().toISOString() }, { onConflict: "chave" });
+  return { ok: true, gravados: data ?? validas.length };
 }
 
 export async function importarComandas(linhas: unknown): Promise<Resposta> {
