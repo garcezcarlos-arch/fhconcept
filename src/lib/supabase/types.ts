@@ -1322,6 +1322,7 @@ export type Database = {
         Row: {
           atualizado_em: string
           gendo_codigo: number
+          nao_contatar: boolean
           nasc_ano: number | null
           nasc_dia: number | null
           nasc_mes: number | null
@@ -1334,6 +1335,7 @@ export type Database = {
         Insert: {
           atualizado_em?: string
           gendo_codigo: number
+          nao_contatar?: boolean
           nasc_ano?: number | null
           nasc_dia?: number | null
           nasc_mes?: number | null
@@ -1346,6 +1348,7 @@ export type Database = {
         Update: {
           atualizado_em?: string
           gendo_codigo?: number
+          nao_contatar?: boolean
           nasc_ano?: number | null
           nasc_dia?: number | null
           nasc_mes?: number | null
@@ -1390,6 +1393,51 @@ export type Database = {
           servicos?: string | null
           status?: string
           valor?: number
+        }
+        Relationships: []
+      }
+      salao_config: {
+        Row: {
+          atualizado_em: string
+          chave: string
+          valor: string
+        }
+        Insert: {
+          atualizado_em?: string
+          chave: string
+          valor: string
+        }
+        Update: {
+          atualizado_em?: string
+          chave?: string
+          valor?: string
+        }
+        Relationships: []
+      }
+      salao_contatos: {
+        Row: {
+          cliente_codigo: number
+          feito_em: string
+          feito_por: string | null
+          id: number
+          motivo: string
+          resultado: string
+        }
+        Insert: {
+          cliente_codigo: number
+          feito_em?: string
+          feito_por?: string | null
+          id?: number
+          motivo?: string
+          resultado?: string
+        }
+        Update: {
+          cliente_codigo?: number
+          feito_em?: string
+          feito_por?: string | null
+          id?: number
+          motivo?: string
+          resultado?: string
         }
         Relationships: []
       }
@@ -1694,6 +1742,21 @@ export type Database = {
       }
     }
     Views: {
+      salao_retorno: {
+        Row: {
+          contato_id: number | null
+          contato_por: string | null
+          gendo_codigo: number | null
+          nao_contatar: boolean | null
+          nome: string | null
+          telefone: string | null
+          ultima_visita: string | null
+          ultimo_contato: string | null
+          ultimo_resultado: string | null
+          visitas: number | null
+        }
+        Relationships: []
+      }
       turmas_vagas: {
         Row: {
           created_at: string | null

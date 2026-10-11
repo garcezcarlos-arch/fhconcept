@@ -15,7 +15,7 @@ export default async function Painel() {
   const db = createAdminClient();
   const ha30dias = diasAtras(30);
 
-  const [aguardando, aSeparar, pagos, produtos, variantes, turmas, espera, inscricoes, mensal, retratos] = await Promise.all([
+  const [aguardando, aSeparar, pagos, produtos, variantes, turmas, espera, inscricoes, mensal, retratos, retorno] = await Promise.all([
     db.from("orders").select("id", { count: "exact", head: true }).eq("status", "aguardando_pagamento"),
     db.from("orders").select("id", { count: "exact", head: true }).eq("status", "pago"),
     db.from("orders").select("total").in("status", [...PAGOS]).gte("created_at", ha30dias),
@@ -26,6 +26,8 @@ export default async function Painel() {
     db.from("inscricoes").select("id", { count: "exact", head: true }).eq("status", "aguardando_pagamento"),
     admin ? db.from("salao_mensal").select("*").order("mes", { ascending: false }).limit(12) : null,
     admin ? db.from("salao_retrato").select("*").order("data", { ascending: false }).limit(1) : null,
+    // sumidas com telefone, sem "nao chamar" e sem contato nos ultimos 30 dias
+    admin ? db.from("salao_retorno").select("*", { count: "exact", head: true }).eq("nao_contatar", false).not("telefone", "is", null).or(`ultimo_contato.is.null,ultimo_contato.lt.${ha30dias}`) : null,
   ]);
 
   const estoqueBaixo = (variantes.data ?? []).filter((v) => {
@@ -51,6 +53,9 @@ export default async function Painel() {
       const meses = mensal.data.map(mesDeLinha).reverse();
       const retrato = retratos?.data?.[0] ? retratoDeLinha(retratos.data[0]) : null;
       salao = { meses, retrato };
+
+      // sem a migration do retorno a contagem vem com erro e a pendencia so nao aparece
+      if (retorno && !retorno.error) somar(retorno.count, ["cliente sumida para chamar de volta", "clientes sumidas para chamar de volta"], "/admin/salao/retorno", "Abrir lista");
 
       // meses seguidos, do mais recente para tras, com agenda e nenhuma comanda fechada
       let semComanda = 0;
