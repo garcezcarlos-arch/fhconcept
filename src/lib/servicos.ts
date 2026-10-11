@@ -14,6 +14,8 @@ export type Servico = {
   foto?: string;
   alt?: string;
   posicao?: string;
+  /** antes e depois do mesmo cabelo, com alca para arrastar */
+  comparar?: { antes: string; depois: string; alt: string };
 };
 
 export type Categoria = {
@@ -74,6 +76,7 @@ export const CATEGORIAS: Categoria[] = [
       {
         slug: "correcao-de-cor",
         nome: "Correção de cor",
+        comparar: { antes: "/galeria/cor-correcao-antes.jpg", depois: "/galeria/cor-correcao-depois.jpg", alt: "Correção de cor: de mechas alaranjadas a um loiro iluminado" },
         texto: [
           "Um trabalho especializado para corrigir manchas, suavizar tons indesejados e devolver harmonia à cor. Após avaliar os fios e o histórico de químicas, planejamos cada etapa da transformação, respeitando os limites do cabelo e o resultado que você deseja alcançar.",
         ],
@@ -86,6 +89,8 @@ export const CATEGORIAS: Categoria[] = [
       {
         slug: "ruivos",
         nome: "Ruivos personalizados",
+        foto: "/galeria/cor-ruivo-ondas.jpg",
+        alt: "Ruivo acobreado em cabelo longo com ondas",
         texto: [
           "Dos acobreados naturais aos vermelhos intensos, criamos o ruivo que valoriza sua beleza e expressa sua personalidade. O serviço inclui planejamento da cor e orientações de manutenção para preservar a intensidade, o brilho e a beleza do tom.",
         ],

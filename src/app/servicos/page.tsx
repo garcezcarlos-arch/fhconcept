@@ -4,6 +4,7 @@ import { Rodape } from "@/components/rodape";
 import { DadosEstruturados } from "@/components/dados-estruturados";
 import { NavServicos } from "@/components/nav-servicos";
 import { FotoCategoria } from "@/components/foto-categoria";
+import { Comparador } from "@/components/comparador";
 import { SITE } from "@/lib/site";
 import { linkWhatsapp } from "@/lib/preco";
 import { CATEGORIAS, PREMIUM, TODOS_SERVICOS, mensagemAgendar } from "@/lib/servicos";
@@ -116,6 +117,13 @@ export default function Servicos() {
                       {s.texto.map((p) => (
                         <p key={p} className="mt-4 max-w-[62ch] leading-relaxed text-texto2">{p}</p>
                       ))}
+
+                      {s.comparar && (
+                        <figure className="mt-7 max-w-md">
+                          <Comparador antes={s.comparar.antes} depois={s.comparar.depois} alt={s.comparar.alt} proporcao="aspect-[4/5]" />
+                          <figcaption className="mt-2 text-xs text-texto2">Arraste para comparar o antes e o depois.</figcaption>
+                        </figure>
+                      )}
 
                       {s.itens && (
                         <dl className="mt-7 border-t border-linha">
