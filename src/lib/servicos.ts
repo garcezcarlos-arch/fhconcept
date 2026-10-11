@@ -112,6 +112,8 @@ export const CATEGORIAS: Categoria[] = [
       {
         slug: "corte-e-visagismo",
         nome: "Corte e visagismo",
+        foto: "/galeria/corte-camadas-loiro.jpg",
+        alt: "Corte em camadas longas em cabelo loiro iluminado",
         texto: [
           "Um corte que conecta sua personalidade à imagem que você deseja transmitir. Por meio do visagismo, analisamos seus traços, as proporções do rosto e as características dos fios para definir formas, comprimentos e volumes que valorizem sua expressão. Cada escolha considera seu estilo e sua rotina, com finalização e orientações para os cuidados em casa.",
         ],
