@@ -23,7 +23,7 @@ export function MenuAdmin({ nome, papel, agendaGendo }: { nome: string; papel: s
         { href: "/admin/salao", texto: "Indicadores" },
         { href: "/admin/salao/agenda", texto: "Raio-x da agenda" },
         { href: "/admin/salao/clientes", texto: "Clientes" },
-        { href: "/admin/salao/retorno", texto: "Retorno de clientes" },
+        { href: "/admin/salao/retorno", texto: "Contato com clientes" },
         { href: "/admin/salao/servicos", texto: "Serviços" },
         { href: "/admin/salao/produtos", texto: "Estoque do salão" },
         { href: "/admin/salao/importar", texto: "Importar do Gendo" },

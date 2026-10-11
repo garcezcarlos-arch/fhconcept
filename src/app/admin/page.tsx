@@ -15,7 +15,7 @@ export default async function Painel() {
   const db = createAdminClient();
   const ha30dias = diasAtras(30);
 
-  const [aguardando, aSeparar, pagos, produtos, variantes, turmas, espera, inscricoes, mensal, retratos, retorno] = await Promise.all([
+  const [aguardando, aSeparar, pagos, produtos, variantes, turmas, espera, inscricoes, mensal, retratos, retorno, aniversariantes] = await Promise.all([
     db.from("orders").select("id", { count: "exact", head: true }).eq("status", "aguardando_pagamento"),
     db.from("orders").select("id", { count: "exact", head: true }).eq("status", "pago"),
     db.from("orders").select("total").in("status", [...PAGOS]).gte("created_at", ha30dias),
@@ -28,6 +28,8 @@ export default async function Painel() {
     admin ? db.from("salao_retrato").select("*").order("data", { ascending: false }).limit(1) : null,
     // sumidas com telefone, sem "nao chamar" e sem contato nos ultimos 30 dias
     admin ? db.from("salao_retorno").select("*", { count: "exact", head: true }).eq("nao_contatar", false).not("telefone", "is", null).or(`ultimo_contato.is.null,ultimo_contato.lt.${ha30dias}`) : null,
+    // aniversariantes do mes com telefone, ainda sem mensagem neste ano
+    admin ? db.from("salao_aniversariantes").select("*", { count: "exact", head: true }).eq("nao_contatar", false).not("telefone", "is", null).is("ultimo_contato", null) : null,
   ]);
 
   const estoqueBaixo = (variantes.data ?? []).filter((v) => {
@@ -56,6 +58,7 @@ export default async function Painel() {
 
       // sem a migration do retorno a contagem vem com erro e a pendencia so nao aparece
       if (retorno && !retorno.error) somar(retorno.count, ["cliente sumida para chamar de volta", "clientes sumidas para chamar de volta"], "/admin/salao/retorno", "Abrir lista");
+      if (aniversariantes && !aniversariantes.error) somar(aniversariantes.count, ["aniversariante do mês para parabenizar", "aniversariantes do mês para parabenizar"], "/admin/salao/retorno?lista=aniversario", "Abrir lista");
 
       // meses seguidos, do mais recente para tras, com agenda e nenhuma comanda fechada
       let semComanda = 0;

@@ -1742,12 +1742,48 @@ export type Database = {
       }
     }
     Views: {
+      salao_aniversariantes: {
+        Row: {
+          contato_id: number | null
+          contato_por: string | null
+          gendo_codigo: number | null
+          nao_contatar: boolean | null
+          nasc_dia: number | null
+          nasc_mes: number | null
+          nome: string | null
+          telefone: string | null
+          ultima_visita: string | null
+          ultimo_contato: string | null
+          ultimo_resultado: string | null
+          visitas: number | null
+        }
+        Relationships: []
+      }
       salao_retorno: {
         Row: {
           contato_id: number | null
           contato_por: string | null
           gendo_codigo: number | null
           nao_contatar: boolean | null
+          nasc_dia: number | null
+          nasc_mes: number | null
+          nome: string | null
+          telefone: string | null
+          ultima_visita: string | null
+          ultimo_contato: string | null
+          ultimo_resultado: string | null
+          visitas: number | null
+        }
+        Relationships: []
+      }
+      salao_uma_visita: {
+        Row: {
+          contato_id: number | null
+          contato_por: string | null
+          gendo_codigo: number | null
+          nao_contatar: boolean | null
+          nasc_dia: number | null
+          nasc_mes: number | null
           nome: string | null
           telefone: string | null
           ultima_visita: string | null
