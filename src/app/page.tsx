@@ -109,7 +109,7 @@ export default function Home() {
             </div>
           </section>
 
-        <Faixa itens={[["2014", "abertura em Garuva"], ["2.900", "alunas formadas"], ["15", "anos de formação"], ["+4", "cidades atendidas"]]} />
+        <Faixa itens={[["2014", "abertura em Garuva"], ["2.900", "alunas formadas"], ["15", "anos de profissão"], ["+4", "cidades atendidas"]]} />
 
         <ServicosResumo />
 

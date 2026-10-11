@@ -120,6 +120,7 @@ export const CATEGORIAS: Categoria[] = [
           ["Corte especializado em cabelo cacheado", "1 a 2 h"],
           ["Tratamento capilar com mapeamento personalizado", "1 a 2 h"],
           ["Finalização e definição", "1 h"],
+          ["Soltura de cachos", "Sob avaliação"],
           ["Penteados", "1 a 2 h"],
         ],
       },
