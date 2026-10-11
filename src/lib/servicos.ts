@@ -147,11 +147,10 @@ export const CATEGORIAS: Categoria[] = [
           "Cuidado especializado para valorizar a textura e a beleza natural dos seus fios. Cortes personalizados, soltura de cachos, tratamentos e finalização que realçam a definição e o movimento, com orientações para facilitar os cuidados em casa.",
         ],
         itens: [
-          ["Corte especializado em cabelo cacheado", "1 a 2 h"],
-          ["Tratamento capilar com mapeamento personalizado", "1 a 2 h"],
+          ["Corte especializado em cabelo cacheado", "1 h"],
+          ["Tratamento capilar com mapeamento personalizado", "30 min"],
           ["Finalização e definição", "1 h"],
           ["Soltura de cachos", "Sob avaliação"],
-          ["Penteados", "1 a 2 h"],
         ],
       },
     ],
