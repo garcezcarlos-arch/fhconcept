@@ -3,6 +3,7 @@ import { Cabecalho } from "@/components/cabecalho";
 import { Rodape } from "@/components/rodape";
 import { DadosEstruturados } from "@/components/dados-estruturados";
 import { NavServicos } from "@/components/nav-servicos";
+import { FotoCategoria } from "@/components/foto-categoria";
 import { SITE } from "@/lib/site";
 import { linkWhatsapp } from "@/lib/preco";
 import { CATEGORIAS, PREMIUM, TODOS_SERVICOS, mensagemAgendar } from "@/lib/servicos";
@@ -95,13 +96,22 @@ export default function Servicos() {
                   <p className="mt-2 text-sm text-nude-esc">Com {c.quem}</p>
                 </header>
 
-                <figure className={`relative mt-8 aspect-square overflow-hidden bg-areia md:sticky md:top-40 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/5] md:self-start ${invertido ? "md:col-start-2" : "md:col-start-1"}`}>
-                  <Image src={c.foto} alt={c.alt} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover object-top" />
-                </figure>
+                <FotoCategoria
+                  padrao={{ foto: c.foto, alt: c.alt }}
+                  slugs={c.servicos.map((s) => s.slug)}
+                  fotos={Object.fromEntries(c.servicos.filter((s) => s.foto).map((s) => [s.slug, { foto: s.foto!, alt: s.alt ?? s.nome, posicao: s.posicao }]))}
+                  className={`relative mt-8 aspect-square overflow-hidden bg-areia md:sticky md:top-40 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/5] md:self-start ${invertido ? "md:col-start-2" : "md:col-start-1"}`}
+                />
 
                 <div className={`mt-8 md:mt-12 ${invertido ? "md:col-start-1" : "md:col-start-2"}`}>
-                  {c.servicos.map((s) => (
+                  {c.servicos.map((s, j) => (
                     <article key={s.slug} id={s.slug} className="scroll-mt-36 border-t border-carvao/20 py-9 last:pb-0 md:py-11">
+                      {/* no celular a foto do primeiro servico ja esta no topo da categoria */}
+                      {s.foto && j > 0 && (
+                        <figure className="relative mb-7 aspect-square overflow-hidden bg-areia md:hidden">
+                          <Image src={s.foto} alt={s.alt ?? s.nome} fill sizes="100vw" className={`object-cover ${s.posicao ?? "object-top"}`} />
+                        </figure>
+                      )}
                       <h3 className="font-serif text-2xl leading-snug md:text-[28px]">{s.nome}</h3>
                       {s.texto.map((p) => (
                         <p key={p} className="mt-4 max-w-[62ch] leading-relaxed text-texto2">{p}</p>
