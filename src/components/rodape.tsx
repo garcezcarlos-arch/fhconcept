@@ -42,7 +42,7 @@ export function Rodape() {
           </p>
           <p className="mt-6 font-serif text-base">Redes</p>
           <div className="mt-3 flex flex-col gap-2 text-carvao/60">
-            <a href={SITE.instagram} target="_blank" rel="noopener" className="hover:text-nude">@fernandahosangconcept</a>
+            <a href={SITE.instagram} target="_blank" rel="noopener" className="hover:text-nude">{SITE.instagramArroba}</a>
             <a href="https://instagram.com/juaraujocachos" target="_blank" rel="noopener" className="hover:text-nude">@juaraujocachos</a>
             <a href="https://instagram.com/lauraelisa.beauty" target="_blank" rel="noopener" className="hover:text-nude">@lauraelisa.beauty</a>
           </div>

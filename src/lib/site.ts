@@ -14,5 +14,6 @@ export const SITE = {
   lat: -26.0281,
   lng: -48.8536,
   fundacao: "2014",
-  instagram: "https://www.instagram.com/fernandahosangconcept/",
+  instagram: "https://www.instagram.com/fernandahosang_oficial/",
+  instagramArroba: "@fernandahosang_oficial",
 };

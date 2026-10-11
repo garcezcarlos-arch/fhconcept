@@ -51,7 +51,7 @@ export default function Contato() {
                 </div>
                 <div className="flex justify-between gap-6 border-b border-linha py-4 text-[15px]">
                   <dt className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-texto2 pt-1">Instagram</dt>
-                  <dd className="text-right"><a href={SITE.instagram} target="_blank" rel="noopener" className="hover:text-nude">@fernandahosangconcept</a></dd>
+                  <dd className="text-right"><a href={SITE.instagram} target="_blank" rel="noopener" className="hover:text-nude">{SITE.instagramArroba}</a></dd>
                 </div>
               </dl>
 
