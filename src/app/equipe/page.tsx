@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Cabecalho } from "@/components/cabecalho";
 import { Rodape } from "@/components/rodape";
 import { linkWhatsapp } from "@/lib/preco";
+import { HISTORIA } from "@/lib/historia";
 
 export const metadata = {
   title: "Equipe",
@@ -48,9 +49,6 @@ export default function Equipe() {
             <h1 className="mt-2 max-w-2xl font-serif text-4xl leading-tight md:text-5xl">
               Três profissionais, cada uma no que faz melhor
             </h1>
-            <p className="mt-5 max-w-xl text-texto2">
-              O salão começou como Studio Fernanda Hosang. Virou Concept quando outras profissionais entraram e o nome de uma pessoa só deixou de contar a história certa.
-            </p>
 
             <div className="mt-14 grid gap-12 md:grid-cols-3">
               {EQUIPE.map((p) => (
@@ -63,6 +61,23 @@ export default function Equipe() {
                   <p className="mt-3 text-texto2">{p.texto}</p>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="historia" className="scroll-mt-20 bg-branco px-5 py-16 md:px-10 md:py-24">
+          <div className="mx-auto max-w-6xl md:grid md:grid-cols-[0.85fr_1.15fr] md:gap-x-16">
+            <div className="md:sticky md:top-28 md:self-start">
+              <span className="block h-px w-12 bg-champanhe" />
+              <h2 className="mt-6 font-serif text-4xl leading-tight md:text-[52px]">Nossa história</h2>
+            </div>
+            <div className="mt-8 md:mt-0">
+              <p className="font-serif text-xl leading-relaxed text-texto md:text-2xl md:leading-[1.5]">{HISTORIA[0]}</p>
+              <div className="mt-8 space-y-6 border-t border-linha pt-8 leading-relaxed text-texto2">
+                {HISTORIA.slice(1).map((p) => (
+                  <p key={p} className="max-w-[62ch]">{p}</p>
+                ))}
+              </div>
             </div>
           </div>
         </section>

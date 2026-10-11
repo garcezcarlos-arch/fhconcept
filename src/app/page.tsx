@@ -6,6 +6,9 @@ import { Rodape } from "@/components/rodape";
 import { DadosEstruturados } from "@/components/dados-estruturados";
 import { SITE } from "@/lib/site";
 import { linkWhatsapp } from "@/lib/preco";
+import { TODOS_SERVICOS } from "@/lib/servicos";
+import { HISTORIA } from "@/lib/historia";
+import { ServicosResumo } from "@/components/servicos-resumo";
 
 export const metadata = {
   title: "Salão e formações em Garuva, SC",
@@ -13,64 +16,6 @@ export const metadata = {
     "Coloração, mechas e correção de cor em Garuva, a 30 minutos de Joinville. E formações técnicas para cabeleireiras — 2.900 alunas em oito anos.",
   alternates: { canonical: "/" },
 };
-
-const SERVICOS = [
-  {
-    nome: "Transformação de Cor Premium",
-    texto:
-      "Uma experiência completa de coloração, com diagnóstico capilar e planejamento personalizado para criar ou corrigir a cor, valorizando sua beleza e seu estilo. O serviço inclui tratamentos antes e após a química, além de orientações de manutenção para preservar o tom, o brilho e a saúde dos fios.",
-  },
-  {
-    nome: "Coloração e mechas personalizadas",
-    texto:
-      "Loiros, morenas iluminadas e balayage criados para valorizar sua beleza e seu estilo. Cada resultado começa com uma avaliação dos fios e do histórico de químicas, para definir os tons e as técnicas mais adequados ao seu cabelo.",
-  },
-  {
-    nome: "Correção de cor",
-    texto:
-      "Um trabalho especializado para corrigir manchas, suavizar tons indesejados e devolver harmonia à cor. Após avaliar os fios e o histórico de químicas, planejamos cada etapa da transformação, respeitando os limites do cabelo e o resultado que você deseja alcançar.",
-  },
-  {
-    nome: "Ruivos personalizados",
-    texto:
-      "Dos acobreados naturais aos vermelhos intensos, criamos o ruivo que valoriza sua beleza e expressa sua personalidade. O serviço inclui planejamento da cor e orientações de manutenção para preservar a intensidade, o brilho e a beleza do tom.",
-  },
-  {
-    nome: "Camuflagem de fios brancos",
-    texto:
-      "Valorize a cor natural do seu cabelo com uma cobertura estratégica, direcionada somente aos fios brancos e preservando os fios naturalmente pigmentados. Planejamos os tons e a aplicação conforme a distribuição dos brancos e o resultado desejado, para um acabamento discreto e harmonioso, que mantém a cor natural e a identidade do seu cabelo.",
-  },
-  {
-    nome: "Ondulados, cacheados e crespos",
-    texto:
-      "Cuidado especializado para valorizar a textura e a beleza natural dos seus fios. Cortes personalizados, tratamentos e finalização que realçam a definição e o movimento, com orientações para facilitar os cuidados em casa.",
-  },
-  {
-    nome: "Tratamentos capilares personalizados",
-    texto:
-      "Mapeamento capilar personalizado para identificar as necessidades dos fios e definir um protocolo exclusivo. Combinamos produtos profissionais, ozonioterapia, fototerapia e equipamentos de tecnologia avançada para tratar os fios de fora para dentro, com cuidados direcionados à superfície e à estrutura da fibra capilar, valorizando a resistência, a maciez e o brilho.",
-  },
-  {
-    nome: "Alisamentos",
-    texto:
-      "Protocolos exclusivos e personalizados para cada tipo de cabelo, suas condições e o resultado desejado — do alisamento ao realinhamento mais leve dos fios, com controle de frizz e preservação do movimento natural.\n\nCada procedimento começa com avaliação capilar e teste de mecha, considerando o histórico de químicas e as necessidades dos fios. O cuidado se completa com orientações de manutenção para preservar o alinhamento, o brilho e a beleza do resultado.",
-  },
-  {
-    nome: "Cuidados faciais",
-    texto:
-      "Limpeza de pele, dermaplaning, tratamentos faciais e microagulhamento, com protocolos definidos a partir de uma avaliação individual. Um cuidado direcionado às necessidades da sua pele para melhorar a textura, realçar a luminosidade e valorizar sua beleza natural.",
-  },
-  {
-    nome: "Sobrancelhas",
-    texto:
-      "Design personalizado, henna, tintura e reconstrução de sobrancelhas para valorizar o formato, a definição e a harmonia com o seu rosto. Cada serviço é escolhido de acordo com suas necessidades, realçando o olhar e preservando a naturalidade da sua expressão.",
-  },
-  {
-    nome: "Produção completa — maquiagem e penteado",
-    texto:
-      "Maquiagem personalizada e penteados dos clássicos aos mais despojados, em harmonia com seu estilo, sua personalidade e a ocasião. Trabalhamos com produtos e técnicas de pele blindada para uma maquiagem à prova d’água, com duração de até 24 horas e acabamento impecável. Uma produção completa, com atenção a cada detalhe para valorizar sua beleza.",
-  },
-];
 
 const EQUIPE = [
   {
@@ -140,9 +85,9 @@ export default function Home() {
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Serviços",
-            itemListElement: SERVICOS.map((s) => ({
+            itemListElement: TODOS_SERVICOS.map((s) => ({
               "@type": "Offer",
-              itemOffered: { "@type": "Service", name: s.nome, description: s.texto },
+              itemOffered: { "@type": "Service", name: s.nome, description: s.descricao },
             })),
           },
         }}
@@ -186,38 +131,22 @@ export default function Home() {
 
         <Faixa itens={[["2014", "abertura em Garuva"], ["2.900", "alunas formadas"], ["15", "anos de formação"], ["+4", "cidades atendidas"]]} />
 
-        <section id="servicos" className="scroll-mt-20 py-16 md:py-24">
-          <p className="text-sm text-carvao/45">O que fazemos</p>
-          <h2 className="mt-2 font-serif text-3xl md:text-4xl">Serviços</h2>
-          <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            {SERVICOS.map((s, i) => (
-              <div key={s.nome} className={i === 0 ? "md:col-span-2 lg:col-span-1" : ""}>
-                <h3 className="font-serif text-xl leading-snug">{s.nome}</h3>
-                {s.texto.split("\n\n").map((p) => (
-                  <p key={p} className="mt-2 text-carvao/65">{p}</p>
-                ))}
-              </div>
-            ))}
-          </div>
-        </section>
+        <ServicosResumo />
 
         <section className="border-y border-linha py-16 md:grid md:grid-cols-2 md:gap-16 md:py-24">
           <div>
             <p className="text-sm text-carvao/45">A casa</p>
-            <h2 className="mt-2 font-serif text-3xl md:text-4xl">De Studio a Concept</h2>
+            <h2 className="mt-2 font-serif text-3xl md:text-4xl">Nossa história</h2>
           </div>
-          <div className="mt-6 space-y-5 text-carvao/70 md:mt-0">
-            <p>
-              No começo era o Studio Fernanda Hosang: uma estrutura menor, com
-              todos os atendimentos feitos por uma pessoa só. Quando o negócio
-              cresceu e novas profissionais entraram, o nome deixou de contar a
-              história certa.
-            </p>
-            <p>
-              O FH Concept nasceu dessa virada. Não é só nome nem metro quadrado:
-              é um conceito de atendimento em que diferentes especialidades
-              trabalham alinhadas ao mesmo padrão.
-            </p>
+          <div className="mt-6 md:mt-0">
+            <div className="space-y-5 leading-relaxed text-carvao/70">
+              {HISTORIA.slice(0, 2).map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <Link href="/equipe#historia" className="mt-6 inline-flex min-h-11 items-center border-b border-nude text-sm text-nude">
+              Ler a história completa
+            </Link>
           </div>
         </section>
 
