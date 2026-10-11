@@ -66,11 +66,12 @@ export const CATEGORIAS: Categoria[] = [
           "Loiros, morenas iluminadas e balayage criados para valorizar sua beleza e seu estilo. Cada resultado começa com uma avaliação dos fios e do histórico de químicas, para definir os tons e as técnicas mais adequados ao seu cabelo.",
         ],
         itens: [
-          ["Mechas e iluminação personalizada", "3 a 6 h"],
-          ["Morena iluminada", "3 a 5 h"],
-          ["Descoloração global", "4 a 6 h"],
-          ["Coloração e tonalização", "1 a 2 h"],
-          ["Matização e manutenção de tom", "1 h"],
+          ["Mechas criativas", "4 a 6 h"],
+          ["Mechas pontuais", "3 a 4 h"],
+          ["Mechas ombré hair", "3 a 5 h"],
+          ["Mechas moreno iluminado", "3 a 5 h"],
+          ["Correção de cor", "3 a 7 h"],
+          ["Manutenção de cor", "1 a 2 h"],
         ],
       },
       {
@@ -81,9 +82,9 @@ export const CATEGORIAS: Categoria[] = [
           "Um trabalho especializado para corrigir manchas, suavizar tons indesejados e devolver harmonia à cor. Após avaliar os fios e o histórico de químicas, planejamos cada etapa da transformação, respeitando os limites do cabelo e o resultado que você deseja alcançar.",
         ],
         itens: [
-          ["Diagnóstico e teste de mecha", "Sempre primeiro"],
-          ["Correção de tom e neutralização", "A definir"],
-          ["Reconstrução acompanhando o processo", "Incluída"],
+          ["Diagnóstico e teste de mecha", "1 h"],
+          ["Correção de cor e neutralização de tons indesejados", "4 a 7 h"],
+          ["Tratamento de reconstrução acompanhando todas as etapas", "Incluído"],
         ],
       },
       {
@@ -94,6 +95,7 @@ export const CATEGORIAS: Categoria[] = [
         texto: [
           "Dos acobreados naturais aos vermelhos intensos, criamos o ruivo que valoriza sua beleza e expressa sua personalidade. O serviço inclui planejamento da cor e orientações de manutenção para preservar a intensidade, o brilho e a beleza do tom.",
         ],
+        itens: [["Limpeza de cor + pré-pigmentação e coloração", "3 a 5 h"]],
       },
       {
         slug: "camuflagem-de-fios-brancos",
@@ -101,6 +103,7 @@ export const CATEGORIAS: Categoria[] = [
         texto: [
           "Valorize a cor natural do seu cabelo com uma cobertura estratégica, direcionada somente aos fios brancos e preservando os fios naturalmente pigmentados. Planejamos os tons e a aplicação conforme a distribuição dos brancos e o resultado desejado, para um acabamento discreto e harmonioso, que mantém a cor natural e a identidade do seu cabelo.",
         ],
+        itens: [["Camuflagem de fios brancos", "1 h"]],
       },
     ],
   },
@@ -157,8 +160,8 @@ export const CATEGORIAS: Categoria[] = [
     slug: "tratamentos",
     nome: "Tratamentos",
     quem: "Fernanda Hosang e Juliana Araujo",
-    foto: "/galeria/cor-morena-volume.jpg",
-    alt: "Cabelo castanho iluminado, com brilho e movimento",
+    foto: "/galeria/tratamento-loiro-ondas-costas.jpg",
+    alt: "Cabelo loiro longo com ondas e brilho, visto de costas",
     servicos: [
       {
         slug: "tratamentos-capilares",
