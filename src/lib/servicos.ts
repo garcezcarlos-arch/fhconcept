@@ -9,7 +9,10 @@ export type Servico = {
   slug: string;
   nome: string;
   texto: string[];
-  itens?: [string, string][];
+  /** atendimento, tempo e, se precisar, uma linha de explicacao */
+  itens?: [string, string, string?][];
+  /** servico-experiencia com texto longo: chamada, selos, secoes e fecho (so em /servicos) */
+  ritual?: { chamada: string; selos: string[]; secoes: { titulo?: string; texto: string[] }[]; fecho: string[] };
   /** foto do proprio servico; sem ela vale a foto da categoria */
   foto?: string;
   alt?: string;
@@ -137,8 +140,8 @@ export const CATEGORIAS: Categoria[] = [
     nome: "Ondulados, cacheados e crespos",
     menu: "Cacheados e crespos",
     quem: "Juliana Araujo",
-    foto: "/galeria/cachos-loiro-cacheado.jpg",
-    alt: "Cabelo cacheado loiro com corte em camadas",
+    foto: "/galeria/cachos-longos-definidos.jpg",
+    alt: "Cachos longos e definidos em cabelo castanho, em frente à parede do salão",
     servicos: [
       {
         slug: "ondulados-cacheados-e-crespos",
@@ -169,11 +172,54 @@ export const CATEGORIAS: Categoria[] = [
           "Mapeamento capilar personalizado para identificar as necessidades dos fios e definir um protocolo exclusivo. Combinamos produtos profissionais, ozonioterapia, fototerapia e equipamentos de tecnologia avançada para tratar os fios de fora para dentro, com cuidados direcionados à superfície e à estrutura da fibra capilar, valorizando a resistência, a maciez e o brilho.",
         ],
         itens: [
-          ["Mapeamento capilar personalizado", "Consulta"],
-          ["Reconstrução profunda", "1 a 2 h"],
-          ["Hidratação e nutrição", "1 h"],
-          ["Escova e finalização", "40 min a 1 h"],
+          ["Mapeamento capilar", "20 min"],
+          ["Ritual Infusion (reconstrução profunda)", "1 h 30"],
+          ["Ritual Élixir (nutrição)", "1 h"],
+          ["Ritual Lumière (hidratação)", "1 h"],
+          ["Ritual FH Signature", "1 h 30", "Um ritual exclusivo que combina diagnóstico capilar personalizado, cosméticos de alta performance, tecnologias avançadas e uma experiência sensorial sofisticada, incluso ozonioterapia e fototerapia."],
+          ["Escova e finalização", "30 min"],
         ],
+      },
+      {
+        slug: "fh-signature-ritual",
+        nome: "FH Signature Ritual",
+        texto: [
+          "Mais do que um tratamento, um convite para desacelerar, despertar os sentidos e vivenciar uma experiência única de cuidado e conexão consigo mesma.",
+          "O FH Signature Ritual é um protocolo exclusivo desenvolvido por Fernanda Hosang, que combina conhecimento técnico, tecnologias avançadas, cosméticos de alta performance e experiências sensoriais cuidadosamente pensadas para transformar o cuidado capilar em um momento de puro bem-estar.",
+        ],
+        ritual: {
+          chamada: "Uma experiência sensorial exclusiva de beleza, tecnologia e bem-estar.",
+          selos: ["Ozonioterapia", "Fototerapia", "Massagem capilar", "Tratamento personalizado"],
+          secoes: [
+            {
+              texto: [
+                "A experiência começa com um mapeamento capilar individualizado, permitindo compreender as necessidades específicas dos fios e desenvolver um protocolo personalizado, respeitando a estrutura, o histórico e as particularidades de cada cabelo.",
+                "A partir dessa avaliação, integramos tratamentos profissionais, ozonioterapia e fototerapia, associados a ativos selecionados para proporcionar cuidados direcionados à fibra capilar.",
+              ],
+            },
+            {
+              titulo: "Um ritual que desperta os sentidos",
+              texto: [
+                "O grande diferencial está na experiência que acompanha cada etapa do tratamento.",
+                "O toque das mãos, os movimentos suaves e ritmados da massagem capilar, a sensação de relaxamento e o cuidado dedicado transformam o atendimento em uma verdadeira pausa na rotina.",
+                "A massagem no couro cabeludo proporciona uma agradável sensação de conforto, ajuda a aliviar tensões e convida o corpo e a mente a desacelerar.",
+                "Texturas envolventes, fragrâncias delicadas, sensações de aconchego e um ambiente cuidadosamente preparado complementam essa jornada sensorial, criando uma atmosfera de tranquilidade, acolhimento e exclusividade.",
+                "Enquanto os cabelos recebem cuidados personalizados para melhorar sua resistência, maciez, hidratação e luminosidade, você desfruta de um momento dedicado inteiramente ao seu bem-estar.",
+                "Cada toque, cada sensação e cada detalhe fazem parte de uma experiência pensada para você.",
+              ],
+            },
+            {
+              titulo: "Muito além da beleza dos fios",
+              texto: [
+                "O FH Signature Ritual representa uma nova forma de vivenciar o cuidado capilar, onde ciência, tecnologia e sensorialidade se encontram.",
+                "Não se trata apenas de melhorar a aparência dos cabelos, mas de proporcionar uma experiência que desperta sensações, valoriza o autocuidado e transforma um atendimento em um momento especial.",
+                "Porque o verdadeiro luxo está nos detalhes, no tempo dedicado a você e na maneira como cada cuidado faz você se sentir.",
+              ],
+            },
+          ],
+          fecho: ["Uma experiência para os cabelos. Um ritual para os sentidos. Um momento inteiramente seu.", "Fernanda Hosang Concept — A exclusividade de cuidar. O privilégio de sentir."],
+        },
+        itens: [["FH Signature Ritual", "1 h 30"]],
       },
     ],
   },

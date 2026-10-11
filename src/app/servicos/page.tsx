@@ -115,10 +115,43 @@ export default function Servicos() {
                         </figure>
                       )}
                       {/* servico com o mesmo nome da categoria: o titulo da categoria ja basta */}
+                      {s.ritual && <p className="mb-2 text-sm text-nude-esc">Exclusivo FH Concept</p>}
                       {s.nome !== c.nome && <h3 className="mb-4 font-serif text-2xl leading-snug md:text-[28px]">{s.nome}</h3>}
+                      {s.ritual && (
+                        <>
+                          <p className="mb-5 max-w-[36ch] font-serif text-xl leading-snug text-texto md:text-[22px]">{s.ritual.chamada}</p>
+                          <ul className="mb-6 flex flex-wrap gap-2 text-xs text-texto2">
+                            {s.ritual.selos.map((selo) => <li key={selo} className="border border-linha bg-branco px-3 py-1.5">{selo}</li>)}
+                          </ul>
+                        </>
+                      )}
                       {s.texto.map((p, k) => (
                         <p key={p} className={`max-w-[62ch] leading-relaxed text-texto2 ${k > 0 ? "mt-4" : ""}`}>{p}</p>
                       ))}
+
+                      {s.ritual && (
+                        <details className="group mt-6 border-y border-linha">
+                          <summary className="flex min-h-13 cursor-pointer list-none items-center justify-between gap-6 text-sm text-nude-esc [&::-webkit-details-marker]:hidden">
+                            <span>Conhecer o ritual por inteiro</span>
+                            <span aria-hidden className="relative block h-3.5 w-3.5 shrink-0">
+                              <span className="absolute left-0 top-1/2 h-px w-full bg-current" />
+                              <span className="absolute left-1/2 top-0 h-full w-px bg-current transition-transform duration-200 group-open:rotate-90 motion-reduce:transition-none" />
+                            </span>
+                          </summary>
+                          <div className="pb-8">
+                            {s.ritual.secoes.map((sec) => (
+                              <div key={sec.titulo ?? sec.texto[0]} className="mt-6 first:mt-2">
+                                {sec.titulo && <h4 className="mb-3 font-serif text-xl leading-snug">{sec.titulo}</h4>}
+                                {sec.texto.map((p, k) => (
+                                  <p key={p} className={`max-w-[62ch] leading-relaxed text-texto2 ${k > 0 ? "mt-4" : ""}`}>{p}</p>
+                                ))}
+                              </div>
+                            ))}
+                            <p className="mt-8 max-w-[40ch] border-l border-champanhe pl-5 font-serif text-xl leading-snug text-texto">{s.ritual.fecho[0]}</p>
+                            {s.ritual.fecho.slice(1).map((f) => <p key={f} className="mt-4 text-sm text-texto2">{f}</p>)}
+                          </div>
+                        </details>
+                      )}
 
                       {s.comparar && (
                         // no computador o antes e depois fica na foto ao lado
@@ -130,9 +163,12 @@ export default function Servicos() {
 
                       {s.itens && (
                         <dl className="mt-7 border-t border-linha">
-                          {s.itens.map(([nome, dur]) => (
+                          {s.itens.map(([nome, dur, nota]) => (
                             <div key={nome} className="flex items-baseline justify-between gap-6 border-b border-linha py-3 text-sm">
-                              <dt>{nome}</dt>
+                              <dt>
+                                {nome}
+                                {nota && <span className="mt-1 block max-w-[52ch] text-[13px] leading-relaxed text-texto2">{nota}</span>}
+                              </dt>
                               <dd className="shrink-0 text-texto2">{dur}</dd>
                             </div>
                           ))}
