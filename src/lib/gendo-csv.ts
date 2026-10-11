@@ -181,7 +181,7 @@ export function lerArquivoGendo(bytes: Uint8Array): ArquivoLido | null {
       const data = dataBr(v(l, "Data"));
       const status = texto(v(l, "Status"), 40);
       if (numero === null || numero <= 0 || !data || !status) { ignoradas++; continue; }
-      linhas.push({ numero, data, valor: dinheiro(v(l, "Valor")) ?? 0, desconto: dinheiro(v(l, "Desconto")) ?? 0, saldo: dinheiro(v(l, "Saldo")) ?? 0, status, pagamento: texto(v(l, "Pagamento"), 300), servicos: texto(v(l, "Servicos"), 600) });
+      linhas.push({ numero, data, valor: dinheiro(v(l, "Valor")) ?? 0, desconto: dinheiro(v(l, "Desconto")) ?? 0, saldo: dinheiro(v(l, "Saldo")) ?? 0, status, pagamento: texto(v(l, "Pagamento"), 1200), servicos: texto(v(l, "Servicos"), 1200) });
     }
     return { tipo: "comandas", linhas, ignoradas };
   }

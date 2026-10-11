@@ -66,8 +66,8 @@ export default async function Painel() {
         if (m.agendamentos > 0 && m.comandasFechadas === 0) semComanda++;
         else break;
       }
-      somar(semComanda, ["mês com agenda e nenhuma comanda fechada no Gendo", "meses seguidos com agenda e nenhuma comanda fechada no Gendo"], "/admin/salao", "Ver indicadores");
-      if (retrato) somar(retrato.comandasAbertas, [`comanda em aberto no Gendo em ${rotuloDia(retrato.data)}`, `comandas em aberto no Gendo em ${rotuloDia(retrato.data)}`], "/admin/salao", "Ver indicadores");
+      somar(semComanda, ["mês com agenda e nenhuma comanda fechada no Gendo", "meses seguidos com agenda e nenhuma comanda fechada no Gendo"], "/admin/salao/caixa", "Ver comandas");
+      if (retrato) somar(retrato.comandasAbertas, [`comanda em aberto no Gendo em ${rotuloDia(retrato.data)}`, `comandas em aberto no Gendo em ${rotuloDia(retrato.data)}`], "/admin/salao/caixa", "Ver comandas");
 
       // o ultimo mes fechado e o anterior ao corrente; acima disso falta lancar
       const ultimo = meses.at(-1);

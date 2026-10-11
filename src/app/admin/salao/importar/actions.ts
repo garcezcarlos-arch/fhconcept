@@ -102,7 +102,7 @@ export async function importarComandas(linhas: unknown): Promise<Resposta> {
     const data = dia(l.data);
     const status = str(l.status, 40);
     if (numero === null || !data || !status) continue;
-    validas.push({ numero, data, valor: num(l.valor) ?? 0, desconto: num(l.desconto) ?? 0, saldo: num(l.saldo) ?? 0, status, pagamento: str(l.pagamento, 300) || null, servicos: str(l.servicos, 600) || null, atualizado_em: agora });
+    validas.push({ numero, data, valor: num(l.valor) ?? 0, desconto: num(l.desconto) ?? 0, saldo: num(l.saldo) ?? 0, status, pagamento: str(l.pagamento, 1200) || null, servicos: str(l.servicos, 1200) || null, atualizado_em: agora });
   }
   if (!validas.length) return falha("Nenhuma comanda válida no lote.");
   const { error } = await createAdminClient().from("salao_comandas").upsert(validas, { onConflict: "numero" });

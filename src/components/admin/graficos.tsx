@@ -48,7 +48,7 @@ export function Colunas({ titulo, unidade, dados, formatar = inteiro, todosRotul
         {/* grade: linhas finas e continuas, com o valor a esquerda */}
         {marcas.map((m) => (
           <div key={m} aria-hidden className="pointer-events-none absolute inset-x-0 h-0" style={{ bottom: `${(m / topo) * 100}%` }}>
-            <span className="absolute left-0 top-0 w-7 -translate-y-1/2 text-right text-[11px] tabular-nums text-texto2">{formatar(m)}</span>
+            <span className="absolute right-[calc(100%-1.75rem)] top-0 -translate-y-1/2 whitespace-nowrap text-right text-[11px] tabular-nums text-texto2">{formatar(m)}</span>
             <span className={`absolute left-9 right-0 top-0 h-px ${m === 0 ? "bg-carvao/30" : "bg-linha"}`} />
           </div>
         ))}
@@ -58,7 +58,7 @@ export function Colunas({ titulo, unidade, dados, formatar = inteiro, todosRotul
             <div className={`relative w-full px-px ${todosRotulos ? "max-w-12" : "max-w-6"}`} style={{ height: `${(d.valor / topo) * 100}%` }}>
               <div className="h-full rounded-t-[4px] bg-nude-esc transition-colors group-hover:bg-carvao group-focus-visible:bg-carvao" />
               {(todosRotulos ? d.valor > 0 : i === iMax || i === iFim) && (
-                <span className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 text-[11px] tabular-nums text-texto group-hover:invisible group-focus-visible:invisible">{formatar(d.valor)}</span>
+                <span className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap text-[11px] tabular-nums text-texto group-hover:invisible group-focus-visible:invisible">{formatar(d.valor)}</span>
               )}
               <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden -translate-x-1/2 whitespace-nowrap bg-carvao px-2 py-1 text-xs text-creme group-hover:block group-focus-visible:block">
                 <b className="font-semibold">{formatar(d.valor)}</b> <span className="text-creme/70">{d.rotulo}{d.ano ? `/${d.ano.slice(2)}` : ""}</span>
@@ -84,8 +84,10 @@ export function Colunas({ titulo, unidade, dados, formatar = inteiro, todosRotul
 
 /** Barras horizontais para comparar categorias sem ordem natural: uma cor so,
     nome a esquerda e valor na ponta. */
-export function Barras({ titulo, dados, nomeLargo = false, nota }: { titulo: string; dados: { nome: string; valor: number; nota?: string }[]; nomeLargo?: boolean; nota?: ReactNode }) {
+export function Barras({ titulo, dados, nomeLargo = false, nota, formatar = inteiro }: { titulo: string; dados: { nome: string; valor: number; nota?: string }[]; nomeLargo?: boolean; nota?: ReactNode; formatar?: (n: number) => string }) {
   const max = Math.max(1, ...dados.map((d) => d.valor));
+  // valor em dinheiro ocupa mais texto na ponta: a barra encolhe para ele caber no celular
+  const escala = formatar === inteiro ? 78 : 42;
   return (
     <figure className="border border-linha bg-branco px-5 py-4">
       <figcaption className="text-sm text-carvao">{titulo}</figcaption>
@@ -95,8 +97,8 @@ export function Barras({ titulo, dados, nomeLargo = false, nota }: { titulo: str
           <div key={d.nome} className={`grid items-center text-sm ${nomeLargo ? "grid-cols-1 gap-1 sm:grid-cols-[15rem_1fr] sm:gap-3" : "grid-cols-[7rem_1fr] gap-3"}`}>
             <dt className={`text-texto2 ${nomeLargo ? "sm:truncate" : "truncate"}`} title={nomeLargo ? d.nome : undefined}>{d.nome}</dt>
             <dd className="flex items-center gap-2">
-              <span className="h-3 rounded-r-[4px] bg-nude-esc" style={{ width: `${(d.valor / max) * 78}%`, minWidth: d.valor > 0 ? 2 : 0 }} />
-              <span className="whitespace-nowrap tabular-nums text-carvao">{inteiro(d.valor)}{d.nota && <span className="text-texto2"> ({d.nota})</span>}</span>
+              <span className="h-3 rounded-r-[4px] bg-nude-esc" style={{ width: `${(Math.max(0, d.valor) / max) * escala}%`, minWidth: d.valor > 0 ? 2 : 0 }} />
+              <span className="whitespace-nowrap tabular-nums text-carvao">{formatar(d.valor)}{d.nota && <span className="text-texto2"> ({d.nota})</span>}</span>
             </dd>
           </div>
         ))}

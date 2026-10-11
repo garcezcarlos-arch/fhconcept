@@ -22,6 +22,7 @@ export function MenuAdmin({ nome, papel, agendaGendo }: { nome: string; papel: s
       itens: [
         { href: "/admin/salao", texto: "Indicadores" },
         { href: "/admin/salao/agenda", texto: "Raio-x da agenda" },
+        { href: "/admin/salao/caixa", texto: "Caixa e comandas" },
         { href: "/admin/salao/clientes", texto: "Clientes" },
         { href: "/admin/salao/retorno", texto: "Contato com clientes" },
         { href: "/admin/salao/servicos", texto: "Serviços" },
