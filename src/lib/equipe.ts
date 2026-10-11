@@ -31,6 +31,8 @@ export const EQUIPE: Pessoa[] = [
     texto: [
       "Fernanda une conhecimento técnico, sensibilidade e olhar artístico para criar transformações de cor que valorizam a identidade de cada cliente. Suas especialidades incluem colorimetria, correção de cor e mechas personalizadas — dos loiros e morenas iluminadas às mechas pontuais e criativas, que destacam contornos, criam contrastes e expressam personalidade.",
       "Seu olhar como visagista considera os traços, o estilo, a rotina e os desejos de cada pessoa. Da iluminação sutil à mudança completa de cor, cada resultado é planejado com escuta, diagnóstico capilar, precisão técnica e cuidado com a saúde dos fios.",
+      "Educadora técnica há 10 anos, contribuiu para a formação de mais de 2.900 alunos. Como educadora técnica na marca Nátylla Professional, compartilha sua experiência para desenvolver a técnica, o olhar e a confiança de outros profissionais.",
+      "Para Fernanda, cada transformação de cor carrega um propósito: revelar personalidade e fortalecer a autoestima. Seu trabalho ganha sentido quando a cliente se olha no espelho, reconhece sua beleza e encontra confiança para expressar quem é.",
     ],
     foto: "/galeria/equipe-fernanda.jpg",
     alt: "Fernanda Hosang",
@@ -39,7 +41,7 @@ export const EQUIPE: Pessoa[] = [
   },
   {
     slug: "juliana",
-    nome: "Juliana Araújo",
+    nome: "Juliana Araujo",
     primeiroNome: "Juliana",
     titulo: "Especialista em cabelos ondulados, cacheados e crespos, cortes e tratamentos capilares",
     papel: "Ondulados, cacheados e crespos, cortes e tratamentos",
@@ -51,7 +53,7 @@ export const EQUIPE: Pessoa[] = [
       "Para Juliana, valorizar os cachos é valorizar a identidade. Seu propósito é ajudar cada cliente a conhecer o próprio cabelo, reconhecer sua beleza e sentir confiança para usá-lo com liberdade.",
     ],
     foto: "/galeria/equipe-juliana.jpg",
-    alt: "Juliana Araújo no salão",
+    alt: "Juliana Araujo no salão",
     posicao: "object-[50%_22%]",
     insta: "https://instagram.com/juaraujocachos",
   },

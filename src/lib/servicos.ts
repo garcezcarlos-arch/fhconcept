@@ -107,7 +107,7 @@ export const CATEGORIAS: Categoria[] = [
   {
     slug: "corte-e-tratamentos",
     nome: "Corte e tratamentos",
-    quem: "Fernanda Hosang e Juliana Araújo",
+    quem: "Fernanda Hosang e Juliana Araujo",
     foto: "/galeria/cachos-loiro-cacheado.jpg",
     alt: "Cabelo cacheado loiro com corte em camadas",
     servicos: [

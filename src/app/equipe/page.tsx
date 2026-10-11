@@ -8,7 +8,7 @@ import { EQUIPE } from "@/lib/equipe";
 export const metadata = {
   title: "Equipe",
   description:
-    "Quem atende no FH Concept em Garuva: Fernanda Hosang (transformação de cor e visagismo), Juliana Araújo (ondulados, cacheados e crespos) e Laura Elisa (estética facial e sobrancelhas).",
+    "Quem atende no FH Concept em Garuva: Fernanda Hosang (transformação de cor e visagismo), Juliana Araujo (ondulados, cacheados e crespos) e Laura Elisa (estética facial e sobrancelhas).",
   alternates: { canonical: "/equipe" },
 };
 

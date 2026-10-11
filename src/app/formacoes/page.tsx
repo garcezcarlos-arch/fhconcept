@@ -11,7 +11,7 @@ import { createClient } from "@/lib/supabase/server";
 export const metadata = {
   title: "Formações para cabeleireiras",
   description:
-    "Cursos de colorimetria, mechas e correção de cor dentro de um salão em operação, em Garuva/SC. Seis formatos, a partir de R$ 350. 2.900 alunas formadas em oito anos.",
+    "Cursos de colorimetria, mechas e correção de cor dentro de um salão em operação, em Garuva/SC. Seis formatos, a partir de R$ 350. Mais de 2.900 alunas formadas em 10 anos.",
   alternates: { canonical: "/formacoes" },
 };
 
@@ -199,7 +199,7 @@ export default async function Formacoes() {
               <h2 className="mt-4 max-w-[19ch] font-serif text-3xl leading-[1.12] md:text-4xl">Escola dentro de um salão que funciona</h2>
               <div className="mt-6 space-y-4 text-texto2">
                 <p>A maioria das formações acontece em sala alugada, com modelo contratado, longe da realidade da cadeira. Aqui a aula é no salão, no meio da operação — com cliente de verdade entrando, agenda apertada e imprevisto acontecendo. É onde a técnica encontra o dia a dia.</p>
-                <p>Em oito anos foram cerca de 150 turmas e mais de 2.900 profissionais formadas, em workshops demonstrativos, cursos práticos, imersões e treinamentos em parceria com marcas profissionais.</p>
+                <p>Em 10 anos foram cerca de 150 turmas e mais de 2.900 profissionais formadas, em workshops demonstrativos, cursos práticos, imersões e treinamentos em parceria com marcas profissionais.</p>
               </div>
             </div>
           </div>

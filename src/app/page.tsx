@@ -14,7 +14,7 @@ import { ServicosResumo } from "@/components/servicos-resumo";
 export const metadata = {
   title: "Salão e formações em Garuva, SC",
   description:
-    "Coloração, mechas e correção de cor em Garuva, a 30 minutos de Joinville. E formações técnicas para cabeleireiras — 2.900 alunas em oito anos.",
+    "Coloração, mechas e correção de cor em Garuva, a 30 minutos de Joinville. E formações técnicas para cabeleireiras — mais de 2.900 alunas em 10 anos.",
   alternates: { canonical: "/" },
 };
 
@@ -103,7 +103,7 @@ export default function Home() {
               <div className="flex flex-col justify-center bg-areia p-5">
                 <b className="font-serif text-[29px] font-normal leading-none">2.900</b>
                 <span className="mt-2 text-[10.5px] font-medium uppercase leading-relaxed tracking-[0.16em] text-carvao/55">
-                  alunas formadas<br />em oito anos
+                  alunas formadas<br />em 10 anos
                 </span>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default function Home() {
         <section id="formacoes" className="scroll-mt-20 bg-carvao px-6 py-16 text-creme md:px-12 md:py-20">
           <p className="text-sm text-creme/50">Para profissionais</p>
           <h2 className="mt-2 max-w-2xl font-serif text-3xl leading-tight md:text-4xl">
-            2.900 cabeleireiras formadas em oito anos
+            2.900 cabeleireiras formadas em 10 anos
           </h2>
           <p className="mt-5 max-w-xl text-creme/70">
             As formações acontecem dentro do salão em operação, com modelo real e

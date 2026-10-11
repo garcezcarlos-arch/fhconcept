@@ -38,7 +38,7 @@ export function Galeria() {
             <span className="mt-2 text-[10.5px] font-medium uppercase leading-relaxed tracking-[0.16em] text-texto2">
               alunas formadas
               <br />
-              em oito anos
+              em 10 anos
             </span>
           </div>
           <Fig item={ITENS[1]} />
