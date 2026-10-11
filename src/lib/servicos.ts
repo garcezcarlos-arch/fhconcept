@@ -27,6 +27,8 @@ export type Categoria = {
   /** nome curto para a barra de categorias, quando o nome inteiro nao cabe */
   menu?: string;
   quem: string;
+  /** formato da foto ao lado; o padrao e quadrada no celular e em pe no computador */
+  proporcao?: string;
   foto: string;
   alt: string;
   servicos: Servico[];
@@ -244,6 +246,7 @@ export const CATEGORIAS: Categoria[] = [
   {
     slug: "pele-e-sobrancelhas",
     nome: "Pele e sobrancelhas",
+    proporcao: "aspect-[4/3]", // as fotos do antes e depois de pele sao deitadas
     quem: "Laura Elisa",
     foto: "/galeria/rosto-maquiagem-perfil.jpg",
     alt: "Rosto de perfil com pele iluminada e sobrancelhas definidas",
@@ -251,7 +254,7 @@ export const CATEGORIAS: Categoria[] = [
       {
         slug: "cuidados-faciais",
         nome: "Cuidados faciais",
-        comparar: { antes: "/galeria/pele-limpeza-antes.jpg", depois: "/galeria/pele-limpeza-depois.jpg", alt: "Limpeza de pele: a pele antes e depois do atendimento", empilhado: true },
+        comparar: { antes: "/galeria/pele-limpeza-antes.jpg", depois: "/galeria/pele-limpeza-depois.jpg", alt: "Limpeza de pele: a pele antes e depois do atendimento" },
         texto: [
           "Limpeza de pele, dermaplaning, tratamentos faciais e microagulhamento, com protocolos definidos a partir de uma avaliação individual. Um cuidado direcionado às necessidades da sua pele para melhorar a textura, realçar a luminosidade e valorizar sua beleza natural.",
         ],
