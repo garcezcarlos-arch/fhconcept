@@ -194,8 +194,8 @@ export const CATEGORIAS: Categoria[] = [
     slug: "maquiagem-e-penteado",
     nome: "Maquiagem e penteado",
     quem: "Fernanda Hosang",
-    foto: "/galeria/rosto-coque-maquiagem.jpg",
-    alt: "Maquiagem social com penteado preso",
+    foto: "/galeria/maquiagem-social-ondas.jpg",
+    alt: "Maquiagem social em tons rosados com cabelo em ondas",
     servicos: [
       {
         slug: "producao-completa",
