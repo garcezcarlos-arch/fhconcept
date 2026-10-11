@@ -37,7 +37,7 @@ export const EQUIPE: Pessoa[] = [
     foto: "/galeria/equipe-fernanda.jpg",
     alt: "Fernanda Hosang",
     posicao: "object-[50%_18%]",
-    insta: "https://instagram.com/fernandahosangconcept",
+    insta: "https://www.instagram.com/fernandahosang_oficial/",
   },
   {
     slug: "juliana",
