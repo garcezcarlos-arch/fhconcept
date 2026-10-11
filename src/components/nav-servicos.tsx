@@ -53,7 +53,7 @@ export function NavServicos({ itens, agendar }: { itens: Item[]; agendar: string
   return (
     <nav aria-label="Categorias de serviços" className="sticky top-[69px] z-40 border-b border-linha bg-creme/95 backdrop-blur md:top-[77px]">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-5 md:px-10">
-        <div ref={trilho} className="-mx-5 flex flex-1 gap-7 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
+        <div ref={trilho} className="-mx-5 flex flex-1 gap-6 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
           {itens.map((i) => (
             <a
               key={i.slug}
@@ -66,7 +66,7 @@ export function NavServicos({ itens, agendar }: { itens: Item[]; agendar: string
             </a>
           ))}
         </div>
-        <a href={agendar} target="_blank" rel="noopener" className="hidden min-h-10 shrink-0 items-center bg-carvao px-5 text-sm text-creme transition-colors hover:bg-nude-esc md:inline-flex">
+        <a href={agendar} target="_blank" rel="noopener" className="hidden min-h-10 shrink-0 items-center bg-carvao px-5 text-sm text-creme transition-colors hover:bg-nude-esc lg:inline-flex">
           Agendar pelo WhatsApp
         </a>
       </div>

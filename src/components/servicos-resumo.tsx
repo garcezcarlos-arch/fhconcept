@@ -55,7 +55,7 @@ export function ServicosResumo() {
               {c.servicos.map((s) => (
                 <details key={s.slug} name="servicos-home" className="group border-b border-linha">
                   <summary className="flex min-h-15 cursor-pointer list-none items-center justify-between gap-6 py-3 outline-offset-4 hover:text-nude-esc [&::-webkit-details-marker]:hidden">
-                    <span className="font-serif text-lg leading-snug md:text-xl">{s.nome}</span>
+                    <span className="font-serif text-lg leading-snug md:text-xl">{s.nome === c.nome && c.servicos.length === 1 ? "O que inclui" : s.nome}</span>
                     <span aria-hidden className="relative block h-3.5 w-3.5 shrink-0">
                       <span className="absolute left-0 top-1/2 h-px w-full bg-current" />
                       <span className="absolute left-1/2 top-0 h-full w-px bg-current transition-transform duration-200 group-open:rotate-90 motion-reduce:transition-none" />

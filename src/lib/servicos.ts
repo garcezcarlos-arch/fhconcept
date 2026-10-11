@@ -21,6 +21,8 @@ export type Servico = {
 export type Categoria = {
   slug: string;
   nome: string;
+  /** nome curto para a barra de categorias, quando o nome inteiro nao cabe */
+  menu?: string;
   quem: string;
   foto: string;
   alt: string;
@@ -103,25 +105,38 @@ export const CATEGORIAS: Categoria[] = [
     ],
   },
   {
-    slug: "corte-e-tratamentos",
-    nome: "Corte e tratamentos",
-    quem: "Fernanda Hosang e Juliana Araujo",
+    slug: "corte",
+    nome: "Corte",
+    quem: "Fernanda Hosang",
+    foto: "/galeria/corte-camadas-loiro.jpg",
+    alt: "Corte em camadas longas em cabelo loiro iluminado",
+    servicos: [
+      {
+        slug: "corte-feminino",
+        nome: "Corte",
+        texto: [
+          "Um corte que conecta sua personalidade à imagem que você deseja transmitir, com formas, comprimentos e volumes que valorizam sua expressão. Cada escolha considera seu estilo e sua rotina, com finalização e orientações para os cuidados em casa.",
+        ],
+        itens: [["Corte feminino", "1 h"]],
+      },
+      {
+        slug: "visagismo",
+        nome: "Visagismo",
+        texto: [
+          "Por meio do visagismo, analisamos seus traços, as proporções do rosto e as características dos fios para definir formas, comprimentos e volumes que valorizem sua expressão. O olhar considera também seu estilo, sua rotina e seus desejos.",
+        ],
+        itens: [["Consultoria de imagem e visagismo", "Sob consulta"]],
+      },
+    ],
+  },
+  {
+    slug: "cachos",
+    nome: "Ondulados, cacheados e crespos",
+    menu: "Cacheados e crespos",
+    quem: "Juliana Araujo",
     foto: "/galeria/cachos-loiro-cacheado.jpg",
     alt: "Cabelo cacheado loiro com corte em camadas",
     servicos: [
-      {
-        slug: "corte-e-visagismo",
-        nome: "Corte e visagismo",
-        foto: "/galeria/corte-camadas-loiro.jpg",
-        alt: "Corte em camadas longas em cabelo loiro iluminado",
-        texto: [
-          "Um corte que conecta sua personalidade à imagem que você deseja transmitir. Por meio do visagismo, analisamos seus traços, as proporções do rosto e as características dos fios para definir formas, comprimentos e volumes que valorizem sua expressão. Cada escolha considera seu estilo e sua rotina, com finalização e orientações para os cuidados em casa.",
-        ],
-        itens: [
-          ["Corte feminino", "1 h"],
-          ["Consultoria de imagem e visagismo", "Sob consulta"],
-        ],
-      },
       {
         slug: "ondulados-cacheados-e-crespos",
         nome: "Ondulados, cacheados e crespos",
@@ -136,6 +151,15 @@ export const CATEGORIAS: Categoria[] = [
           ["Penteados", "1 a 2 h"],
         ],
       },
+    ],
+  },
+  {
+    slug: "tratamentos",
+    nome: "Tratamentos",
+    quem: "Fernanda Hosang e Juliana Araujo",
+    foto: "/galeria/cor-morena-volume.jpg",
+    alt: "Cabelo castanho iluminado, com brilho e movimento",
+    servicos: [
       {
         slug: "tratamentos-capilares",
         nome: "Tratamentos capilares personalizados",
@@ -149,6 +173,15 @@ export const CATEGORIAS: Categoria[] = [
           ["Escova e finalização", "40 min a 1 h"],
         ],
       },
+    ],
+  },
+  {
+    slug: "alisamentos-e-realinhamento",
+    nome: "Alisamentos",
+    quem: "Fernanda Hosang",
+    foto: "/galeria/cor-platinado-liso-costas.jpg",
+    alt: "Cabelo loiro longo e liso, visto de costas",
+    servicos: [
       {
         slug: "alisamentos",
         nome: "Alisamentos",
@@ -195,6 +228,7 @@ export const CATEGORIAS: Categoria[] = [
   {
     slug: "maquiagem-e-penteado",
     nome: "Maquiagem e penteado",
+    menu: "Maquiagem",
     quem: "Fernanda Hosang",
     foto: "/galeria/maquiagem-social-ondas.jpg",
     alt: "Maquiagem social em tons rosados com cabelo em ondas",

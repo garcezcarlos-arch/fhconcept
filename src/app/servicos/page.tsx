@@ -17,8 +17,8 @@ export const metadata = {
 };
 
 const NAV = [
-  { slug: PREMIUM.slug, nome: "Transformação Premium" },
-  ...CATEGORIAS.map((c) => ({ slug: c.slug, nome: c.nome })),
+  { slug: PREMIUM.slug, nome: "Premium" },
+  ...CATEGORIAS.map((c) => ({ slug: c.slug, nome: c.menu ?? c.nome })),
 ];
 
 export default function Servicos() {
@@ -114,9 +114,10 @@ export default function Servicos() {
                           <Image src={s.foto} alt={s.alt ?? s.nome} fill sizes="100vw" className={`object-cover ${s.posicao ?? "object-top"}`} />
                         </figure>
                       )}
-                      <h3 className="font-serif text-2xl leading-snug md:text-[28px]">{s.nome}</h3>
-                      {s.texto.map((p) => (
-                        <p key={p} className="mt-4 max-w-[62ch] leading-relaxed text-texto2">{p}</p>
+                      {/* servico com o mesmo nome da categoria: o titulo da categoria ja basta */}
+                      {s.nome !== c.nome && <h3 className="mb-4 font-serif text-2xl leading-snug md:text-[28px]">{s.nome}</h3>}
+                      {s.texto.map((p, k) => (
+                        <p key={p} className={`max-w-[62ch] leading-relaxed text-texto2 ${k > 0 ? "mt-4" : ""}`}>{p}</p>
                       ))}
 
                       {s.comparar && (
