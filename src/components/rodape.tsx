@@ -56,7 +56,7 @@ export function Rodape() {
           <Link href="/privacidade" className="hover:text-nude">Privacidade</Link>
           <Link href="/termos" className="hover:text-nude">Termos</Link>
         </span>
-        <span>Garuva · Joinville · Itapoá · Guaratuba</span>
+        <span>Garuva · Joinville · Araquari · Itapoá · Guaratuba · Curitiba · Balneário Camboriú</span>
       </div>
     </footer>
   );

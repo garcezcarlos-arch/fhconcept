@@ -1,23 +1,44 @@
 # FH Concept
 
-> Salão e centro de formação em colorimetria em Garuva, Santa Catarina.
-> Especializado em mechas, correção de cor e cabelos loiros. Também vende
-> os produtos usados no atendimento.
+> Salão de beleza e centro de formação técnica em Garuva, Santa Catarina,
+> fundado por Fernanda Hosang em 2014. Especializado em transformação de cor
+> (coloração, mechas, correção de cor, ruivos), corte e visagismo, cabelos
+> ondulados, cacheados e crespos, tratamentos capilares, estética facial,
+> sobrancelhas, maquiagem e penteado.
 
-Responsável: Fernanda Hosang, colorista com formação PHD em colorimetria
-e descoloração. Atende em Garuva desde 2014 e forma profissionais de todo
-o país.
+## Serviços
+- [Serviços](https://fhconcept.com.br/servicos): Transformação de Cor Premium;
+  Cor (coloração e mechas personalizadas, correção de cor, ruivos
+  personalizados, camuflagem de fios brancos); Corte e visagismo; Ondulados,
+  cacheados e crespos; Tratamentos capilares personalizados; Alisamentos;
+  Pele e sobrancelhas; Maquiagem e penteado.
+- Os valores variam com o comprimento e o histórico químico do cabelo; o
+  orçamento fecha depois do diagnóstico.
+
+## Equipe
+- [Equipe](https://fhconcept.com.br/equipe)
+- Fernanda Hosang: fundadora, especialista em transformação de cor, visagista
+  e educadora técnica há 10 anos, com mais de 2.900 alunos formados.
+- Juliana Araujo: cabelos ondulados, cacheados e crespos, cortes e
+  tratamentos capilares.
+- Laura Elisa: estética facial e design de sobrancelhas.
+
+## Formações para profissionais
+- [Formações](https://fhconcept.com.br/formacoes): curso prático em turma
+  (R$ 350 a R$ 650), curso particular, Shadow Day (R$ 1.100), atendimento
+  assistido (R$ 900 a R$ 1.200), mentoria técnica (R$ 1.200 a R$ 1.700) e
+  pacotes personalizados.
 
 ## Loja
-- [Loja](/loja): produtos de cabelo, estética facial, perfumaria e corpo.
-- [Diagnóstico](/loja/diagnostico): quatro perguntas sobre tipo de cabelo,
-  química e necessidade; devolve os produtos indicados para o caso.
+- [Loja](https://fhconcept.com.br/loja): produtos usados no atendimento.
+  Catálogo em preparação.
+- [Diagnóstico](https://fhconcept.com.br/loja/diagnostico): quatro perguntas
+  sobre tipo de cabelo, química e necessidade; devolve os produtos indicados.
 
 ## Atendimento
 - Endereço: Rua Rui Barbosa, 679 — Sala 02, Centro, Garuva/SC
-- Horário: terça a sábado, 8h30 às 12h e 13h30 às 18h30
-- Agendamento e pedidos pelo WhatsApp
-
-## Observações
-- Pedidos são fechados por WhatsApp; não há checkout automático no site.
-- Retirada no salão em Garuva ou envio para outras cidades.
+- Horário: terça a sábado, 8h30 às 12h e 13h30 às 18h30, com hora marcada
+- Agendamento pelo WhatsApp: (47) 99642-6656
+- Recebe clientes de Joinville, Araquari, Itapoá, Guaratuba, Curitiba,
+  Balneário Camboriú e outras cidades da região.
+- [Como chegar](https://fhconcept.com.br/contato)
