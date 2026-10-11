@@ -18,13 +18,48 @@ const SERVICOS = [
   {
     nome: "Transformação de Cor Premium",
     texto:
-      "O atendimento completo de correção e construção de cor: diagnóstico do fio, tratamento antes e depois da química, e o tom entregue com a manutenção explicada.",
+      "Uma experiência completa de coloração, com diagnóstico capilar e planejamento personalizado para criar ou corrigir a cor, valorizando sua beleza e seu estilo. O serviço inclui tratamentos antes e após a química, além de orientações de manutenção para preservar o tom, o brilho e a saúde dos fios.",
   },
-  { nome: "Coloração e mechas", texto: "Loiros, morenas iluminadas e balayage, com leitura de fundo de clareamento antes de qualquer química." },
-  { nome: "Correção de cor", texto: "Cabelo manchado, esverdeado ou alaranjado. É o caso que mais chega aqui vindo de outro salão." },
-  { nome: "Ruivos", texto: "Construção e manutenção de vermelhos, que desbotam mais rápido que qualquer outro tom." },
-  { nome: "Cachos e tratamentos", texto: "Corte, definição e reconstrução para ondas, cachos e crespos, com a Juliana." },
-  { nome: "Pele e sobrancelhas", texto: "Limpeza, tratamento facial e design de sobrancelhas, com a Laura." },
+  {
+    nome: "Coloração e mechas personalizadas",
+    texto:
+      "Loiros, morenas iluminadas e balayage criados para valorizar sua beleza e seu estilo. Cada resultado começa com uma avaliação dos fios e do histórico de químicas, para definir os tons e as técnicas mais adequados ao seu cabelo.",
+  },
+  {
+    nome: "Correção de cor",
+    texto:
+      "Um trabalho especializado para corrigir manchas, suavizar tons indesejados e devolver harmonia à cor. Após avaliar os fios e o histórico de químicas, planejamos cada etapa da transformação, respeitando os limites do cabelo e o resultado que você deseja alcançar.",
+  },
+  {
+    nome: "Ruivos personalizados",
+    texto:
+      "Dos acobreados naturais aos vermelhos intensos, criamos o ruivo que valoriza sua beleza e expressa sua personalidade. O serviço inclui planejamento da cor e orientações de manutenção para preservar a intensidade, o brilho e a beleza do tom.",
+  },
+  {
+    nome: "Ondulados, cacheados e crespos",
+    texto:
+      "Cuidado especializado para valorizar a textura e a beleza natural dos seus fios. Cortes personalizados, tratamentos e finalização que realçam a definição e o movimento, com orientações para facilitar os cuidados em casa.",
+  },
+  {
+    nome: "Pele",
+    texto:
+      "Limpeza de pele, tratamentos faciais e microagulhamento com protocolos personalizados para as necessidades da sua pele. Um cuidado dedicado a valorizar sua beleza natural e melhorar a textura, a luminosidade e a aparência da pele.",
+  },
+  {
+    nome: "Sobrancelhas",
+    texto:
+      "Design personalizado, henna, tintura e reconstrução de sobrancelhas para valorizar o formato, a definição e a harmonia com o seu rosto. Cada serviço é escolhido de acordo com suas necessidades, realçando o olhar e preservando a naturalidade da sua expressão.",
+  },
+  {
+    nome: "Produção completa — maquiagem e penteado",
+    texto:
+      "Maquiagem personalizada e penteados dos clássicos aos mais despojados, em harmonia com seu estilo, sua personalidade e a ocasião. Trabalhamos com produtos e técnicas de pele blindada para uma maquiagem à prova d’água, com duração de até 24 horas e acabamento impecável. Uma produção completa, com atenção a cada detalhe para valorizar sua beleza.",
+  },
+  {
+    nome: "Alisamentos",
+    texto:
+      "Protocolos exclusivos e personalizados para cada tipo de cabelo, suas condições e o resultado desejado — do alisamento ao realinhamento mais leve dos fios, com controle de frizz e preservação do movimento natural.\n\nCada procedimento começa com avaliação capilar e teste de mecha, considerando o histórico de químicas e as necessidades dos fios. O cuidado se completa com orientações de manutenção para preservar o alinhamento, o brilho e a beleza do resultado.",
+  },
 ];
 
 const EQUIPE = [
@@ -139,7 +174,7 @@ export default function Home() {
             </div>
           </section>
 
-        <Faixa itens={[["2014", "no mesmo endereço"], ["2.900", "alunas formadas"], ["8", "anos de formação"], ["4", "cidades atendidas"]]} />
+        <Faixa itens={[["2014", "abertura em Garuva"], ["2.900", "alunas formadas"], ["15", "anos de formação"], ["+4", "cidades atendidas"]]} />
 
         <section id="servicos" className="scroll-mt-20 py-16 md:py-24">
           <p className="text-sm text-carvao/45">O que fazemos</p>
@@ -148,7 +183,9 @@ export default function Home() {
             {SERVICOS.map((s, i) => (
               <div key={s.nome} className={i === 0 ? "md:col-span-2 lg:col-span-1" : ""}>
                 <h3 className="font-serif text-xl leading-snug">{s.nome}</h3>
-                <p className="mt-2 text-carvao/65">{s.texto}</p>
+                {s.texto.split("\n\n").map((p) => (
+                  <p key={p} className="mt-2 text-carvao/65">{p}</p>
+                ))}
               </div>
             ))}
           </div>
@@ -229,7 +266,7 @@ export default function Home() {
           <div className="mt-10 space-y-5 text-carvao/65 md:mt-0">
             <p>
               A maior parte das clientes vem de Joinville, a trinta minutos.
-              Também atendemos Itapoá e Guaratuba.
+              Também atendemos Itapoá, Guaratuba e outras cidades da região.
             </p>
             <p>
               Atendimento com hora marcada. Para correção de cor, o horário é

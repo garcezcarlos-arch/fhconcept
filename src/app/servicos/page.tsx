@@ -27,10 +27,10 @@ const PREMIUM = [
 
 const LINHAS = [
   {
-    nome: "Cor, mechas e iluminação",
+    nome: "Coloração e mechas personalizadas",
     quem: "Fernanda Hosang",
     texto:
-      "A linha mais procurada da casa. Clarear cabelo é química, não sorte: começa com diagnóstico de histórico, passa por teste de mecha e termina com um plano de manutenção que você leva para casa.",
+      "Loiros, morenas iluminadas e balayage criados para valorizar sua beleza e seu estilo. Cada resultado começa com uma avaliação dos fios e do histórico de químicas, para definir os tons e as técnicas mais adequados ao seu cabelo.",
     itens: [
       ["Mechas e iluminação personalizada", "3 a 6 h"],
       ["Morena iluminada", "3 a 5 h"],
@@ -41,10 +41,10 @@ const LINHAS = [
     cta: "Falar sobre cor",
   },
   {
-    nome: "Correção de cor e colorimetria",
+    nome: "Correção de cor",
     quem: "Fernanda Hosang",
     texto:
-      "Loiro que amarelou, mechas manchadas, cor que saiu diferente do combinado, cabelo com histórico de progressiva ou henna. É o serviço que mais chega aqui vindo de outras cidades — e o que mais exige diagnóstico antes de qualquer promessa.",
+      "Um trabalho especializado para corrigir manchas, suavizar tons indesejados e devolver harmonia à cor. Após avaliar os fios e o histórico de químicas, planejamos cada etapa da transformação, respeitando os limites do cabelo e o resultado que você deseja alcançar.",
     itens: [
       ["Diagnóstico e teste de mecha", "Sempre primeiro"],
       ["Correção de tom e neutralização", "A definir"],
@@ -63,10 +63,10 @@ const LINHAS = [
     ],
   },
   {
-    nome: "Cachos, cortes e tratamentos",
+    nome: "Ondulados, cacheados e crespos",
     quem: "Juliana Araújo",
     texto:
-      "Cabelo cacheado precisa de corte pensado para a curva do fio, não do corte que se faz em cabelo liso. E de tratamento que devolva massa ao fio sem pesar na definição.",
+      "Cuidado especializado para valorizar a textura e a beleza natural dos seus fios. Cortes personalizados, tratamentos e finalização que realçam a definição e o movimento, com orientações para facilitar os cuidados em casa.",
     itens: [
       ["Corte especializado em cabelo cacheado", "1 a 2 h"],
       ["Tratamento capilar com mapeamento personalizado", "1 a 2 h"],
@@ -111,9 +111,10 @@ const LINHAS = [
     ],
   },
   {
-    nome: "Penteados e maquiagem",
+    nome: "Produção completa — maquiagem e penteado",
     quem: "Fernanda Hosang",
-    texto: "Para festa, formatura, madrinha e noiva. Com teste prévio quando o dia é importante.",
+    texto:
+      "Maquiagem personalizada e penteados dos clássicos aos mais despojados, em harmonia com seu estilo, sua personalidade e a ocasião. Trabalhamos com produtos e técnicas de pele blindada para uma maquiagem à prova d’água, com duração de até 24 horas e acabamento impecável. Uma produção completa, com atenção a cada detalhe para valorizar sua beleza.",
     itens: [
       ["Penteado", "1 a 2 h"],
       ["Maquiagem social", "1 h"],
@@ -179,10 +180,11 @@ export default function Servicos() {
                 Transformação de Cor Premium
               </h2>
               <p className="mt-5 text-creme/70">
-                Não é uma coloração. É um projeto: entra diagnóstico, planejamento
-                de imagem, execução e plano de manutenção. A proposta é unir
-                técnica, saúde capilar e visagismo — e entregar um resultado que
-                continua bonito depois que você sai daqui.
+                Uma experiência completa de coloração, com diagnóstico capilar e
+                planejamento personalizado para criar ou corrigir a cor,
+                valorizando sua beleza e seu estilo. O serviço inclui tratamentos
+                antes e após a química, além de orientações de manutenção para
+                preservar o tom, o brilho e a saúde dos fios.
               </p>
               <p className="mt-5 text-sm text-champanhe">
                 De 3 a 6 horas, conforme o histórico do seu cabelo
