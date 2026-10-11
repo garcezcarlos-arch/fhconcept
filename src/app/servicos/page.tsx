@@ -35,7 +35,7 @@ export default function Servicos() {
               name: s.nome,
               description: s.descricao,
               provider: { "@type": "HairSalon", name: SITE.nome, url: SITE.url },
-              areaServed: ["Garuva", "Joinville", "Itapoá", "Guaratuba"],
+              areaServed: ["Garuva", "Joinville", "Araquari", "Itapoá", "Guaratuba", "Curitiba", "Balneário Camboriú"],
             },
           })),
         }}

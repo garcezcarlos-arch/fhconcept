@@ -76,7 +76,7 @@ export default function Home() {
             addressCountry: SITE.pais,
           },
           geo: { "@type": "GeoCoordinates", latitude: SITE.lat, longitude: SITE.lng },
-          areaServed: ["Garuva", "Joinville", "Itapoá", "Guaratuba"],
+          areaServed: ["Garuva", "Joinville", "Araquari", "Itapoá", "Guaratuba", "Curitiba", "Balneário Camboriú"],
           openingHoursSpecification: [
             {
               "@type": "OpeningHoursSpecification",
@@ -209,15 +209,8 @@ export default function Home() {
             <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="mt-8 inline-flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Agendar pelo WhatsApp</a>
           </div>
           <div className="mt-10 space-y-5 text-carvao/65 md:mt-0">
-            <p>
-              A maior parte das clientes vem de Joinville, a trinta minutos.
-              Também atendemos Itapoá, Guaratuba e outras cidades da região.
-            </p>
-            <p>
-              Atendimento com hora marcada. Para correção de cor, o horário é
-              reservado com mais tempo — vale mandar uma foto do cabelo antes
-              para dimensionarmos o atendimento.
-            </p>
+            <p>Recebemos clientes de Joinville, Araquari, Itapoá, Guaratuba, Curitiba, Balneário Camboriú e outras cidades da região, que escolhem nosso espaço pelo cuidado e atendimento personalizado.</p>
+            <p>Atendemos com hora marcada. Para correções de cor, reservamos um tempo maior para cada atendimento. Envie uma foto atual do seu cabelo antes do agendamento para avaliarmos suas necessidades e planejarmos seu horário.</p>
           </div>
         </section>
       </main>

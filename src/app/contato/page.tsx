@@ -60,9 +60,8 @@ export default function Contato() {
                 <Botao href={rota} variante="secundario">Traçar rota</Botao>
               </div>
 
-              <p className="mt-8 max-w-[52ch] text-sm leading-relaxed text-texto2">
-                Atendimento com hora marcada. Para correção de cor, o horário é reservado com mais tempo — vale mandar uma foto do cabelo antes para dimensionarmos o atendimento.
-              </p>
+              <p className="mt-8 max-w-[52ch] text-sm leading-relaxed text-texto2">Recebemos clientes de Joinville, Araquari, Itapoá, Guaratuba, Curitiba, Balneário Camboriú e outras cidades da região, que escolhem nosso espaço pelo cuidado e atendimento personalizado.</p>
+              <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-texto2">Atendemos com hora marcada. Para correções de cor, reservamos um tempo maior para cada atendimento. Envie uma foto atual do seu cabelo antes do agendamento para avaliarmos suas necessidades e planejarmos seu horário.</p>
             </div>
 
             <div className="mt-12 md:mt-0">
