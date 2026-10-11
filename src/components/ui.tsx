@@ -56,13 +56,13 @@ export function LinkNude({ href, children, externo = true }: { href: string; chi
   );
 }
 
-type FiguraProps = { src: string; alt: string; proporcao?: string; sizes?: string; prioridade?: boolean; className?: string };
+type FiguraProps = { src: string; alt: string; proporcao?: string; sizes?: string; prioridade?: boolean; className?: string; posicao?: string };
 
 /* Foto com fundo areia enquanto carrega e leve escala no hover */
-export function Figura({ src, alt, proporcao = "aspect-[3/4]", sizes = "(max-width: 768px) 100vw, 50vw", prioridade = false, className = "" }: FiguraProps) {
+export function Figura({ src, alt, proporcao = "aspect-[3/4]", sizes = "(max-width: 768px) 100vw, 50vw", prioridade = false, className = "", posicao = "" }: FiguraProps) {
   return (
     <figure className={`group relative overflow-hidden bg-areia ${proporcao} ${className}`}>
-      <Image src={src} alt={alt} fill sizes={sizes} priority={prioridade} className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+      <Image src={src} alt={alt} fill sizes={sizes} priority={prioridade} className={`object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] ${posicao}`} />
     </figure>
   );
 }

@@ -1282,6 +1282,81 @@ export type Database = {
         }
         Relationships: []
       }
+      salao_mensal: {
+        Row: {
+          agendamentos: number
+          atualizado_em: string
+          cancelados: number
+          comandas_fechadas: number
+          descontos: number
+          faltas: number | null
+          mes: string
+          origem: string
+          por_profissional: Json
+          valor_bruto: number
+        }
+        Insert: {
+          agendamentos?: number
+          atualizado_em?: string
+          cancelados?: number
+          comandas_fechadas?: number
+          descontos?: number
+          faltas?: number | null
+          mes: string
+          origem?: string
+          por_profissional?: Json
+          valor_bruto?: number
+        }
+        Update: {
+          agendamentos?: number
+          atualizado_em?: string
+          cancelados?: number
+          comandas_fechadas?: number
+          descontos?: number
+          faltas?: number | null
+          mes?: string
+          origem?: string
+          por_profissional?: Json
+          valor_bruto?: number
+        }
+        Relationships: []
+      }
+      salao_retrato: {
+        Row: {
+          atualizado_em: string
+          clientes_90d: number
+          clientes_mais_90d: number
+          clientes_sem_visita: number
+          clientes_sumidas: number
+          clientes_total: number
+          comandas_abertas: number
+          data: string
+          origem: string
+        }
+        Insert: {
+          atualizado_em?: string
+          clientes_90d?: number
+          clientes_mais_90d?: number
+          clientes_sem_visita?: number
+          clientes_sumidas?: number
+          clientes_total?: number
+          comandas_abertas?: number
+          data: string
+          origem?: string
+        }
+        Update: {
+          atualizado_em?: string
+          clientes_90d?: number
+          clientes_mais_90d?: number
+          clientes_sem_visita?: number
+          clientes_sumidas?: number
+          clientes_total?: number
+          comandas_abertas?: number
+          data?: string
+          origem?: string
+        }
+        Relationships: []
+      }
       turmas: {
         Row: {
           created_at: string

@@ -11,7 +11,7 @@ export const metadata = {
   alternates: { canonical: "/equipe" },
 };
 
-type Pessoa = { nome: string; papel: string; texto: string; foto: string; alt: string };
+type Pessoa = { nome: string; papel: string; texto: string; foto: string; alt: string; posicao?: string };
 
 const EQUIPE: Pessoa[] = [
   {
@@ -25,8 +25,9 @@ const EQUIPE: Pessoa[] = [
     nome: "Juliana Araújo",
     papel: "Cachos e tratamentos",
     texto: "Cuida de definição de cachos, cronograma capilar e recuperação de fios danificados. Atende quem chega com o cabelo cansado de processo químico.",
-    foto: "/galeria/equipe-atendimento-parede.jpg",
-    alt: "Juliana Araújo atendendo uma cliente no salão",
+    foto: "/galeria/equipe-juliana.jpg",
+    alt: "Juliana Araújo no salão",
+    posicao: "object-[50%_22%]",
   },
   {
     nome: "Laura Elisa",
@@ -54,7 +55,7 @@ export default function Equipe() {
               {EQUIPE.map((p) => (
                 <article key={p.nome}>
                   <div className="relative aspect-[4/3] overflow-hidden bg-areia md:aspect-[3/4]">
-                    <Image src={p.foto} alt={p.alt} fill sizes="(max-width: 768px) 100vw, 31vw" className="object-cover" />
+                    <Image src={p.foto} alt={p.alt} fill sizes="(max-width: 768px) 100vw, 31vw" className={`object-cover ${p.posicao ?? ""}`} />
                   </div>
                   <h2 className="mt-6 font-serif text-2xl">{p.nome}</h2>
                   <p className="mt-1 text-sm text-nude">{p.papel}</p>

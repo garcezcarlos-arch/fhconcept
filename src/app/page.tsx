@@ -30,7 +30,8 @@ const EQUIPE = [
     papel: "Cachos e tratamentos",
     texto: "Corte e definição para ondas, cachos e crespos, e reconstrução de fios comprometidos.",
     insta: "https://instagram.com/juaraujocachos",
-    foto: "/galeria/equipe-atendimento-parede.jpg",
+    foto: "/galeria/equipe-juliana.jpg",
+    posicao: "object-[50%_22%]",
   },
   {
     nome: "Laura Elisa",
@@ -156,7 +157,7 @@ export default function Home() {
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {EQUIPE.map((p) => (
               <div key={p.nome}>
-                <Figura src={p.foto} alt={p.nome} proporcao="aspect-[4/3] md:aspect-[3/4]" sizes="(max-width: 768px) 100vw, 31vw" />
+                <Figura src={p.foto} alt={p.nome} posicao={"posicao" in p ? p.posicao : undefined} proporcao="aspect-[4/3] md:aspect-[3/4]" sizes="(max-width: 768px) 100vw, 31vw" />
                 <h3 className="mt-5 font-serif text-xl">{p.nome}</h3>
                 <p className="mt-1 text-sm text-nude">{p.papel}</p>
                 <p className="mt-3 text-carvao/65">{p.texto}</p>

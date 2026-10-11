@@ -25,7 +25,7 @@ function FormularioEntrar() {
       setErro("E-mail ou senha nao conferem.");
       return;
     }
-    router.push(params.get("redirect") ?? "/admin/produtos");
+    router.push(params.get("redirect") ?? "/admin");
     router.refresh();
   }
 
@@ -33,7 +33,7 @@ function FormularioEntrar() {
     <main className="min-h-dvh bg-creme text-carvao grid place-items-center px-6">
       <div className="w-full max-w-sm">
         <p className="font-serif text-3xl tracking-tight">FH Concept</p>
-        <p className="mt-1 mb-8 text-sm text-carvao/60">Painel da loja</p>
+        <p className="mt-1 mb-8 text-sm text-carvao/60">Operações</p>
 
         <label className="block text-sm mb-1" htmlFor="email">E-mail</label>
         <input
