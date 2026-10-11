@@ -8,6 +8,7 @@ import { SITE } from "@/lib/site";
 import { linkWhatsapp } from "@/lib/preco";
 import { TODOS_SERVICOS } from "@/lib/servicos";
 import { HISTORIA } from "@/lib/historia";
+import { EQUIPE } from "@/lib/equipe";
 import { ServicosResumo } from "@/components/servicos-resumo";
 
 export const metadata = {
@@ -17,38 +18,11 @@ export const metadata = {
   alternates: { canonical: "/" },
 };
 
-const EQUIPE = [
-  {
-    nome: "Fernanda Hosang",
-    papel: "Colorimetria, mechas e correção de cor",
-    texto: "Cabeleireira em Garuva desde 2014 e educadora técnica. Formou 2.900 alunas em oito anos.",
-    insta: "https://instagram.com/fernandahosangconcept",
-    foto: "/galeria/equipe-fernanda.jpg",
-    posicao: "object-[50%_18%]",
-  },
-  {
-    nome: "Juliana Araújo",
-    papel: "Cachos e tratamentos",
-    texto: "Corte e definição para ondas, cachos e crespos, e reconstrução de fios comprometidos.",
-    insta: "https://instagram.com/juaraujocachos",
-    foto: "/galeria/equipe-juliana.jpg",
-    posicao: "object-[50%_22%]",
-  },
-  {
-    nome: "Laura Elisa",
-    papel: "Estética facial e sobrancelhas",
-    texto: "Limpeza de pele, tratamentos faciais e design de sobrancelhas.",
-    insta: "https://instagram.com/lauraelisa.beauty",
-    foto: "/galeria/equipe-laura.jpg",
-    posicao: "object-[50%_18%]",
-  },
-];
-
 const FORMACOES = [
-  { nome: "Curso em turma", preco: "R$ 700 a R$ 2.200", texto: "Colorimetria, mechas e loiros dentro de um salão em operação, com modelo real e turma pequena." },
-  { nome: "Shadow Day", preco: "R$ 950", texto: "Um dia acompanhando os atendimentos de perto, do diagnóstico à entrega." },
+  { nome: "Curso em turma", preco: "R$ 350 a R$ 650", texto: "Colorimetria, mechas e loiros dentro de um salão em operação, com modelo real e turma pequena." },
+  { nome: "Shadow Day", preco: "R$ 1.100", texto: "Um dia acompanhando os atendimentos de perto, do diagnóstico à entrega." },
   { nome: "Atendimento assistido", preco: "R$ 900 a R$ 1.200", texto: "Você atende sua própria cliente com a Fernanda ao lado, corrigindo o que for preciso na hora." },
-  { nome: "Mentoria técnica", preco: "R$ 1.200", texto: "Acompanhamento individual para resolver o que trava a sua técnica hoje." },
+  { nome: "Mentoria técnica", preco: "R$ 1.200 a R$ 1.700", texto: "Acompanhamento individual para resolver o que trava a sua técnica hoje." },
 ];
 
 export default function Home() {
@@ -162,10 +136,10 @@ export default function Home() {
           <div className="mt-12 grid gap-10 md:grid-cols-3">
             {EQUIPE.map((p) => (
               <div key={p.nome}>
-                <Figura src={p.foto} alt={p.nome} posicao={"posicao" in p ? p.posicao : undefined} proporcao="aspect-[4/3] md:aspect-[3/4]" sizes="(max-width: 768px) 100vw, 31vw" />
+                <Figura src={p.foto} alt={p.alt} posicao={p.posicao} proporcao="aspect-[4/3] md:aspect-[3/4]" sizes="(max-width: 768px) 100vw, 31vw" />
                 <h3 className="mt-5 font-serif text-xl">{p.nome}</h3>
                 <p className="mt-1 text-sm text-nude">{p.papel}</p>
-                <p className="mt-3 text-carvao/65">{p.texto}</p>
+                <p className="mt-3 text-carvao/65">{p.resumo}</p>
                 <a href={p.insta} target="_blank" rel="noopener" className="mt-3 inline-block text-sm text-carvao/45 hover:text-nude">Instagram</a>
               </div>
             ))}

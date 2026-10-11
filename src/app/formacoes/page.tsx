@@ -11,7 +11,7 @@ import { createClient } from "@/lib/supabase/server";
 export const metadata = {
   title: "Formações para cabeleireiras",
   description:
-    "Cursos de colorimetria, mechas e correção de cor dentro de um salão em operação, em Garuva/SC. Seis formatos, de R$ 700 a R$ 2.200. 2.900 alunas formadas em oito anos.",
+    "Cursos de colorimetria, mechas e correção de cor dentro de um salão em operação, em Garuva/SC. Seis formatos, a partir de R$ 350. 2.900 alunas formadas em oito anos.",
   alternates: { canonical: "/formacoes" },
 };
 
