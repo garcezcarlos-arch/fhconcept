@@ -31,8 +31,9 @@ function eixo(max: number) {
 export type Coluna = { rotulo: string; valor: number; ano?: string };
 
 /** Colunas de uma serie ao longo do tempo. O rotulo direto vai so no maior valor
-    e no ultimo; os demais aparecem ao passar o mouse ou focar pelo teclado. */
-export function Colunas({ titulo, unidade, dados, formatar = inteiro }: { titulo: string; unidade: string; dados: Coluna[]; formatar?: (n: number) => string }) {
+    e no ultimo; os demais aparecem ao passar o mouse ou focar pelo teclado.
+    Com poucas colunas (dias da semana), `todosRotulos` escreve o valor em todas. */
+export function Colunas({ titulo, unidade, dados, formatar = inteiro, todosRotulos = false, nota }: { titulo: string; unidade: string; dados: Coluna[]; formatar?: (n: number) => string; todosRotulos?: boolean; nota?: ReactNode }) {
   const max = Math.max(0, ...dados.map((d) => d.valor));
   const { topo, passo } = eixo(max);
   const marcas = Array.from({ length: Math.round(topo / passo) + 1 }, (_, i) => i * passo);
@@ -54,9 +55,9 @@ export function Colunas({ titulo, unidade, dados, formatar = inteiro }: { titulo
 
         {dados.map((d, i) => (
           <div key={d.rotulo + (d.ano ?? "")} role="listitem" tabIndex={0} aria-label={`${d.rotulo}${d.ano ? ` de ${d.ano}` : ""}: ${formatar(d.valor)} ${unidade}`} className="group relative flex h-full min-w-0 flex-1 items-end justify-center outline-none">
-            <div className="relative w-full max-w-6 px-px" style={{ height: `${(d.valor / topo) * 100}%` }}>
+            <div className={`relative w-full px-px ${todosRotulos ? "max-w-12" : "max-w-6"}`} style={{ height: `${(d.valor / topo) * 100}%` }}>
               <div className="h-full rounded-t-[4px] bg-nude-esc transition-colors group-hover:bg-carvao group-focus-visible:bg-carvao" />
-              {(i === iMax || i === iFim) && (
+              {(todosRotulos ? d.valor > 0 : i === iMax || i === iFim) && (
                 <span className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 text-[11px] tabular-nums text-texto group-hover:invisible group-focus-visible:invisible">{formatar(d.valor)}</span>
               )}
               <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden -translate-x-1/2 whitespace-nowrap bg-carvao px-2 py-1 text-xs text-creme group-hover:block group-focus-visible:block">
@@ -76,21 +77,23 @@ export function Colunas({ titulo, unidade, dados, formatar = inteiro }: { titulo
           </div>
         ))}
       </div>
+      {nota && <p className="mt-3 text-xs leading-snug text-texto2">{nota}</p>}
     </figure>
   );
 }
 
 /** Barras horizontais para comparar categorias sem ordem natural: uma cor so,
     nome a esquerda e valor na ponta. */
-export function Barras({ titulo, dados }: { titulo: string; dados: { nome: string; valor: number; nota?: string }[] }) {
+export function Barras({ titulo, dados, nomeLargo = false, nota }: { titulo: string; dados: { nome: string; valor: number; nota?: string }[]; nomeLargo?: boolean; nota?: ReactNode }) {
   const max = Math.max(1, ...dados.map((d) => d.valor));
   return (
     <figure className="border border-linha bg-branco px-5 py-4">
       <figcaption className="text-sm text-carvao">{titulo}</figcaption>
       <dl className="mt-5 space-y-3">
         {dados.map((d) => (
-          <div key={d.nome} className="grid grid-cols-[7rem_1fr] items-center gap-3 text-sm">
-            <dt className="truncate text-texto2">{d.nome}</dt>
+          // nome comprido: no celular o nome vai em cima da barra, sem cortar
+          <div key={d.nome} className={`grid items-center text-sm ${nomeLargo ? "grid-cols-1 gap-1 sm:grid-cols-[15rem_1fr] sm:gap-3" : "grid-cols-[7rem_1fr] gap-3"}`}>
+            <dt className={`text-texto2 ${nomeLargo ? "sm:truncate" : "truncate"}`} title={nomeLargo ? d.nome : undefined}>{d.nome}</dt>
             <dd className="flex items-center gap-2">
               <span className="h-3 rounded-r-[4px] bg-nude-esc" style={{ width: `${(d.valor / max) * 78}%`, minWidth: d.valor > 0 ? 2 : 0 }} />
               <span className="whitespace-nowrap tabular-nums text-carvao">{inteiro(d.valor)}{d.nota && <span className="text-texto2"> ({d.nota})</span>}</span>
@@ -98,6 +101,7 @@ export function Barras({ titulo, dados }: { titulo: string; dados: { nome: strin
           </div>
         ))}
       </dl>
+      {nota && <p className="mt-4 text-xs leading-snug text-texto2">{nota}</p>}
     </figure>
   );
 }
