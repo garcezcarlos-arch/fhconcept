@@ -17,8 +17,8 @@ export type Servico = {
   foto?: string;
   alt?: string;
   posicao?: string;
-  /** antes e depois do mesmo cabelo, com alca para arrastar */
-  comparar?: { antes: string; depois: string; alt: string };
+  /** antes e depois: com alca para arrastar ou, para fotos deitadas, uma em cima da outra */
+  comparar?: { antes: string; depois: string; alt: string; empilhado?: boolean };
 };
 
 export type Categoria = {
@@ -251,6 +251,7 @@ export const CATEGORIAS: Categoria[] = [
       {
         slug: "cuidados-faciais",
         nome: "Cuidados faciais",
+        comparar: { antes: "/galeria/pele-limpeza-antes.jpg", depois: "/galeria/pele-limpeza-depois.jpg", alt: "Limpeza de pele: a pele antes e depois do atendimento", empilhado: true },
         texto: [
           "Limpeza de pele, dermaplaning, tratamentos faciais e microagulhamento, com protocolos definidos a partir de uma avaliação individual. Um cuidado direcionado às necessidades da sua pele para melhorar a textura, realçar a luminosidade e valorizar sua beleza natural.",
         ],

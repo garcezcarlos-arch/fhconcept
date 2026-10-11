@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Comparador } from "@/components/comparador";
+import { AntesDepoisEmpilhado, Comparador } from "@/components/comparador";
 
 type Foto = { foto: string; alt: string; posicao?: string };
-type Par = { antes: string; depois: string; alt: string };
+type Par = { antes: string; depois: string; alt: string; empilhado?: boolean };
 
 /* Foto da categoria em /servicos. No computador ela fica presa ao lado da lista
    e troca conforme o servico que esta na tela: a foto propria dele, ou o antes
@@ -62,9 +62,13 @@ export function FotoCategoria({ padrao, slugs, fotos, pares, className }: { padr
         </div>
       ))}
       {slugs.filter((s) => pares[s]).map((s) => (
-        // so no computador: no celular o comparador aparece dentro do proprio servico
-        <div key={`par-${s}`} className={`hidden md:block ${camada(s)}`} inert={s !== visivel}>
-          <Comparador antes={pares[s].antes} depois={pares[s].depois} alt={pares[s].alt} proporcao="h-full" />
+        // no celular so o do primeiro servico fica aqui em cima; os outros aparecem dentro do proprio servico
+        <div key={`par-${s}`} className={`${s === slugs[0] ? "" : "hidden md:block"} ${camada(s)}`} inert={s !== visivel}>
+          {pares[s].empilhado ? (
+            <AntesDepoisEmpilhado antes={pares[s].antes} depois={pares[s].depois} alt={pares[s].alt} className="h-full" />
+          ) : (
+            <Comparador antes={pares[s].antes} depois={pares[s].depois} alt={pares[s].alt} proporcao="h-full" />
+          )}
         </div>
       ))}
     </figure>

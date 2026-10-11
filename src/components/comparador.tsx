@@ -45,3 +45,20 @@ export function Comparador({ antes, depois, alt, proporcao = "aspect-[4/3]" }: P
     </div>
   );
 }
+
+/* Antes em cima, depois embaixo, sem alca: para fotos deitadas, que nao cabem lado a lado. */
+export function AntesDepoisEmpilhado({ antes, depois, alt, className = "" }: { antes: string; depois: string; alt: string; className?: string }) {
+  const rotulo = "absolute bottom-3 left-3 bg-creme/92 px-3 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-carvao";
+  return (
+    <div className={`grid grid-rows-2 gap-0.5 bg-creme ${className}`}>
+      <div className="relative overflow-hidden bg-areia">
+        <Image src={antes} alt={`${alt} — antes`} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+        <span className={rotulo}>Antes</span>
+      </div>
+      <div className="relative overflow-hidden bg-areia">
+        <Image src={depois} alt={`${alt} — depois`} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+        <span className={rotulo}>Depois</span>
+      </div>
+    </div>
+  );
+}

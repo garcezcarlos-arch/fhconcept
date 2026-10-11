@@ -4,7 +4,7 @@ import { Rodape } from "@/components/rodape";
 import { DadosEstruturados } from "@/components/dados-estruturados";
 import { NavServicos } from "@/components/nav-servicos";
 import { FotoCategoria } from "@/components/foto-categoria";
-import { Comparador } from "@/components/comparador";
+import { AntesDepoisEmpilhado, Comparador } from "@/components/comparador";
 import { SITE } from "@/lib/site";
 import { linkWhatsapp } from "@/lib/preco";
 import { CATEGORIAS, PREMIUM, TODOS_SERVICOS, mensagemAgendar } from "@/lib/servicos";
@@ -153,11 +153,17 @@ export default function Servicos() {
                         </details>
                       )}
 
-                      {s.comparar && (
-                        // no computador o antes e depois fica na foto ao lado
+                      {s.comparar && j > 0 && (
+                        // no computador o antes e depois fica na foto ao lado; o do primeiro servico tambem no celular
                         <figure className="mt-7 max-w-md md:hidden">
-                          <Comparador antes={s.comparar.antes} depois={s.comparar.depois} alt={s.comparar.alt} proporcao="aspect-[4/5]" />
-                          <figcaption className="mt-2 text-xs text-texto2">Arraste para comparar o antes e o depois.</figcaption>
+                          {s.comparar.empilhado ? (
+                            <AntesDepoisEmpilhado antes={s.comparar.antes} depois={s.comparar.depois} alt={s.comparar.alt} className="aspect-[4/5]" />
+                          ) : (
+                            <>
+                              <Comparador antes={s.comparar.antes} depois={s.comparar.depois} alt={s.comparar.alt} proporcao="aspect-[4/5]" />
+                              <figcaption className="mt-2 text-xs text-texto2">Arraste para comparar o antes e o depois.</figcaption>
+                            </>
+                          )}
                         </figure>
                       )}
 
