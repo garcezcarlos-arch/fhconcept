@@ -36,14 +36,29 @@ const SERVICOS = [
       "Dos acobreados naturais aos vermelhos intensos, criamos o ruivo que valoriza sua beleza e expressa sua personalidade. O serviço inclui planejamento da cor e orientações de manutenção para preservar a intensidade, o brilho e a beleza do tom.",
   },
   {
+    nome: "Camuflagem de fios brancos",
+    texto:
+      "Valorize a cor natural do seu cabelo com uma cobertura estratégica, direcionada somente aos fios brancos e preservando os fios naturalmente pigmentados. Planejamos os tons e a aplicação conforme a distribuição dos brancos e o resultado desejado, para um acabamento discreto e harmonioso, que mantém a cor natural e a identidade do seu cabelo.",
+  },
+  {
     nome: "Ondulados, cacheados e crespos",
     texto:
       "Cuidado especializado para valorizar a textura e a beleza natural dos seus fios. Cortes personalizados, tratamentos e finalização que realçam a definição e o movimento, com orientações para facilitar os cuidados em casa.",
   },
   {
-    nome: "Pele",
+    nome: "Tratamentos capilares personalizados",
     texto:
-      "Limpeza de pele, tratamentos faciais e microagulhamento com protocolos personalizados para as necessidades da sua pele. Um cuidado dedicado a valorizar sua beleza natural e melhorar a textura, a luminosidade e a aparência da pele.",
+      "Mapeamento capilar personalizado para identificar as necessidades dos fios e definir um protocolo exclusivo. Combinamos produtos profissionais, ozonioterapia, fototerapia e equipamentos de tecnologia avançada para tratar os fios de fora para dentro, com cuidados direcionados à superfície e à estrutura da fibra capilar, valorizando a resistência, a maciez e o brilho.",
+  },
+  {
+    nome: "Alisamentos",
+    texto:
+      "Protocolos exclusivos e personalizados para cada tipo de cabelo, suas condições e o resultado desejado — do alisamento ao realinhamento mais leve dos fios, com controle de frizz e preservação do movimento natural.\n\nCada procedimento começa com avaliação capilar e teste de mecha, considerando o histórico de químicas e as necessidades dos fios. O cuidado se completa com orientações de manutenção para preservar o alinhamento, o brilho e a beleza do resultado.",
+  },
+  {
+    nome: "Cuidados faciais",
+    texto:
+      "Limpeza de pele, dermaplaning, tratamentos faciais e microagulhamento, com protocolos definidos a partir de uma avaliação individual. Um cuidado direcionado às necessidades da sua pele para melhorar a textura, realçar a luminosidade e valorizar sua beleza natural.",
   },
   {
     nome: "Sobrancelhas",
@@ -54,11 +69,6 @@ const SERVICOS = [
     nome: "Produção completa — maquiagem e penteado",
     texto:
       "Maquiagem personalizada e penteados dos clássicos aos mais despojados, em harmonia com seu estilo, sua personalidade e a ocasião. Trabalhamos com produtos e técnicas de pele blindada para uma maquiagem à prova d’água, com duração de até 24 horas e acabamento impecável. Uma produção completa, com atenção a cada detalhe para valorizar sua beleza.",
-  },
-  {
-    nome: "Alisamentos",
-    texto:
-      "Protocolos exclusivos e personalizados para cada tipo de cabelo, suas condições e o resultado desejado — do alisamento ao realinhamento mais leve dos fios, com controle de frizz e preservação do movimento natural.\n\nCada procedimento começa com avaliação capilar e teste de mecha, considerando o histórico de químicas e as necessidades dos fios. O cuidado se completa com orientações de manutenção para preservar o alinhamento, o brilho e a beleza do resultado.",
   },
 ];
 

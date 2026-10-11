@@ -75,10 +75,10 @@ const LINHAS = [
     ],
   },
   {
-    nome: "Tratamentos capilares",
+    nome: "Tratamentos capilares personalizados",
     quem: "Fernanda e Juliana",
     texto:
-      "O que sustenta a cor. Reconstrução, hidratação e nutrição no ritmo que o seu cabelo pede — com mapeamento escrito, para você saber o que fazer entre uma visita e outra.",
+      "Mapeamento capilar personalizado para identificar as necessidades dos fios e definir um protocolo exclusivo. Combinamos produtos profissionais, ozonioterapia, fototerapia e equipamentos de tecnologia avançada para tratar os fios de fora para dentro, com cuidados direcionados à superfície e à estrutura da fibra capilar, valorizando a resistência, a maciez e o brilho.",
     itens: [
       ["Mapeamento capilar personalizado", "Consulta"],
       ["Reconstrução profunda", "1 a 2 h"],
