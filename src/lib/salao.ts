@@ -98,3 +98,31 @@ export function mesesEntre(de: string, ate: string) {
   const [a2, m2] = ate.split("-").map(Number);
   return (a2 - a1) * 12 + (m2 - m1);
 }
+
+/** Dia de hoje em Sao Paulo (AAAA-MM-DD), deslocado em `dias` (negativo = passado). */
+export function diaSP(dias = 0) {
+  const hoje = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Sao_Paulo" }).format(new Date());
+  const d = new Date(`${hoje}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + dias);
+  return d.toISOString().slice(0, 10);
+}
+
+/** "5547999990000" -> "(47) 99999-0000"; fora do padrao brasileiro volta com "+". */
+export function telefoneBr(t: string | null) {
+  if (!t) return "";
+  const m = /^55(\d{2})(\d{4,5})(\d{4})$/.exec(t);
+  return m ? `(${m[1]}) ${m[2]}-${m[3]}` : `+${t}`;
+}
+
+/** 90 -> "1 h 30"; 45 -> "45 min" */
+export function duracaoBr(min: number | null) {
+  if (min == null) return "";
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return h ? (m ? `${h} h ${String(m).padStart(2, "0")}` : `${h} h`) : `${m} min`;
+}
+
+/** Erro do banco que significa "a migration ainda nao rodou". */
+export function semTabela(erro: { code?: string } | null | undefined) {
+  return erro?.code === "42P01" || erro?.code === "PGRST205";
+}

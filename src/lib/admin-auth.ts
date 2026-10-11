@@ -1,4 +1,5 @@
 import "server-only";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export type Perfil = { nome: string; papel: string };
@@ -17,5 +18,12 @@ export async function exigirAdmin() {
   const perfil = await perfilAtual();
   if (!perfil) throw new Error("nao autenticado");
   if (perfil.papel !== "admin") throw new Error("sem permissao");
+  return perfil;
+}
+
+/** Para paginas: quem nao e administradora volta ao Painel. */
+export async function paginaAdmin() {
+  const perfil = await perfilAtual();
+  if (perfil?.papel !== "admin") redirect("/admin");
   return perfil;
 }

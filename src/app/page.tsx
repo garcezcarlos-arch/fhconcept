@@ -23,7 +23,8 @@ const EQUIPE = [
     papel: "Colorimetria, mechas e correção de cor",
     texto: "Cabeleireira em Garuva desde 2014 e educadora técnica. Formou 2.900 alunas em oito anos.",
     insta: "https://instagram.com/fernandahosangconcept",
-    foto: "/galeria/equipe-atendimento-bob.jpg",
+    foto: "/galeria/equipe-fernanda.jpg",
+    posicao: "object-[50%_18%]",
   },
   {
     nome: "Juliana Araújo",
@@ -38,7 +39,8 @@ const EQUIPE = [
     papel: "Estética facial e sobrancelhas",
     texto: "Limpeza de pele, tratamentos faciais e design de sobrancelhas.",
     insta: "https://instagram.com/lauraelisa.beauty",
-    foto: "/galeria/equipe-jaleco-natylla.jpg",
+    foto: "/galeria/equipe-laura.jpg",
+    posicao: "object-[50%_18%]",
   },
 ];
 
@@ -100,16 +102,19 @@ export default function Home() {
         <section className="border-b border-linha py-12 md:grid md:grid-cols-2 md:items-center md:gap-16 md:py-24">
             <div>
               <span className="block h-px w-12 bg-champanhe" />
-              <h1 className="mt-6 max-w-[12ch] font-serif text-4xl leading-[1.08] md:text-6xl">
-                Cor que sai como foi combinado
+              <h1 className="mt-6 font-serif text-4xl leading-[1.1] md:text-[46px]">
+                Sua beleza,<br /> nossa especialidade.
               </h1>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-carvao/70">
-                Salão técnico em Garuva, a trinta minutos de Joinville. Especializado
-                em mechas, loiros e correção de cor — o caso que costuma chegar aqui
-                vindo de outro lugar.
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-carvao/80">
+                Um conceito de beleza que une técnica, visagismo e atendimento
+                personalizado para valorizar sua identidade.
+              </p>
+              <p className="mt-4 max-w-lg leading-relaxed text-carvao/65">
+                Especialistas em transformações de cor, mechas, cortes e tratamentos
+                capilares com tecnologia e protocolos exclusivos.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-5">
-                <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Agendar pelo WhatsApp</a>
+                <a href={linkWhatsapp("Oi! Vim pelo site e queria agendar.")} target="_blank" rel="noopener" className="flex min-h-13 items-center bg-carvao px-7 text-sm text-creme">Agende sua experiência</a>
                 <Link href="/loja/diagnostico" className="inline-flex min-h-11 items-center border-b border-nude text-sm text-nude">Descobrir o que usar no seu cabelo</Link>
               </div>
             </div>

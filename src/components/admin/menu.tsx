@@ -21,6 +21,10 @@ export function MenuAdmin({ nome, papel, agendaGendo }: { nome: string; papel: s
       soAdmin: true,
       itens: [
         { href: "/admin/salao", texto: "Indicadores" },
+        { href: "/admin/salao/clientes", texto: "Clientes" },
+        { href: "/admin/salao/servicos", texto: "Serviços" },
+        { href: "/admin/salao/produtos", texto: "Estoque do salão" },
+        { href: "/admin/salao/importar", texto: "Importar do Gendo" },
         { href: agendaGendo, texto: "Agenda no Gendo", externo: true },
       ],
     },

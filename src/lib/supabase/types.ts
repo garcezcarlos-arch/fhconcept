@@ -1282,6 +1282,117 @@ export type Database = {
         }
         Relationships: []
       }
+      salao_agendamentos: {
+        Row: {
+          categoria: string | null
+          cliente_codigo: number | null
+          data: string
+          hora_fim: string | null
+          hora_inicio: string | null
+          id: number
+          profissional: string | null
+          servico: string | null
+          status: string
+        }
+        Insert: {
+          categoria?: string | null
+          cliente_codigo?: number | null
+          data: string
+          hora_fim?: string | null
+          hora_inicio?: string | null
+          id?: number
+          profissional?: string | null
+          servico?: string | null
+          status: string
+        }
+        Update: {
+          categoria?: string | null
+          cliente_codigo?: number | null
+          data?: string
+          hora_fim?: string | null
+          hora_inicio?: string | null
+          id?: number
+          profissional?: string | null
+          servico?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      salao_clientes: {
+        Row: {
+          atualizado_em: string
+          gendo_codigo: number
+          nasc_ano: number | null
+          nasc_dia: number | null
+          nasc_mes: number | null
+          nome: string
+          origem: string
+          telefone: string | null
+          ultima_visita: string | null
+          visitas: number
+        }
+        Insert: {
+          atualizado_em?: string
+          gendo_codigo: number
+          nasc_ano?: number | null
+          nasc_dia?: number | null
+          nasc_mes?: number | null
+          nome: string
+          origem?: string
+          telefone?: string | null
+          ultima_visita?: string | null
+          visitas?: number
+        }
+        Update: {
+          atualizado_em?: string
+          gendo_codigo?: number
+          nasc_ano?: number | null
+          nasc_dia?: number | null
+          nasc_mes?: number | null
+          nome?: string
+          origem?: string
+          telefone?: string | null
+          ultima_visita?: string | null
+          visitas?: number
+        }
+        Relationships: []
+      }
+      salao_comandas: {
+        Row: {
+          atualizado_em: string
+          data: string
+          desconto: number
+          numero: number
+          pagamento: string | null
+          saldo: number
+          servicos: string | null
+          status: string
+          valor: number
+        }
+        Insert: {
+          atualizado_em?: string
+          data: string
+          desconto?: number
+          numero: number
+          pagamento?: string | null
+          saldo?: number
+          servicos?: string | null
+          status: string
+          valor?: number
+        }
+        Update: {
+          atualizado_em?: string
+          data?: string
+          desconto?: number
+          numero?: number
+          pagamento?: string | null
+          saldo?: number
+          servicos?: string | null
+          status?: string
+          valor?: number
+        }
+        Relationships: []
+      }
       salao_mensal: {
         Row: {
           agendamentos: number
@@ -1354,6 +1465,69 @@ export type Database = {
           comandas_abertas?: number
           data?: string
           origem?: string
+        }
+        Relationships: []
+      }
+      salao_produtos: {
+        Row: {
+          atualizado_em: string
+          categoria: string | null
+          comissao: number | null
+          custo: number | null
+          gendo_codigo: number
+          nome: string
+          preco: number
+          quantidade: number | null
+        }
+        Insert: {
+          atualizado_em?: string
+          categoria?: string | null
+          comissao?: number | null
+          custo?: number | null
+          gendo_codigo: number
+          nome: string
+          preco?: number
+          quantidade?: number | null
+        }
+        Update: {
+          atualizado_em?: string
+          categoria?: string | null
+          comissao?: number | null
+          custo?: number | null
+          gendo_codigo?: number
+          nome?: string
+          preco?: number
+          quantidade?: number | null
+        }
+        Relationships: []
+      }
+      salao_servicos: {
+        Row: {
+          atualizado_em: string
+          categoria: string | null
+          comissao: number | null
+          duracao_min: number | null
+          gendo_codigo: number
+          nome: string
+          preco: number
+        }
+        Insert: {
+          atualizado_em?: string
+          categoria?: string | null
+          comissao?: number | null
+          duracao_min?: number | null
+          gendo_codigo: number
+          nome: string
+          preco?: number
+        }
+        Update: {
+          atualizado_em?: string
+          categoria?: string | null
+          comissao?: number | null
+          duracao_min?: number | null
+          gendo_codigo?: number
+          nome?: string
+          preco?: number
         }
         Relationships: []
       }
@@ -1540,6 +1714,11 @@ export type Database = {
       }
     }
     Functions: {
+      fn_salao_importar_agenda: {
+        Args: { p_ate: string; p_de: string; p_linhas: Json }
+        Returns: number
+      }
+      fn_salao_recalcular: { Args: { p_ativas?: string[] }; Returns: Json }
       fn_cupom_calcular: {
         Args: { p_codigo: string; p_frete?: number; p_subtotal: number }
         Returns: {

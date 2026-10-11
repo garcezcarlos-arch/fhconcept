@@ -18,8 +18,9 @@ const EQUIPE: Pessoa[] = [
     nome: "Fernanda Hosang",
     papel: "Colorimetria, mechas e correção de cor",
     texto: "Abriu o salão em 2014 e é Educadora Técnica Nátylla. Formou mais de 2.900 alunas em oito anos. É quem conduz a Transformação de Cor Premium, do diagnóstico do fio ao tom final.",
-    foto: "/galeria/equipe-atendimento-bob.jpg",
-    alt: "Fernanda Hosang finalizando a cor de uma cliente no salão",
+    foto: "/galeria/equipe-fernanda.jpg",
+    alt: "Fernanda Hosang",
+    posicao: "object-[50%_18%]",
   },
   {
     nome: "Juliana Araújo",
@@ -33,8 +34,9 @@ const EQUIPE: Pessoa[] = [
     nome: "Laura Elisa",
     papel: "Estética facial e sobrancelhas",
     texto: "Design de sobrancelha, limpeza de pele e protocolos faciais. O olhar e a pele, na mesma visita em que se resolve o cabelo.",
-    foto: "/galeria/equipe-jaleco-natylla.jpg",
+    foto: "/galeria/equipe-laura.jpg",
     alt: "Laura Elisa no salão",
+    posicao: "object-[50%_18%]",
   },
 ];
 

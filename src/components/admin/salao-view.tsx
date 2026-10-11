@@ -25,13 +25,14 @@ export function SalaoView({ meses, retrato, aviso, salvarMes }: { meses: MesSala
         <div>
           <h1 className="font-serif text-3xl">Salão</h1>
           <p className="mt-2 max-w-xl text-sm text-texto2">
-            Números da agenda e das comandas do Gendo, lançados mês a mês. Aqui entram só contagens e totais, sem dados de clientes.
+            Números da agenda e das comandas do Gendo, mês a mês. Eles são refeitos a cada importação dos arquivos do Gendo; o formulário no fim da página serve para corrigir um mês à mão.
             {ultimo && <> Último mês lançado: {rotuloMes(ultimo.mes, true)}.</>}
           </p>
         </div>
         <div className="flex flex-wrap gap-3 text-sm">
           <a href={GENDO.agenda} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center bg-carvao px-5 text-creme hover:bg-nude-esc">Abrir agenda no Gendo</a>
           <a href={GENDO.agendamentoOnline} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center border border-linha bg-branco px-5 hover:border-carvao">Link de agendamento</a>
+          <a href="/admin/salao/importar" className="inline-flex min-h-11 items-center border border-linha bg-branco px-5 hover:border-carvao">Importar do Gendo</a>
         </div>
       </div>
 
