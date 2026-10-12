@@ -102,7 +102,7 @@ export default function Home() {
                 <Image src="/galeria/cor-loiro-iluminado-costas.jpg" alt="Loiro iluminado longo visto de costas, com meio preso" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_30%]" />
               </figure>
               <figure className="relative min-h-0 overflow-hidden bg-areia">
-                <Image src="/galeria/cor-loiro-mel-ondas-longas.jpg" alt="Loiro mel em cabelo longo com ondas" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_14%]" />
+                <Image src="/galeria/cor-loiro-mel-ondas-longas.jpg" alt="Loiro mel em cabelo longo com ondas" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_46%]" />
               </figure>
             </div>
           </section>

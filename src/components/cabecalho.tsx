@@ -19,8 +19,9 @@ export function Cabecalho() {
   return (
     <header className="sticky top-0 z-50 border-b border-linha bg-creme/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 md:px-10">
-        <Link href="/" aria-label="FH Concept" className="py-4" onClick={() => setAberto(false)}>
-          <img src="/fh-concept.svg" alt="FH Concept" className="h-9 w-auto md:h-11" />
+        <Link href="/" aria-label="FH Concept" className="py-3" onClick={() => setAberto(false)}>
+          {/* logomarca 1/3 maior (36 -> 48 px no celular, 44 -> 59 px no computador); a barra de categorias em nav-servicos acompanha esta altura */}
+          <img src="/fh-concept.svg" alt="FH Concept" className="h-12 w-auto md:h-[59px]" />
         </Link>
 
         <nav className="hidden gap-7 text-sm md:flex">

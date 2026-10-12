@@ -51,7 +51,7 @@ export function NavServicos({ itens, agendar }: { itens: Item[]; agendar: string
   }, [ativo]);
 
   return (
-    <nav aria-label="Categorias de serviços" className="sticky top-[69px] z-40 border-b border-linha bg-creme/95 backdrop-blur md:top-[77px]">
+    <nav aria-label="Categorias de serviços" className="sticky top-[73px] z-40 border-b border-linha bg-creme/95 backdrop-blur md:top-[84px]">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-5 md:px-10">
         <div ref={trilho} className="-mx-5 flex flex-1 gap-6 overflow-x-auto px-5 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden">
           {itens.map((i) => (
