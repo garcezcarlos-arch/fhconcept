@@ -93,19 +93,17 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mt-12 grid grid-cols-[1.5fr_1fr] gap-3 md:mt-0">
-              <figure className="relative row-span-2 aspect-[3/4.1] overflow-hidden bg-areia">
-                <Image src="/galeria/cor-loiro-balayage.jpg" alt="Balayage loiro com ondas longas" fill sizes="(max-width: 768px) 60vw, 30vw" priority className="object-cover" />
+            {/* tres fotos: a principal ocupa a coluna larga, as outras duas dividem a estreita em partes iguais */}
+            <div className="mt-12 grid grid-cols-[1.7fr_1fr] grid-rows-2 gap-3 md:mt-0">
+              <figure className="relative row-span-2 aspect-[3/4.4] overflow-hidden bg-areia">
+                <Image src="/galeria/salao-finalizacao-letreiro.jpg" alt="Finalização de um corte médio com mechas, em frente ao letreiro do salão" fill sizes="(max-width: 768px) 62vw, 30vw" priority className="object-cover object-[50%_12%]" />
               </figure>
-              <figure className="relative aspect-[4/3] overflow-hidden bg-areia">
-                <Image src="/galeria/cor-acobreado-costas.jpg" alt="Acobreado visto de costas" fill sizes="(max-width: 768px) 40vw, 20vw" className="object-cover" />
+              <figure className="relative min-h-0 overflow-hidden bg-areia">
+                <Image src="/galeria/cor-loiro-iluminado-costas.jpg" alt="Loiro iluminado longo visto de costas, com meio preso" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_30%]" />
               </figure>
-              <div className="flex flex-col justify-center bg-areia p-5">
-                <b className="font-serif text-[29px] font-normal leading-none">2.900</b>
-                <span className="mt-2 text-[10.5px] font-medium uppercase leading-relaxed tracking-[0.16em] text-carvao/55">
-                  alunas formadas<br />em 10 anos
-                </span>
-              </div>
+              <figure className="relative min-h-0 overflow-hidden bg-areia">
+                <Image src="/galeria/cor-loiro-mel-ondas-longas.jpg" alt="Loiro mel em cabelo longo com ondas" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_14%]" />
+              </figure>
             </div>
           </section>
 
