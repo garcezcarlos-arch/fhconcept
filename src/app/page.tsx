@@ -99,7 +99,7 @@ export default function Home() {
                 <Image src="/galeria/salao-finalizacao-letreiro.jpg" alt="Finalização de um corte médio com mechas, em frente ao letreiro do salão" fill sizes="(max-width: 768px) 62vw, 30vw" priority className="object-cover object-[50%_12%]" />
               </figure>
               <figure className="relative min-h-0 overflow-hidden bg-areia">
-                <Image src="/galeria/cor-loiro-iluminado-costas.jpg" alt="Loiro iluminado longo visto de costas, com meio preso" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_30%]" />
+                <Image src="/galeria/cor-loiro-iluminado-costas.jpg" alt="Loiro iluminado longo visto de costas, com meio preso" fill sizes="(max-width: 768px) 38vw, 18vw" className="origin-[53%_28%] scale-[1.075] object-cover object-bottom" />
               </figure>
               <figure className="relative min-h-0 overflow-hidden bg-areia">
                 <Image src="/galeria/cor-loiro-mel-ondas-longas.jpg" alt="Loiro mel em cabelo longo com ondas" fill sizes="(max-width: 768px) 38vw, 18vw" className="object-cover object-[50%_46%]" />
